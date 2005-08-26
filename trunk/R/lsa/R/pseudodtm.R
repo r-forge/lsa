@@ -14,7 +14,7 @@ pseudo_docs <- function( docdir, termlist, stemming=FALSE, language="german" ) {
     
     doclist = dir(docdir)
     
-    dtm = vector(mode="numeric", length=0);
+    dtm = vector( mode="numeric", length(termlist)*length(doclist) );
     wc = length(termlist)
     
     for (n in doclist) {
@@ -33,7 +33,6 @@ pseudo_docs <- function( docdir, termlist, stemming=FALSE, language="german" ) {
         }
         
         # vec now contains the original termlist
-        #dtm = cbind(dtm, vec) # old: costly! doubles matrix everytime!
         dtm[(length(dtm)+1):(length(dtm)+wc)] = vec
         
     } # // for

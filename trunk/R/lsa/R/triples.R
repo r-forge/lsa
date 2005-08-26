@@ -1,7 +1,10 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### triples.r v0.1
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-
+### 
+### 2005-08-26:
+###   * added garbage collection to delTriple
+###   * removed useless create environment from setTriple
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # convert input subject (column names or 
@@ -58,9 +61,13 @@ getTriple <- function(M, subject, predicate) {
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 setTriple <- function(M, subject, predicate, object) {
     
-    # create environment if not yet existing
-    # BUG: does not survive this function !!!
-    if ( ! is.environment(environment(M)) ) environment(M) = new.env();
+    # be aware: the environment must already be
+    # created outside this function! If you use
+    # your own object (not created by textmatrix, 
+    # please do so by:
+    #    environment(M) = new.env();
+    
+    # if ( ! is.environment(environment(M)) ) return -1;
     
     # if input is vectors, check if they 
     # have the same number of elements (else break)
@@ -129,6 +136,9 @@ delTriple <- function(M, subject, predicate, object) {
     assign("triples$S", get("triples$S",envir=environment(M))[-origspos], envir=environment(M));
     assign("triples$P", get("triples$P",envir=environment(M))[-origspos], envir=environment(M));
     assign("triples$O", get("triples$O",envir=environment(M))[-origspos], envir=environment(M));
+    
+    # garbage collection
+    gc()
     
 }
 

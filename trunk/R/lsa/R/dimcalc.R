@@ -4,13 +4,13 @@
 ### 
 ### HISTORY
 ### 
+### 2005-08-26
+###    * removed slope / turning point sceletons (to be
+###      included later, maybe)
 ### 2005-08-25
 ###    * replaced max() with length() in ndocs
 ###      now if the first factor is already > ndocs
 ###      dimcalc_ndocs returns 1 not -Inf
-### 2005-08-26
-###    * removed slope / turning point sceletons (to be
-###      included later, maybe)
 ### 
 
 # return the position with which 50% share of the

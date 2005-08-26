@@ -2,8 +2,6 @@
 \alias{dimcalc_share}
 \alias{dimcalc_ndocs}
 \alias{dimcalc_kaiser}
-\alias{dimcalc_turningpoint}
-\alias{slope}
 \title{Dimensionality Calculation Routines (Matrices)}
 \description{
    Calculates a (good) number of singular values for the dimensionality reduction in LSA.
@@ -12,8 +10,6 @@
 dimcalc_share(s, share=0.5)
 dimcalc_ndocs(s, ndocs)
 dimcalc_kaiser(s)
-dimcalc_turningpoint(s)
-slope(s)
 }
 \arguments{
    \item{s}{A sequence of singular values (as produced by the svd).}
