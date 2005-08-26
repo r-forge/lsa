@@ -5,5 +5,6 @@ export("mean_max")
 export("pseudo_docs", "query", "pseudo_svd")
 export("getTriple", "setTriple", "delTriple")
 export("lw_tf", "lw_logtf", "lw_bintf", "gw_normalisation", "gw_idf", "gw_gfidf", "entropy", "gw_entropy")
-#export("stopwords_de", "stopwords_en")
+# export("stopwords_de", "stopwords_en")
+# import(Rstem)
 
