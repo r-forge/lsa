@@ -1,12 +1,13 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-### dtmatrix
+### textmatrix
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
 ### 
 ### 2005-08-25: added "\\[|\\]|\\{|\\}" to gsub
+### 2005-08-26: renamed dt_triples to textvector and dt_matrix to textmatrix
 ### 
 
-dt_triples <- function (file, stemming=FALSE, language="german", minWordLength=3, minDocFreq=1, stopwords=NULL) {
+textvector <- function (file, stemming=FALSE, language="german", minWordLength=3, minDocFreq=1, stopwords=NULL) {
     
     txt = scan(file, what = "character", quiet = TRUE)
     txt = gsub( "\\.|:|\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\?|-|\\!|\"|\'|\`|\\^|\/", " ", txt)
@@ -33,9 +34,9 @@ dt_triples <- function (file, stemming=FALSE, language="german", minWordLength=3
     
 }
 
-dt_matrix <- function( mydir, stemming=FALSE, language="german", minWordLength=3, minDocFreq=1, stopwords=NULL ) {
+textmatrix <- function( mydir, stemming=FALSE, language="german", minWordLength=3, minDocFreq=1, stopwords=NULL ) {
     
-    dummy = lapply( dir(mydir, full.names=TRUE), dt_triples, stemming, language, minWordLength, minDocFreq, stopwords)
+    dummy = lapply( dir(mydir, full.names=TRUE), textvector, stemming, language, minWordLength, minDocFreq, stopwords)
     dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
     
     environment(dtm) = new.env()
