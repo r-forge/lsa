@@ -1,0 +1,22 @@
+
+high-level functions:
+
+   * lsa_fold-in
+   * lsa
+
+refacturing:
+
+   * eliminate query
+     -> integrate into textmatrix (thru connections)
+   * eliminate pseudo_docs
+     -> integrate into textmatrix
+   * connections
+   * summary, print methods
+   * rewrite "pseudo_docs" to table / factor?
+   * in triples.r: With(environment, { bla })
+   * getTriples: return list(S=S, P=P, O=O)
+
+paper:
+   
+   * vignettes
+
