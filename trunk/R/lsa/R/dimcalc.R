@@ -16,7 +16,7 @@
 # return the position with which 50% share of the
 # summed up singular values are reached
 dimcalc_share <- function ( s, share = 0.5 ) {
-    return ( max(which(cumsum(s/sum(s))<=0.5)) + 1 )
+    return ( max(which(cumsum(s/sum(s))<=share)) + 1 )
 }
 
 # calculate the number of singular values
