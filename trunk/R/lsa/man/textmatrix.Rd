@@ -7,9 +7,9 @@
 }
 \usage{
 textmatrix ( mydir, stemming=FALSE, language="german", 
-   minWordLength=3, minDocFreq=1, stopwords=NULL )
+   minWordLength=3, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
 textvector ( file, stemming=FALSE, language="german", 
-   minWordLength=3, minDocFreq=1, stopwords=NULL )
+   minWordLength=3, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
 }
 \arguments{
    \item{file}{filename (may include path).}
@@ -19,6 +19,7 @@ textvector ( file, stemming=FALSE, language="german",
    \item{minWordLength}{words with less than minWordLength characters will be ignored.}
    \item{minDocFreq}{words of a document appearing less than minDocFreq within that document will be ignored.}
    \item{stopwords}{a stopword list that contains terms the will be ignored.}
+   \item{vocabulary}{if specified, only words in this term list will be used for building the matrix ('controlled vocabulary').}
 }
 \details{
   All documents in the specified directory are read and a matrix is composed.
