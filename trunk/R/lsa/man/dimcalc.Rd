@@ -7,14 +7,16 @@
    Calculates a (good) number of singular values for the dimensionality reduction in LSA.
 }
 \usage{
+dimcalc(method=c("share","kaiser","ndocs","raw"), share=0.5, ndocs)
 dimcalc_share(s, share=0.5)
 dimcalc_ndocs(s, ndocs)
 dimcalc_kaiser(s)
 }
 \arguments{
-   \item{s}{A sequence of singular values (as produced by the svd).}
-   \item{share}{A fraction [0;1] of the sum of the selected singular values to the sum of all singular values.}
-   \item{ndocs}{The number of documents.}
+   \item{method}{Choose one method as described below.}
+   \item{share}{Optional: a fraction [0;1] of the sum of the selected singular values to the sum of all singular values.}
+   \item{ndocs}{Optional: the number of documents (only needed for method="ndocs").}
+   \item{s}{A sequence of singular values (as produced by the svd). Only needed when calling the dimcal methods directly.}
 }
 \details{
   In an LSA-process, the diagonal matrix of the singular value decomposition is 
@@ -22,6 +24,17 @@ dimcalc_kaiser(s)
   The functions \code{dimcalc_share()} and \code{dimcalc_ndocs()} offer methods to calculate a
   useful number of singular values (based on the distribution and values of the
   given sequence of singular values).
+  
+  The function \code{dimcalc()} generates a function to be executed by
+  the calling (higher-level) function (\code{createLSAspace()}). The
+  generated function contains only one parameter, namely \code{s}, which
+  is the sequence of singular values. In \code{createLSAspace()}, the
+  code returned by \code{dimcalc()} is executed and the mandatory 
+  singular values are provided as a parameter.
+
+  Whenever you have to call one of the methods directly, do as follows:
+     \code{dimcalc(method="share",share=0.2)(mysingularvalues)}
+  
 }
 \value{
   \item{dimcalc_share}{finds the first position in the descending sequence of singular values s where their sum (divided by the sum of all values) meets or exceeds the specified share.}
