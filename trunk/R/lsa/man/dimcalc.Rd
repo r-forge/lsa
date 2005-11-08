@@ -1,4 +1,5 @@
 \name{dimcalc}
+\alias{dimcalc}
 \alias{dimcalc_share}
 \alias{dimcalc_ndocs}
 \alias{dimcalc_kaiser}
