@@ -21,7 +21,7 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \seealso{
-\code{\link[Rstem]{wordStem}}, for more information see \code{\link{dt_matrix}} 
+\code{\link[Rstem]{wordStem}}, for more information see \code{\link{textmatrix}} 
 }
 \examples{
 
