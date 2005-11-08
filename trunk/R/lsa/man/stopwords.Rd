@@ -2,6 +2,8 @@
 \docType{data}
 \alias{stopwords_de}
 \alias{stopwords_en}
+\alias{stopwords_english}
+\alias{stopwords_german}
 \title{Stopwordlists in German and English}
 \description{
 This data sets contain very common lists of words that want to be ignored when 
