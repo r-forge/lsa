@@ -3,6 +3,7 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
 ### 
+### !!!!! WARNING: you currently cannot use textmatrix with vocabulary=s.th. !!!!!
 ### 2005-11-08: added print and summary functions
 ### 2005-11-08: added vocabulary filter to both functions
 ### 2005-10-04: added nchar(..., type="chars") to count characters, not bytes
@@ -42,7 +43,11 @@ textvector <- function (file, stemming=FALSE, language="german", minWordLength=3
 textmatrix <- function( mydir, stemming=FALSE, language="german", minWordLength=3, minDocFreq=1, stopwords=NULL, vocabulary=NULL ) {
     
     dummy = lapply( dir(mydir, full.names=TRUE), textvector, stemming, language, minWordLength, minDocFreq, stopwords, vocabulary)
-    dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
+    if (!is.null(vocabulary)) {
+        dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy), col.vars=vocabulary))
+    } else {
+        dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
+    }
     
     environment(dtm) = new.env()
     class(dtm) = "textmatrix"
