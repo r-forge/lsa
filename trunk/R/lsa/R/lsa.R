@@ -43,10 +43,10 @@ createLSAspace <- function( x, dims=dimcalc(method="share") ) {
 # showLSAspace: recalc a textmatrix of the 
 # original format, name it and return it
 
-showLSAspace <- function (SVD){
-    Y = SVD$tk %*% diag(SVD$sk) %*% t(SVD$dk)
-    rownames(Y)=rownames(SVD$tk)
-    colnames(Y)=rownames(SVD$dk)
+showLSAspace <- function (LSAspace){
+    Y = LSAspace$tk %*% diag(LSAspace$sk) %*% t(LSAspace$dk)
+    rownames(Y)=rownames(LSAspace$tk)
+    colnames(Y)=rownames(LSAspace$dk)
     return(Y)
 }
 
