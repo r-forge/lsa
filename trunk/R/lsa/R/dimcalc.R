@@ -4,6 +4,16 @@
 ### 
 ### HISTORY
 ### 
+### 2005-08-11
+###    * integrated all three functions into one joint
+###      generating function. dimcalc() returns a
+###      a function source to the caller which
+###      contains only one parameter (the diagonal values)
+###      to be executed by the calling (higher-level) function.
+###      To call directly, use
+###          e.g. dimcalc(method="share", share=0.3)(mydiags)
+###          with mydiags being the diagonal values as a vector.
+###      The original three functions will stay (maybe not forever).
 ### 2005-08-26
 ###    * removed slope / turning point sceletons (to be
 ###      included later, maybe)
@@ -13,23 +23,55 @@
 ###      dimcalc_ndocs returns 1 not -Inf
 ### 
 
-# return the position with which 50% share of the
-# summed up singular values are reached
+dimcalc <- function ( method=c("share","kaiser","ndocs","raw"), share=0.5, ndocs) {
+    
+    if (method=="share") {
+        
+        # return the position with which 50% share of the
+        # summed up singular values are reached
+        
+        function ( s ) {
+            return( max(which(cumsum(s/sum(s))<=share)) + 1 )
+        }
+        
+    } else if (method=="kaiser") {
+        
+        # calculate the number of singular values
+        # according to the Kaiser-criterium 
+        # (take all with s>1).
+        
+        function ( s ) {
+            return(  max(which(s>=1)) ) 
+        }
+        
+    } else if (method=="ndocs") {
+
+        # return the position where the 
+        # summed up factor values for the
+        # first time exceed ndocs.
+
+        if (missing(ndocs)) {
+            stop("[dimcalc] - parameter ndocs is missing")
+        }
+        function ( s ) {
+            return( length(which(cumsum(s)<=ndocs)) + 1 ) 
+        }
+        
+    } else if (method=="raw") {
+        function ( s ) {
+            return( length(s) ) 
+        }
+    }
+    
+}
+
 dimcalc_share <- function ( s, share = 0.5 ) {
     return ( max(which(cumsum(s/sum(s))<=share)) + 1 )
 }
 
-# calculate the number of singular values
-# according to the Kaiser-criterium 
-# (take all with s>1).
-
 dimcalc_kaiser <- function (s) {
     return( max(which(s>=1)) )
 }
-
-# return the position where the 
-# summed up factor values for the
-# first time exceed ndocs.
 
 dimcalc_ndocs <- function ( s, ndocs ) {
     return( length(which(cumsum(s)<=ndocs)) + 1 )
