@@ -54,7 +54,7 @@ getSubjectId ( M, subject )
   \item{dtm}{the document-term-matrix (incl. row- and column-header).}
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
-\seealso{ \code{\link{dt_matrix}}, \code{\link{pseudo_docs}}}
+\seealso{ \code{\link{textmatrix}} }
 \examples{
 
     x = matrix(2,2,3) # we fake a document term matrix
