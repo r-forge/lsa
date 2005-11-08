@@ -8,7 +8,6 @@
 ### 2005-10-04: added nchar(..., type="chars") to count characters, not bytes
 ### 2005-08-25: added "\\[|\\]|\\{|\\}" to gsub
 ### 2005-08-26: renamed dt_triples to textvector and dt_matrix to textmatrix
-### 
 
 textvector <- function (file, stemming=FALSE, language="german", minWordLength=3, minDocFreq=1, stopwords=NULL, vocabulary=NULL) {
     
