@@ -101,10 +101,27 @@ unlink(paste(td,"/stopwords",sep=""), recursive=TRUE)
 # now clean up a little.
 unlink(td, recursive=TRUE)
 
+# test for word order sensitivity
+
+td = tempdir()
+dir.create(td)
+td1 = paste(td,"test1",sep="/");
+dir.create(td1)
+write( c("word4", "word3", "word2"), file=paste(td1,"/c1", sep=""))
+write( c("word1", "word4", "word2"), file=paste(td1,"/c2", sep=""))
+td2 = paste(td,"test2",sep="/");
+dir.create(td2)
+write( c("word1", "word2", "word3"), file=paste(td2,"/c1", sep=""))
+write( c("word1", "word2", "word3"), file=paste(td2,"/c2", sep=""))
+dtm1 = textmatrix(td1)
+dtm2 = textmatrix(td2, vocabulary=rownames(dtm1))
+errors = append(errors, length(rownames(dtm1)) == length(rownames(dtm2)))
+errors = append(errors, rownames(dtm1) == rownames(dtm2))
+unlink(td, recursive=TRUE)
+
 if (any(errors == FALSE)) {
     stop("[textmatrx] - fatal error");
 } else {
     print("[textmatrix] - testing went fine.")
 }
-
 
