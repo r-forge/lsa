@@ -1,21 +1,27 @@
 
-high-level functions:
+TO-DO:
 
-   DONE * lsa_fold-in
-   DONE * lsa
+* eliminate query -> integrate into textmatrix (thru connections)
+* vignettes for the paper
+* bugfix textmatrix to work properly with the vocabulary list!!!
+* check query() to ensure it's working
 
-refacturing:
+DONE 2005-11-08:
 
-   * eliminate query -> integrate into textmatrix (thru connections)
-   DONE * eliminate pseudo_docs
-   DONE   -> integrate into textmatrix
-   NOT POSSIBLE * connections
-   DONE * summary, print methods
-   DONE * rewrite "pseudo_docs" to table / factor?
-   NOT POSSIBLE * in triples.r: With(environment, { bla })
-   NOT POSSIBLE * getTriples: return list(S=S, P=P, O=O)
-
-paper:
-   
-   * vignettes
+    high-level functions:
+    
+       DONE * lsa_fold-in
+       DONE * lsa
+    
+    refacturing:
+    
+       
+       DONE * eliminate pseudo_docs
+       DONE   -> integrate into textmatrix
+       NOT POSSIBLE * connections
+       DONE * summary, print methods
+       DONE * rewrite "pseudo_docs" to table / factor?
+       NOT POSSIBLE * in triples.r: With(environment, { bla })
+       NOT POSSIBLE * getTriples: return list(S=S, P=P, O=O)
+    
 
