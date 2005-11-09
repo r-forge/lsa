@@ -44,7 +44,7 @@ textmatrix <- function( mydir, stemming=FALSE, language="german", minWordLength=
     
     dummy = lapply( dir(mydir, full.names=TRUE), textvector, stemming, language, minWordLength, minDocFreq, stopwords, vocabulary)
     if (!is.null(vocabulary)) {
-        dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy), col.vars=vocabulary))
+        # dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy), col.vars=vocabulary))
     } else {
         dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
     }
