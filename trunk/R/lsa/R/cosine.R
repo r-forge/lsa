@@ -1,21 +1,37 @@
-### cosine.r
+### cosine.R
 ###
+### 2005-11-09:
+###   * bugfix cosvecs
+###   * integrated cosvecs into cosine by doing type dependant processing
 ### 2005-08-26:
 ###   * rewrote cosvecs function to crossprod
 ### 
 
-cosvecs <- function(v1,v2) {
-  return ( crossprod(v1*v2) / (sqrt(crossprod(v1))*sqrt(crossprod(v2))) )
-}
-
-cosine <- function( m ) {
-    f = colnames( m )
-    co = array(0,c(length(f),length(f)))
-    dimnames(co) = list(f,f)
-    for (i in f) {
-        for (j in f) {
-            co[i,j] = cosvecs(m[,i], m[,j])
+cosine <- function( x, y ) {
+    
+    if ( is.matrix(x) && missing(y) ) {
+        
+        co = array(0,c(ncol(x),ncol(x)))
+        
+        f = colnames( x )
+        dimnames(co) = list(f,f)
+        
+        for (i in 1:ncol(x)) {
+            for (j in 1:ncol(x)) {
+                co[i,j] = cosine(x[,i], x[,j])
+            }
         }
+        
+        return (as.matrix(co))
+        
+    } else if ( is.vector(x) && is.vector(y) ) {
+        
+        return ( crossprod(x,y) / ( sqrt(crossprod(x)) * sqrt(crossprod(y)) ) )
+        
+    } else {
+        
+        stop("argument mismatch. Either one matrix or two vectors needed as input.")
+        
     }
-    return (co)
+    
 }
