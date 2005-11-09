@@ -22,8 +22,8 @@ cosine(v1,v2)
   When executed on two vectors, \code{cosine()}
   calculates the cosine similarity between them.
   
-  Be reminded that \code{cosine()} is nearly identical
-  with the pearson correlation coefficient \code{cor()}
+  Be reminded that the cosine measure is nearly identical
+  with the pearson correlation coefficient \code{cor(method="pearson")}
   (besides a constant factor). For an investigation on
   the differences in the context of textmining see
   (Leydesdorff, 2005).

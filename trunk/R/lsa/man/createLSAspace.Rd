@@ -21,8 +21,14 @@ foldinLSAspace( docvecs, LSAspace )
 }
 \details{
   
-to be added.
-  
+LSA combines the classical vector space model -- well known in 
+textmining -- with a singular value decomposition (SVD), a two-mode 
+factor analysis. Thereby, bag-of-words representations of texts can 
+be mapped into a modified vector space that is assumed to reflect 
+semantic structure.
+
+
+
 }
 \value{
   \item{LSAspace}{a latent semantic space (for createLSAspace and foldinLSAspace.}
