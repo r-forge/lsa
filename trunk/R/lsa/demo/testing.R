@@ -3,6 +3,23 @@
 ### 
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# testing cosine
+
+print("[cosine] - starting with tests.")
+
+a = c(2,1,1,1,0)
+b = c(0,0,0,1,0)
+
+errors = NULL
+errors = append(errors, (round(cosine(a,b),3) == 0.378))
+
+if (any(errors == FALSE)) {
+    stop("[cosine] - fatal error");
+} else {
+    print("[cosine] - testing went fine.")
+}
+
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # routines for get/set/delTriples
 
 print("[triples] - starting with tests.")
