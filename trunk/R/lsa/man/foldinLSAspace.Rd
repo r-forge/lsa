@@ -25,6 +25,15 @@ Background Information:
 Folding-in is done by calculating a pseudo document vector \code{mi} in 
 \code{Mk} of new documents as shown in equation 1 and 2 (cf. Berry et al., 1995):
 
+(1) \code{ di = t(v) \%*\% Tk \%*\% solve(diag(Sk)) }
+
+(2) \code{ mi = Tk \%*\% diag(Sk) \%*\% t(di) }
+
+The document vector \code{t(v)} in equation 1 is identical to an additional 
+column of \code{M} with the term frequencies of the essay to be folded-in. 
+\code{Tk} and \code{Sk} are the truncated matrices from the SVD applied 
+through \code{createLSAspace()} on a given text collection to construct 
+the latent semantic space.
 
 }
 \value{
