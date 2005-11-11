@@ -44,7 +44,13 @@ textmatrix <- function( mydir, stemming=FALSE, language="german", minWordLength=
     
     dummy = lapply( dir(mydir, full.names=TRUE), textvector, stemming, language, minWordLength, minDocFreq, stopwords, vocabulary)
     if (!is.null(vocabulary)) {
-        # dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy), col.vars=vocabulary))
+        dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
+        result = matrix(0, nrow=length(vocabulary), ncol=ncol(dtm))
+        rownames(result) = vocabulary
+        result[rownames(dtm),] = dtm[rownames(dtm),]
+        colnames(result) = colnames(dtm)
+        dtm = result
+        gc()
     } else {
         dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
     }
@@ -56,65 +62,67 @@ textmatrix <- function( mydir, stemming=FALSE, language="german", minWordLength=
     
 }
 
-print.textmatrix <- function ( m, bag_lines = 12, bag_cols = 10 ) {
+print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
     
-    nc = ncol(m);
-    nr = nrow(m);    
+    nc = ncol(x);
+    nr = nrow(x);    
     
     if (nc <= (3*bag_cols) && nr <= (3*bag_lines)) {
-        print.matrix(m);
+        print.matrix(x);
     } else {
         
-        redm = matrix(ncol = (3*bag_cols), nrow = (3*bag_lines));
-        mid = round(nrow(m)/2)
-        midc = round(ncol(m)/2)
+        redx = matrix(ncol = (3*bag_cols), nrow = (3*bag_lines));
+        mid = round(nrow(x)/2)
+        midc = round(ncol(x)/2)
         
         # top
-        redm[1:bag_lines, 1:bag_cols] = m[1:bag_lines, 1:bag_cols]
-        redm[1:bag_lines, (bag_cols+1):(bag_cols+bag_cols)] = m[1:bag_lines, midc:(midc+bag_cols-1)]
-        redm[1:bag_lines, (2*bag_cols+1):(3*bag_cols)] = m[1:bag_lines, (ncol(m)-bag_cols+1):ncol(m)]
+        redx[1:bag_lines, 1:bag_cols] = x[1:bag_lines, 1:bag_cols]
+        redx[1:bag_lines, (bag_cols+1):(bag_cols+bag_cols)] = x[1:bag_lines, midc:(midc+bag_cols-1)]
+        redx[1:bag_lines, (2*bag_cols+1):(3*bag_cols)] = x[1:bag_lines, (ncol(x)-bag_cols+1):ncol(x)]
         
         # mid
-        redm[(bag_lines+1):(bag_lines*2), 1:bag_cols] = m[mid:(mid+bag_lines-1), 1:bag_cols]
-        redm[(bag_lines+1):(bag_lines*2), (bag_cols+1):(bag_cols+bag_cols)] = m[mid:(mid+bag_lines-1), midc:(midc+bag_cols-1)]
-        redm[(bag_lines+1):(bag_lines*2), (2*bag_cols+1):(3*bag_cols)] = m[mid:(mid+bag_lines-1), (ncol(m)-bag_cols+1):ncol(m)]
+        redx[(bag_lines+1):(bag_lines*2), 1:bag_cols] = x[mid:(mid+bag_lines-1), 1:bag_cols]
+        redx[(bag_lines+1):(bag_lines*2), (bag_cols+1):(bag_cols+bag_cols)] = x[mid:(mid+bag_lines-1), midc:(midc+bag_cols-1)]
+        redx[(bag_lines+1):(bag_lines*2), (2*bag_cols+1):(3*bag_cols)] = x[mid:(mid+bag_lines-1), (ncol(x)-bag_cols+1):ncol(x)]
         
         # bottom
-        redm[(bag_lines*2+1):(bag_lines*3), 1:bag_cols] = m[(nrow(m)-bag_lines+1):nrow(m), 1:bag_cols]
-        redm[(bag_lines*2+1):(bag_lines*3), (bag_cols+1):(bag_cols+bag_cols)] = m[(nrow(m)-bag_lines+1):nrow(m), midc:(midc+bag_cols-1)]
-        redm[(bag_lines*2+1):(bag_lines*3), (2*bag_cols+1):(3*bag_cols)] = m[(nrow(m)-bag_lines+1):nrow(m), (ncol(m)-bag_cols+1):ncol(m)]
+        redx[(bag_lines*2+1):(bag_lines*3), 1:bag_cols] = x[(nrow(x)-bag_lines+1):nrow(x), 1:bag_cols]
+        redx[(bag_lines*2+1):(bag_lines*3), (bag_cols+1):(bag_cols+bag_cols)] = x[(nrow(x)-bag_lines+1):nrow(x), midc:(midc+bag_cols-1)]
+        redx[(bag_lines*2+1):(bag_lines*3), (2*bag_cols+1):(3*bag_cols)] = x[(nrow(x)-bag_lines+1):nrow(x), (ncol(x)-bag_cols+1):ncol(x)]
                 
-        # dimnames
-        rownames(redm) = c( paste(1:bag_lines,rownames(m)[1:bag_lines],sep=". "), paste(mid:(mid+bag_lines-1),rownames(m)[(mid):(mid+bag_lines-1)],sep=". "), paste((nrow(m)-bag_lines+1):nrow(m), rownames(m)[(nrow(m)-bag_lines+1):nrow(m)], sep=". "))
-        colnames(redm) = paste("D", c( 1:bag_cols, midc:(midc+bag_cols-1), (ncol(m)-bag_cols+1):ncol(m) ), sep="")
-        docnames = paste( colnames(redm), c( colnames(m)[1:bag_cols], colnames(m)[midc:(midc+bag_cols-1)], colnames(m)[(ncol(m)-bag_cols+1):ncol(m)] ), sep=" = ")
+        # dixnaxes
+        rownames(redx) = c( paste(1:bag_lines,rownames(x)[1:bag_lines],sep=". "), paste(mid:(mid+bag_lines-1),rownames(x)[(mid):(mid+bag_lines-1)],sep=". "), paste((nrow(x)-bag_lines+1):nrow(x), rownames(x)[(nrow(x)-bag_lines+1):nrow(x)], sep=". "))
+        colnames(redx) = paste("D", c( 1:bag_cols, midc:(midc+bag_cols-1), (ncol(x)-bag_cols+1):ncol(x) ), sep="")
+        docnames = paste( colnames(redx), c( colnames(x)[1:bag_cols], colnames(x)[midc:(midc+bag_cols-1)], colnames(x)[(ncol(x)-bag_cols+1):ncol(x)] ), sep=" = ")
         
         ret = NULL
-        ret$matrix = redm;
+        ret$matrix = redx;
         ret$legend = docnames;
-
-        return( ret )
+        
+        print(ret);
+        invisible(x);
         
     }
     
 }
 
-summary.textmatrix <- function ( m ) {
+summary.textmatrix <- function ( object, ... ) {
     
     s = matrix(ncol=1, nrow=5);
     n = vector(mode="character", length=5);
     n[1] = "vocabulary";
-    s[1] = length(rownames(m));
+    s[1] = length(rownames(object));
     n[2] = "documents";
-    s[2] = length(colnames(m));
+    s[2] = length(colnames(object));
     n[3] = "freqs not '0'";
-    s[3] = length(which(m>0))
+    s[3] = length(which(object>0));
     n[4] = "max term length";
-    s[4] = max(nchar(rownames(dtm),type="chars"))
+    s[4] = max(nchar(rownames(object),type="chars"));
     n[5] = "non-alphanumerics in terms";
-    s[5] = length(which(gsub("[[:alnum:]]|[ÄÖÜäöüß]", "", rownames(m)) != ""))
-    rownames(s) = n
-    colnames(s)="value"
+    s[5] = length(which(gsub("[[:alnum:]]|[ÄÖÜäöüß]", "", rownames(object)) != ""));
+    rownames(s) = n;
+    colnames(s)="value";
+    class(s) = "summary.textmatrix";
     s
     
 }
