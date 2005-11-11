@@ -1,10 +1,12 @@
-
 TO-DO:
 
 * eliminate query -> integrate into textmatrix (thru connections)
 * vignettes for the paper
-* bugfix textmatrix to work properly with the vocabulary list!!!
 * check query() to ensure it's working
+* remove meanmax.R (doesn't fit the package
+
+DONE 2005-11-11:
+* bugfix textmatrix to work properly with the vocabulary list!!!
 
 DONE 2005-11-08:
 
