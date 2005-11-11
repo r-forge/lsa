@@ -91,8 +91,8 @@ Landauer, T., Foltz, P., and Laham, D. (1998) \emph{Introduction to Latent Seman
 td = tempdir()
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td, "data_doc1.dt", sep="/")
-write( c("hamster", "mouse", "sushi"), file=paste(td, "tmp_dtm_test/data_doc2.dt", sep="/")
-write( c("dog", "monster", "monster"), file=paste(td, "tmp_dtm_test/data_doc3.dt", sep="/")
+write( c("hamster", "mouse", "sushi"), file=paste(td, "data_doc2.dt", sep="/")
+write( c("dog", "monster", "monster"), file=paste(td, "data_doc3.dt", sep="/")
 
 # LSA
 data(stopwords_en)

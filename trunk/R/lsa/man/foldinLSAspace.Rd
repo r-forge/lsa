@@ -25,9 +25,9 @@ Background Information:
 Folding-in is done by calculating a pseudo document vector \code{mi} in 
 \code{Mk} of new documents as shown in equation 1 and 2 (cf. Berry et al., 1995):
 
-\code{(1) di = t(v) %*% Tk %*% solve(diag(Sk))}
+(1) \code{ di = t(v) %*% Tk %*% solve(diag(Sk))}
 
-\code{(2) mi = Tk %*% diag(Sk) %*% t(di)}
+(2) \code{ mi = Tk %*% diag(Sk) %*% t(di)}
 
 The document vector \code{t(v)} in equation 1 is identical to an additional 
 column of \code{M} with the term frequencies of the essay to be folded-in. 
