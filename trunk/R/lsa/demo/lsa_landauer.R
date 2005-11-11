@@ -19,43 +19,33 @@ write( c("graph", "minors", "survey"), file="landauer/m4")
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # generate doc term matrix from landauer files
-dtm = dt_matrix("landauer/", minWordLength=1)
+dtm = textmatrix("landauer/", minWordLength=1)
 dtm
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
-# make an SVD
-SVD = svd(dtm)
-t = SVD$u # the left-sided term space
-d = SVD$v # the right-sided document space
-s = SVD$d # the sequence of singular values
+# make a space, reconstruct original
 
-# -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
-# reconstruct original matrix
-X = t %*% diag(s) %*% t(d)
-dimnames(X) = dimnames(dtm)
+landauerOriginalSpace = createLSAspace(dtm, dims=dimcalc(method="raw"))
+X = showLSAspace(landauerOriginalSpace)
 
 # X should be equal to dtm (beside rounding errors)
 all( (round(X,2) == dtm) == TRUE)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # reduce dimensionality (Y shall be the recalculated 'reduced' matrix)
-k = 2
-tk = t[,1:k]
-dk = d[,1:k]
-sk = s[1:k]
-Y = tk %*% diag(sk) %*% t(dk)
-dimnames(Y)=dimnames(dtm)
 
+landauerSpace = createLSAspace(dtm, dims=2)
+Y = showLSAspace(landauerSpace)
 round(Y,2)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # now read in again the landauer sample (but 
 # with the vocabulary of the existing matrix)
-pdocs = pseudo_docs("landauer/", rownames(dtm))
+pdocs = textmatrix("landauer/", vocabulary=rownames(dtm))
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # now calc a pseudo SVD on the basis of dtm's SVD
-Y2 = pseudo_svd(pdocs, tk, sk)
+Y2 = foldinLSAspace(pdocs, landauerSpace)
 round(Y2,2)
 
 # Y and Y2 should be the same (as well as 
