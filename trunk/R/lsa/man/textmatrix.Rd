@@ -50,18 +50,22 @@ textvector ( file, stemming=FALSE, language="german",
 \seealso{ \code{\link[Rstem]{wordStem}}, \code{\link{stopwords_de}}, \code{\link{stopwords_en}}, \code{\link{setTriple}}, \code{\link{getTriple}}}
 \examples{
 
-dir.create("tmp_dtm_test")
-write( c("dog", "cat", "mouse"), file="tmp_dtm_test/data_doc1.dt")
-write( c("hamster", "mouse", "sushi"), file="tmp_dtm_test/data_doc2.dt")
-write( c("dog", "monster", "monster"), file="tmp_dtm_test/data_doc3.dt")
+# create some files
+td = tempdir()
+dir.create(td)
+write( c("dog", "cat", "mouse"), file=paste(td, "data_doc1.dt", sep="/")
+write( c("hamster", "mouse", "sushi"), file=paste(td, "data_doc2.dt", sep="/")
+write( c("dog", "monster", "monster"), file=paste(td, "data_doc3.dt", sep="/")
 
-dtm = textmatrix("tmp_dtm_test/")
-dtm
+# read them, create a document-term matrix
+textmatrix(td)
 
+# read them, drop german stopwords
 data(stopwords_de)
-textmatrix("tmp_dtm_test/", stopwords=stopwords_de)
+textmatrix(td, stopwords=stopwords_de)
 
-unlink("tmp_dtm_test", TRUE)
+# clean up
+unlink(td, recursive=TRUE)
 
 }
 \keyword{algebra}

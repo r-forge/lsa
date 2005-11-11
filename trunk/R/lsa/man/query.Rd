@@ -1,4 +1,4 @@
-\name{pseudodtm}
+\name{query}
 \alias{query}
 \title{Query (Textmatrix)}
 \description{
