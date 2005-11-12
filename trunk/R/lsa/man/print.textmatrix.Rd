@@ -46,4 +46,4 @@ class(m) = "textmatrix"
 print(m, bag_cols=5)
 
 }
-\keyword{textmatrix}
+\keyword{array}

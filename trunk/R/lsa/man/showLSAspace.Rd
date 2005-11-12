@@ -66,4 +66,4 @@ cor(myNewMatrix[,1], myNewMatrix[,2], method="pearson")
 unlink(td, recursive=TRUE)
 
 }
-\keyword{latent semantic analysis}
+\keyword{algebra}

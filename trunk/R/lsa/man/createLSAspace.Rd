@@ -106,4 +106,4 @@ showLSAspace(myLSAspace)
 unlink(td, recursive=TRUE)
 
 }
-\keyword{latent semantic analysis}
+\keyword{algebra}

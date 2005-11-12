@@ -35,4 +35,4 @@ class(m) = "textmatrix"
 summary(m)
 
 }
-\keyword{textmatrix}
+\keyword{array}

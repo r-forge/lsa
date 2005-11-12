@@ -19,4 +19,4 @@ being handed over to \code{textmatrix()}.
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \format{A vector containing 424 (English) resp. 370 (German) stop words (e.g. 'he', 'she', 'a').}
 \keyword{datasets}
-\keyword{textmatrix}
+\keyword{array}

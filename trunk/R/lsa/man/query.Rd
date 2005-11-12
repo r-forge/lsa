@@ -40,4 +40,4 @@ query("monster", rownames(dtm))
 unlink(td, TRUE)
 
 }
-\keyword{textmatrix}
+\keyword{array}

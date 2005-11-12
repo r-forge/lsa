@@ -72,4 +72,4 @@ showLSAspace(space1)
 foldinLSAspace( matrix2, space1)
 
 }
-\keyword{latent semantic analysis}
+\keyword{algebra}

@@ -59,4 +59,4 @@ cosine(matrix)
 % vec3 0.2886751 0.4082483 1.0000000
 
 }
-\keyword{correlation measure}
+\keyword{Statistics}

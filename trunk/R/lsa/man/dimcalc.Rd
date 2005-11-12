@@ -86,4 +86,4 @@ n = ncol(matrix)
 dimcalc(method="ndocs", ndocs=n)(s)
 
 }
-\keyword{latent semantic analysis}
+\keyword{algebra}
