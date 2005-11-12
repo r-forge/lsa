@@ -7,9 +7,9 @@
 }
 \usage{
 textmatrix ( mydir, stemming=FALSE, language="german", 
-   minWordLength=3, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
+   minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
 textvector ( file, stemming=FALSE, language="german", 
-   minWordLength=3, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
+   minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
 }
 \arguments{
    \item{file}{filename (may include path).}
