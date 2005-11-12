@@ -2,14 +2,15 @@
 \alias{createLSAspace}
 \title{Create a vector space with Latent Semantic Analysis (LSA)}
 \description{
-   Creates a latent semantic space from a given document-term matrix.
+   Calculates a latent semantic space from a given document-term matrix.
 }
 \usage{
    createLSAspace( x, dims=dimcalc(method="share") )
 }
 \arguments{
-   \item{x}{a document-term matrix (recommeded to be of class 'textmatrix'), containing documents in colums, terms in rows and frequencies in the cells.}
-   \item{dims}{either the number of dimensions or a function.}
+   \item{x}{a document-term matrix (recommeded to be of class 'textmatrix'), containing documents in 
+   colums, terms in rows and occurrence frequencies in the cells.}
+   \item{dims}{either the number of dimensions or the configuring function 'dimcalc()'.}
 }
 \details{
   
@@ -20,25 +21,27 @@ be mapped into a modified vector space that is assumed to reflect
 semantic structure.
 
 With \code{createLSAspace()} a new latent semantic space can
-be constructed over a given document-term matrix. To enable
-document-document or term-term comparisons with common
-correlation measures, the space has to be converted into
-an ordinary document-term matrix again by calling \code{showLSAspace()}.
+be constructed over a given document-term matrix. To ease
+comparisons of terms and documents with common
+correlation measures, the space can be converted into
+a document-term matrix of the same format as \code{y} 
+by calling \code{showLSAspace()}.
 
-To add more documents or queries into this latent semantic
-space or to keep them from influencing the factor distribution 
-of the original text corpus, they can be 'folded-in' later on 
+To add more documents or queries to this latent semantic
+space in order to keep them from influencing the original 
+factor distribution (=the latent semantic structure calculated
+from a primary text corpus), they can be 'folded-in' later on 
 with the function \code{foldinLSAspace()}.
 
-Background information (see also Deerwester, 1990): 
+Background information (see also Deerwester et al., 1990): 
 
 A document-term matrix \code{M} is constructed 
 with \code{textmatrix()} from a given text base of \code{n} documents 
 containing \code{m} terms.
-This matrix \code{M} of the size \code{m*n} is then decomposed via 
+This matrix \code{M} of the size \code{m*n} is then decomposed via a
 singular value decomposition into: term vector matrix \code{T} (constituting 
 left singular vectors), the document vector matrix \code{D} (constituting 
-right singular vectors) being both orthonormal and the diagonal matrix 
+right singular vectors) being both orthonormal, and the diagonal matrix 
 \code{S} (constituting singular values). 
 
 \code{LSAspace = svd(M)}
@@ -60,12 +63,12 @@ latent semantic space.
 \code{Dk = D[,1:k]}
 
 If these matrices \code{Tk, Sk, Dk} were multiplied, they would give a new
-matrix \code{Mk} (in the same format as \code{M}, i.e. rows are the
+matrix \code{Mk} (of the same format as \code{M}, i.e. rows are the
 same terms, columns are the same documents), which is the least-squares best 
 fit approximation of \code{M} with \code{k} singular values.
 
-In this case of folding-in, i.e. multiplying new documents into the latent 
-semantic space, the matrices \code{Tk} and \code{Sk} remain unchanged
+In the case of folding-in, i.e. multiplying new documents into a given
+latent semantic space, the matrices \code{Tk} and \code{Sk} remain unchanged
 and an additional \code{Dk} is created (without replacing the old one).
 All three are multiplied together to return a (new and appendable)
 document-term matrix \code{Mnew} in the term-order of \code{M}.

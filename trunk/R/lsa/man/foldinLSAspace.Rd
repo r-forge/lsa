@@ -1,12 +1,12 @@
 \name{foldinLSAspace}
 \alias{foldinLSAspace}
-\title{Ex-post fold-in of documents into a latent semantic space}
+\title{Ex-post folding-in of document-term matrices into a latent semantic space}
 \description{
-Additional documents can be mapped into the pre-exisiting
+Additional documents can be mapped into a pre-exisiting
 latent semantic space without influencing the factor
-distribution of the space. Extremely helpful, when
-new documents should not influence the existing
-latent semantic structure.
+distribution of the space. Applied, when additional documents 
+must not influence the calculated existing latent semantic 
+factor structure.
 }
 \usage{
 foldinLSAspace( docvecs, LSAspace )
@@ -18,22 +18,25 @@ foldinLSAspace( docvecs, LSAspace )
 \details{
 
 To keep additional documents from influencing the factor distribution
-of the underlying text corpus, they can be folded-in after the singular
-value decomposition done by \code{createLSAspace()}.
+calculated previously from a particular text basis, they can be folded-in 
+after the singular value decomposition performed in \code{createLSAspace()}.
 
 Background Information:
-Folding-in is done by calculating a pseudo document vector \code{mi} in 
-\code{Mk} of new documents as shown in equation 1 and 2 (cf. Berry et al., 1995):
+For folding-in, a pseudo document vector \code{mi} of the new documents 
+is calculated into as shown in the equations (1) and (2) (cf. Berry et al., 1995):
 
 (1) \code{ di = t(v) \%*\% Tk \%*\% solve(diag(Sk)) }
 
 (2) \code{ mi = Tk \%*\% diag(Sk) \%*\% t(di) }
 
-The document vector \code{t(v)} in equation 1 is identical to an additional 
-column of \code{M} with the term frequencies of the essay to be folded-in. 
-\code{Tk} and \code{Sk} are the truncated matrices from the SVD applied 
-through \code{createLSAspace()} on a given text collection to construct 
-the latent semantic space.
+The document vector \code{t(v)} in equation (1) is identical to an additional 
+column of an input textmatrix \code{M} with the term frequencies of the 
+essay to be folded-in. \code{Tk} and \code{Sk} are the truncated matrices 
+from the SVD applied through \code{createLSAspace()} on a given text 
+collection to construct the latent semantic space. The resulting vector
+\code{mi} from equation (2) is identical to an additional column in the
+textmatrix representation of the latent semantic space (as produced by 
+\code{showLSAspace()}).
 
 }
 \value{

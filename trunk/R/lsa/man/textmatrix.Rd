@@ -1,9 +1,9 @@
 \name{textmatrix}
 \alias{textmatrix}
 \alias{textvector}
-\title{Document Term Matrix (Matrices)}
+\title{Textmatrix (Matrices)}
 \description{
-  Creates a document-term-matrix from all textfiles in a given directory.
+  Creates a document-term matrix from all textfiles in a given directory.
 }
 \usage{
 textmatrix ( mydir, stemming=FALSE, language="german", 
@@ -24,14 +24,14 @@ textvector ( file, stemming=FALSE, language="german",
 \details{
   All documents in the specified directory are read and a matrix is composed.
   The matrix contains in every cell the exact number of appearances (=the term frequency) 
-  of every word for all documents. If specified, simple text-preprocessing mechanisms
+  of every word for all documents. If specified, simple text preprocessing mechanisms
   are applied (stemming, stopword filtering, wordlength cutoffs).
   
-  Stemming thereby facilitates porter's snowball stemmer (of the package \code{Rstem}).
+  Stemming thereby uses porter's snowball stemmer (from package \code{Rstem}).
   
   There are two stopword lists included (for english and for german), which
   are loaded on demand into the variables \code{stopwords_de} and 
-  \code{stopwords_en}. They can be loaded by calling \code{data(stopwords_de)}
+  \code{stopwords_en}. They can be activated by calling \code{data(stopwords_de)}
   or \code{data(stopwords_en)}. Attention: the stopword lists have
   to be already loaded when \code{textmatrix()} is called.
   
@@ -44,7 +44,7 @@ textvector ( file, stemming=FALSE, language="german",
   
 }
 \value{
-  \item{dtm}{the document-term-matrix (incl. row- and column-header).}
+  \item{textmatrix}{the document-term matrix (incl. row and column names).}
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \seealso{ \code{\link[Rstem]{wordStem}}, \code{\link{stopwords_de}}, \code{\link{stopwords_en}}, \code{\link{setTriple}}, \code{\link{getTriple}}}

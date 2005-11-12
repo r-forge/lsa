@@ -5,13 +5,12 @@
   Calculates the cosine measure between two vectors or between all column vectors of a matrix.
 }
 \usage{
+cosine(x, y)
 cosine(x)
-cosine(v1,v2)
 }
 \arguments{
-   \item{x}{a matrix (e.g. a document-term matrix).}
-   \item{v1}{the first vector.}
-   \item{v2}{the second vector.}
+   \item{x}{A vector or a matrix (e.g. a document-term matrix).}
+   \item{y}{Optional: a vector with compatible dimensions to 'x'.}
 }
 \details{
   \code{cosine()} calculates a similarity matrix between all column
@@ -19,8 +18,8 @@ cosine(v1,v2)
   matrix, so columns would be expected to be documents and
   rows to be terms.
   
-  When executed on two vectors, \code{cosine()}
-  calculates the cosine similarity between them.
+  When executed on two vectors \code{x} and \code{y}, 
+  \code{cosine()} calculates the cosine similarity between them.
   
   Be reminded that the cosine measure is nearly identical
   with the pearson correlation coefficient \code{cor(method="pearson")}
@@ -30,8 +29,8 @@ cosine(v1,v2)
 
 }
 \value{
-  Returns a n*n similarity matrix of cosine values, comparing each of 
-  the n column vectors with every other. Executed on two vectors, one 
+  Returns a n*n similarity matrix of cosine values, comparing all 
+  n column vectors against each other. Executed on two vectors, their 
   cosine similarity value is returned.
 }
 \seealso{\code{\link[stats]{cor}}}

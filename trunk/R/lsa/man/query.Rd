@@ -9,7 +9,7 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
 }
 \arguments{
    \item{termlist}{the termlist of the background latent-semantic space.}
-   \item{language}{specifies language for the stemming / stop-word-removal.}
+   \item{language}{specifies a language for stemming / stop-word-removal.}
    \item{stemming}{boolean, specifies whether all terms will be reduced to their wordstems.}
    \item{qtext}{the query string, words are separated by blanks ' '.}
 }
@@ -21,25 +21,23 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \seealso{
-\code{\link[Rstem]{wordStem}}, for more information see \code{\link{textmatrix}} 
+\code{\link[Rstem]{wordStem}}, \code{\link{textmatrix}} 
 }
 \examples{
 
-\dontshow{
+# prepare some files
 td = tempdir()
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td,"/data_doc1.dt",sep="") )
 write( c("hamster", "mouse", "sushi"), file=paste(td,"/data_doc2.dt",sep="") )
 write( c("dog", "monster", "monster"), file=paste(td,"/data_doc3.dt",sep="") )
-}
 
-## demonstrate generation of a query
+# demonstrate generation of a query
 dtm = textmatrix(td)
 query("monster", rownames(dtm))
 
-\dontshow{
+# clean up
 unlink(td, TRUE)
-}
 
 }
 \keyword{algebra}

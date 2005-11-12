@@ -15,12 +15,12 @@ dimcalc_kaiser(s)
 }
 \arguments{
    \item{method}{Choose one calculation method as described below.}
-   \item{share}{Optional: a fraction [0;1] of the sum of the selected singular values to the sum of all singular values.}
+   \item{share}{Optional: a fraction [0;1] of the sum of the selected singular values to the sum of all singular values (default value = 0.5).}
    \item{ndocs}{Optional: the number of documents (only needed for method="ndocs").}
-   \item{s}{A sequence of singular values (as produced by the svd). Only needed when calling the dimcal methods directly.}
+   \item{s}{A sequence of singular values (as produced by the svd). Only needed when calling the dimcalc() directly.}
 }
 \details{
-  In an LSA-process, the diagonal matrix of the singular value decomposition is 
+  In an LSA process, the diagonal matrix of the singular value decomposition is 
   usually reduced to a specific number of dimensions (also 'factors' or 'singular values').
 
   The functions \code{dimcalc_share()}, \code{dimcalc_ndocs()} and \code{dimcalc_kaiser()} offer
