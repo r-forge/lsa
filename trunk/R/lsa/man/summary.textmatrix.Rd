@@ -9,6 +9,7 @@ summary.textmatrix ( object, ... )
 }
 \arguments{
    \item{object}{A textmatrix.}
+   \item{...}{}
 }
 \details{
 Returns some statistical infos about the textmatrix \code{x}:

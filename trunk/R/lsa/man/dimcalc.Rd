@@ -8,10 +8,10 @@
    Calculates a (good) number of singular values for the dimensionality reduction in LSA.
 }
 \usage{
-dimcalc(method=c("share","kaiser","ndocs","raw"), share=0.5, ndocs)
-dimcalc_share(s, share=0.5)
-dimcalc_ndocs(s, ndocs)
-dimcalc_kaiser(s)
+   dimcalc(method=c("share","kaiser","ndocs","raw"), share=0.5, ndocs)
+   dimcalc_share(s, share=0.5)
+   dimcalc_ndocs(s, ndocs)
+   dimcalc_kaiser(s)
 }
 \arguments{
    \item{method}{Choose one calculation method as described below.}
@@ -64,7 +64,7 @@ dimcalc_kaiser(s)
   return the recommended number of dimensions.
 }
 \seealso{\code{\link{createLSAspace}}}
-\references{Wild, F.; Stahl, C.; Stermsek, G.; Neumann, G.; Penya, Y. (2005) \emph{Parameters Driving Effectiveness of Automated Essay Scoring with LSA}. In: Proceedings of the 9th CAA, pp.485-494, Loughborough, UK }
+\references{Wild, F., Stahl, C., Stermsek, G., Neumann, G., Penya, Y. (2005) \emph{Parameters Driving Effectiveness of Automated Essay Scoring with LSA}. In: Proceedings of the 9th CAA, pp.485-494, Loughborough, UK }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \examples{
 

@@ -11,6 +11,7 @@ print.textmatrix ( x, bag_lines, bag_cols, ... )
    \item{x}{A textmatrix.}
    \item{bag_lines}{The number of lines per bag.}
    \item{bag_cols}{The number of columns per bag.}
+   \item{...}{}
 }
 \details{
     Document-term matrices are often very large and

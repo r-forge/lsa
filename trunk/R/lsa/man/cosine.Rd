@@ -5,12 +5,11 @@
   Calculates the cosine measure between two vectors or between all column vectors of a matrix.
 }
 \usage{
-cosine(x, y)
-cosine(x)
+cosine(x, y = NULL)
 }
 \arguments{
    \item{x}{A vector or a matrix (e.g. a document-term matrix).}
-   \item{y}{Optional: a vector with compatible dimensions to 'x'.}
+   \item{y}{Optional: a vector with compatible dimensions to 'x'. If 'NULL', all column vectors of x are correlated.}
 }
 \details{
   \code{cosine()} calculates a similarity matrix between all column
