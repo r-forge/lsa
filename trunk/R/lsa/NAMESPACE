@@ -1,7 +1,6 @@
 export("cosine")
 export("dimcalc", "dimcalc_share", "dimcalc_kaiser", "dimcalc_ndocs")
 export("textmatrix", "textvector")
-export("mean_max")
 export("query")
 export("getTriple", "setTriple", "delTriple")
 export("lw_tf", "lw_logtf", "lw_bintf", "gw_normalisation", "gw_idf", "gw_gfidf", "entropy", "gw_entropy")
