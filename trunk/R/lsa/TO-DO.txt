@@ -5,6 +5,7 @@ TO-DO:
 * check query() to ensure it's working
 
 DONE 2005-11-12:
+* documentation refactured, added documentation for several new methods.
 * remove meanmax.R (doesn't fit the package
 
 DONE 2005-11-11:
