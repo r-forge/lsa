@@ -88,21 +88,29 @@ write( c("graph", "minors", "survey"), file=paste(td,"/m4", sep=""))
 
 errors = NULL
 
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test normal matrix
+
 dtm = textmatrix(td)
 errors = append(errors, all( rownames(dtm) == c("computer", "human",  "interface", "response", "survey", "system", "time", "user", "trees", "graph", "minors")))
 errors = append(errors, all( colnames(dtm) == c("c1","c2","c3","c4","c5","m1","m2","m3","m4") ))
 
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test with reduced vocabulary (replaces former function pseudo_docs)
+
 dtm2 = textmatrix(td, vocabulary = rownames(dtm)[-(3:7)])
 errors = append(errors, all( rownames(dtm2) == c("computer", "human",  "user", "trees", "graph", "minors")))
 errors = append(errors, all( colnames(dtm2) == c("c1","c2","c3","c4","c5","m1","m2","m3","m4") ))
 
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test with stemming
+
 dtm = textmatrix(td, stemming=TRUE, language="english")
 errors = append(errors, all( rownames(dtm) == c("comput", "human", "interfac", "respons", "survey", "system", "time", "user", "tree", "graph", "minor")))
 
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test with stopping
+
 write( c("the", "das", "minor", "die", "it"), file=paste(td,"/stopwords", sep=""))
 
 data(stopwords_en)
@@ -113,11 +121,14 @@ data(stopwords_de)
 dtm2 = textmatrix(td, stopwords=stopwords_de, minDocFreq=1, minWordLength=1)
 errors = append(errors, all( rownames(dtm2) == c("computer", "human", "interface", "response", "survey", "system", "time", "user", "eps", "trees", "graph", "minors", "it", "minor", "the" )))
 
-unlink(paste(td,"/stopwords",sep=""), recursive=TRUE)
-
-# now clean up a little.
 unlink(td, recursive=TRUE)
 
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# test query
+
+errors = append( errors, all( query("response.interface human", rownames(dtm2)) == c(0,1,1,1,0,0,0,0,0,0,0,0,0,0,0)))
+
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test for word order sensitivity
 
 td = tempdir()
