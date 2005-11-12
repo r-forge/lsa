@@ -7,9 +7,9 @@
 ###   * rewrote cosvecs function to crossprod
 ### 
 
-cosine <- function( x, y ) {
+cosine <- function( x, y=NULL ) {
     
-    if ( is.matrix(x) && missing(y) ) {
+    if ( is.matrix(x) && is.null(y) ) {
         
         co = array(0,c(ncol(x),ncol(x)))
         
