@@ -3,7 +3,7 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
 ### 
-### !!!!! WARNING: you currently cannot use textmatrix with vocabulary=s.th. !!!!!
+### 2005-11-11: integrated the vocabulary order/sort functions...
 ### 2005-11-08: added print and summary functions
 ### 2005-11-08: added vocabulary filter to both functions
 ### 2005-10-04: added nchar(..., type="chars") to count characters, not bytes
