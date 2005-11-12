@@ -1,8 +1,9 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-### pseudo_dtm v0.2
+### query.R
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
 ### 
+### 2005-11-12: bugfix for regexp
 ### 2005-11-08: pseudo_dtm.R renamed to query.R
 ### 2005-11-08: removed pseudo_svd (now in lsa.R, renamed
 ###             to foldinLSAspace()
@@ -19,7 +20,7 @@ query <- function( qtext, termlist, stemming=FALSE, language="german" ) {
     
     dtm = NULL
     
-    q = strsplit( gsub('[[:space:][:punct:]]*', ' ', tolower(qtext) ), " ")[[1]]
+    q = strsplit( gsub('[[:space:]]|[[:punct:]]+', ' ', tolower(qtext) ), " ")[[1]]
     vec = vector( mode="numeric", length(termlist) )
     for ( word in q ) {
         if (stemming) word = wordStem(word, language=language)
