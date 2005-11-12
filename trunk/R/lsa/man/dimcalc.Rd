@@ -64,7 +64,7 @@
   return the recommended number of dimensions.
 }
 \seealso{\code{\link{createLSAspace}}}
-\references{Wild, F., Stahl, C., Stermsek, G., Neumann, G., Penya, Y. (2005) \emph{Parameters Driving Effectiveness of Automated Essay Scoring with LSA}. In: Proceedings of the 9th CAA, pp.485-494, Loughborough, UK }
+\references{Wild, F., Stahl, C., Stermsek, G., Neumann, G., Penya, Y. (2005) \emph{Parameters Driving Effectiveness of Automated Essay Scoring with LSA}. In: Proceedings of the 9th CAA, pp.485-494, Loughborough }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \examples{
 
@@ -86,5 +86,4 @@ n = ncol(matrix)
 dimcalc(method="ndocs", ndocs=n)(s)
 
 }
-\keyword{algebra}
-\keyword{array}
+\keyword{latent semantic analysis}

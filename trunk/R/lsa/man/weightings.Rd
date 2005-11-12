@@ -83,5 +83,5 @@ matrix = cbind(vec1,vec2, vec3)
 weighted = lw_logtf(matrix)*gw_idf(matrix)
 
 }
-\keyword{algebra}
-\keyword{array}
+\keyword{textmatrix}
+\keyword{termweighting}

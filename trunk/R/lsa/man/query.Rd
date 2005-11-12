@@ -28,9 +28,9 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
 # prepare some files
 td = paste(tempdir(), "lsatest", sep="/")
 dir.create(td)
-write( c("dog", "cat", "mouse"), file=paste(td,"/data_doc1.dt",sep="") )
-write( c("hamster", "mouse", "sushi"), file=paste(td,"/data_doc2.dt",sep="") )
-write( c("dog", "monster", "monster"), file=paste(td,"/data_doc3.dt",sep="") )
+write( c("dog", "cat", "mouse"), file=paste(td,"D1", sep="/") )
+write( c("hamster", "mouse", "sushi"), file=paste(td,"D2", sep="/") )
+write( c("dog", "monster", "monster"), file=paste(td,"D3", sep="/") )
 
 # demonstrate generation of a query
 dtm = textmatrix(td)
@@ -40,5 +40,4 @@ query("monster", rownames(dtm))
 unlink(td, TRUE)
 
 }
-\keyword{algebra}
-\keyword{array}
+\keyword{textmatrix}

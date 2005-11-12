@@ -72,5 +72,4 @@ textmatrix(td, vocabulary=voc, minWordLength=1)
 unlink(td, recursive=TRUE)
 
 }
-\keyword{algebra}
-\keyword{array}
+\keyword{textmatrix}

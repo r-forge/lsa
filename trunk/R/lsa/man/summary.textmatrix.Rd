@@ -1,6 +1,6 @@
 \name{summary.textmatrix}
 \alias{summary.textmatrix}
-\title{Summary over a textmatrix (Matrices)}
+\title{Summary of a textmatrix (Matrices)}
 \description{
   Return a summary with some statistical infos about a given textmatrix.
 }
@@ -35,5 +35,4 @@ class(m) = "textmatrix"
 summary(m)
 
 }
-\keyword{algebra}
-\keyword{array}
+\keyword{textmatrix}

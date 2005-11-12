@@ -71,5 +71,4 @@ getSubjectId ( M, subject )
     getTriple(x, "doc1", "has_category") # -> [1] "11"
     
 }
-\keyword{algebra}
-\keyword{array}
+\keyword{textmatrix}

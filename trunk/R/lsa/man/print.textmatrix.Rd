@@ -46,5 +46,4 @@ class(m) = "textmatrix"
 print(m, bag_cols=5)
 
 }
-\keyword{algebra}
-\keyword{array}
+\keyword{textmatrix}
