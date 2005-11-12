@@ -2,11 +2,11 @@ TO-DO:
 
 * eliminate query -> integrate into textmatrix
 * vignettes for the paper
-* check query() to ensure it's working
 
 DONE 2005-11-12:
 * documentation refactured, added documentation for several new methods.
 * remove meanmax.R (doesn't fit the package
+* check query() to ensure it's working
 
 DONE 2005-11-11:
 * bugfix textmatrix to work properly with the vocabulary list!!!
