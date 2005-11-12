@@ -47,6 +47,8 @@ showLSAspace <- function (LSAspace){
     Y = LSAspace$tk %*% diag(LSAspace$sk) %*% t(LSAspace$dk)
     rownames(Y)=rownames(LSAspace$tk)
     colnames(Y)=rownames(LSAspace$dk)
+    class(Y) = "textmatrix"
+    environment(Y) = new.env()
     return(Y)
 }
 

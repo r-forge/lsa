@@ -10,7 +10,7 @@
 ### 2005-08-25: added "\\[|\\]|\\{|\\}" to gsub
 ### 2005-08-26: renamed dt_triples to textvector and dt_matrix to textmatrix
 
-textvector <- function (file, stemming=FALSE, language="german", minWordLength=3, minDocFreq=1, stopwords=NULL, vocabulary=NULL) {
+textvector <- function (file, stemming=FALSE, language="german", minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL) {
     
     txt = scan(file, what = "character", quiet = TRUE)
     txt = gsub( "\\.|:|\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\?|-|\\!|\"|\'|\`|\\^|\=|\’|\–|\„|\”|\/", " ", txt)
@@ -31,7 +31,7 @@ textvector <- function (file, stemming=FALSE, language="german", minWordLength=3
     tab = tab[tab >= minDocFreq]
     
     # wordLength filtering?
-    tab = tab[nchar(names(tab), type="chars") > minWordLength]
+    tab = tab[nchar(names(tab), type="chars") >= minWordLength]
     
     # stemming?
     if (stemming) names(tab) = wordStem(names(tab), language=language)
@@ -40,7 +40,7 @@ textvector <- function (file, stemming=FALSE, language="german", minWordLength=3
     
 }
 
-textmatrix <- function( mydir, stemming=FALSE, language="german", minWordLength=3, minDocFreq=1, stopwords=NULL, vocabulary=NULL ) {
+textmatrix <- function( mydir, stemming=FALSE, language="german", minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL ) {
     
     dummy = lapply( dir(mydir, full.names=TRUE), textvector, stemming, language, minWordLength, minDocFreq, stopwords, vocabulary)
     if (!is.null(vocabulary)) {
@@ -96,7 +96,7 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
         docnames = paste( colnames(redx), c( colnames(x)[1:bag_cols], colnames(x)[midc:(midc+bag_cols-1)], colnames(x)[(ncol(x)-bag_cols+1):ncol(x)] ), sep=" = ")
         
         ret = NULL
-        ret$matrix = redx;
+        ret$matrix = round(redx,2);
         ret$legend = docnames;
         
         print(ret);
