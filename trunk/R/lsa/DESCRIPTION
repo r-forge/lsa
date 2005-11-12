@@ -8,7 +8,7 @@ Description: The basic idea of latent semantic analysis (LSA) is,
   however, is obscured by word usage (e.g. through the use of synonyms 
   or polysemy). By using conceptual indices that are derived statistically 
   via a truncated singular value decomposition (a two-mode factor analysis) 
-  over a given document-term-matrix, this variability problem can be overcome. 
+  over a given document-term matrix, this variability problem can be overcome. 
 Depends: Rstem
 Maintainer: Fridolin Wild <fridolin.wild@wu-wien.ac.at>
 License: GPL version 2 or later.
