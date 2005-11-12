@@ -36,8 +36,6 @@ setTriple(myTextMatrix, "c3", "has_category", 20)
 setTriple(myTextMatrix, "c2", "has_category", 20)
 setTriple(myTextMatrix, "c1", "has_category", 20)
 
-errors = NULL
-
 errors = append(errors, all( (getTriple(myTextMatrix)[[1]] == as.vector(c("1", "1", "3", "2", "1"))) == TRUE))
 errors = append(errors, all( (getTriple(myTextMatrix)[[2]] == as.vector(rep("has_category", 5))) == TRUE))
 errors = append(errors, all( (getTriple(myTextMatrix)[[3]] == as.vector(c("15","11","20","20","20"))) == TRUE))
@@ -74,7 +72,7 @@ print("[textmatrix] - starting with tests.")
 
 # create landauer example with files
 
-td = tempdir()
+td = paste(tempdir(), "lsatest", sep="/")
 dir.create(td)
 write( c("human", "interface", "computer"), file=paste(td,"/c1", sep=""))
 write( c("survey", "user", "computer", "system", "response", "time"), file=paste(td,"/c2", sep=""))
@@ -85,8 +83,6 @@ write( c("trees"), file=paste(td,"/m1", sep=""))
 write( c("graph", "trees"), file=paste(td,"/m2", sep=""))
 write( c("graph", "minors", "trees"), file=paste(td,"/m3", sep=""))
 write( c("graph", "minors", "survey"), file=paste(td,"/m4", sep=""))
-
-errors = NULL
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test normal matrix
@@ -112,15 +108,15 @@ errors = append(errors, all( rownames(dtm) == c("comput", "human", "interfac", "
 # test with stopping
 
 write( c("the", "das", "minor", "die", "it"), file=paste(td,"/stopwords", sep=""))
-
 data(stopwords_en)
 dtm = textmatrix(td, stopwords=stopwords_en, minDocFreq=1, minWordLength=1)
 errors = append(errors, all( rownames(dtm) == c("computer", "human", "interface", "response", "survey", "system", "time", "user", "eps", "trees", "graph", "minors", "das", "die", "minor")))
-
 data(stopwords_de)
 dtm2 = textmatrix(td, stopwords=stopwords_de, minDocFreq=1, minWordLength=1)
 errors = append(errors, all( rownames(dtm2) == c("computer", "human", "interface", "response", "survey", "system", "time", "user", "eps", "trees", "graph", "minors", "it", "minor", "the" )))
 
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# clean up
 unlink(td, recursive=TRUE)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
@@ -131,13 +127,11 @@ errors = append( errors, all( query("response.interface human", rownames(dtm2)) 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test for word order sensitivity
 
-td = tempdir()
-dir.create(td)
-td1 = paste(td,"test1",sep="/");
+td1 = paste(tempdir(),"test1",sep="/");
 dir.create(td1)
 write( c("word4", "word3", "word2"), file=paste(td1,"/c1", sep=""))
 write( c("word1", "word4", "word2"), file=paste(td1,"/c2", sep=""))
-td2 = paste(td,"test2",sep="/");
+td2 = paste(tempdir(),"test2",sep="/");
 dir.create(td2)
 write( c("word1", "word2", "word3"), file=paste(td2,"/c1", sep=""))
 write( c("word1", "word2", "word3"), file=paste(td2,"/c2", sep=""))
@@ -147,10 +141,11 @@ dtm3 = textmatrix(td2)
 errors = append(errors, length(rownames(dtm1)) == length(rownames(dtm2)))
 errors = append(errors, rownames(dtm1) == rownames(dtm2) )
 errors = append(errors, length(rownames(dtm2)) != length(rownames(dtm3)) )
-unlink(td, recursive=TRUE)
+unlink(td1, recursive=TRUE)
+unlink(td2, recursive=TRUE)
 
 if (any(errors == FALSE)) {
-    stop("[textmatrx] - fatal error");
+    stop("[textmatrix] - fatal error");
 } else {
     print("[textmatrix] - testing went fine.")
 }
