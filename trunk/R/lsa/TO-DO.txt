@@ -1,8 +1,10 @@
 TO-DO:
 
-* eliminate query -> integrate into textmatrix (thru connections)
+* eliminate query -> integrate into textmatrix
 * vignettes for the paper
 * check query() to ensure it's working
+
+DONE 2005-11-12:
 * remove meanmax.R (doesn't fit the package
 
 DONE 2005-11-11:
