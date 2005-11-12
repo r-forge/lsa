@@ -24,7 +24,7 @@ With \code{createLSAspace()} a new latent semantic space can
 be constructed over a given document-term matrix. To ease
 comparisons of terms and documents with common
 correlation measures, the space can be converted into
-a document-term matrix of the same format as \code{y} 
+a textmatrix of the same format as \code{y} 
 by calling \code{showLSAspace()}.
 
 To add more documents or queries to this latent semantic
@@ -79,9 +79,7 @@ document-term matrix \code{Mnew} in the term-order of \code{M}.
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \seealso{ 
-  \code{\link{showLSAspace}}, \code{\link{foldinLSAspace}}, 
-  Creating a document-term matrix: \code{\link{textmatrix}}, 
-  applying weighting schemes: \code{\link{gw_idf}} 
+  \code{\link{showLSAspace}}, \code{\link{foldinLSAspace}}, \code{\link{textmatrix}}, \code{\link{gw_idf}} 
 }
 \references{
 Deerwester, S., Dumais, S., Furnas, G., Landauer, T., and Harshman, R. (1990) \emph{Indexing by Latent Semantic Analysis}. In: Journal of the American Society for Information Science 41(6), pp. 391--407.
@@ -94,8 +92,8 @@ Landauer, T., Foltz, P., and Laham, D. (1998) \emph{Introduction to Latent Seman
 td = tempdir()
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td, "data_doc1.dt", sep="/")
-write( c("hamster", "mouse", "sushi"), file=paste(td, "data_doc2.dt", sep="/")
-write( c("dog", "monster", "monster"), file=paste(td, "data_doc3.dt", sep="/")
+write( c("ham", "mouse", "sushi"), file=paste(td, "data_doc2.dt", sep="/")
+write( c("dog", "pet", "pet"), file=paste(td, "data_doc3.dt", sep="/")
 
 # LSA
 data(stopwords_en)

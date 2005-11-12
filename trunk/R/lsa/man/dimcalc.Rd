@@ -3,7 +3,7 @@
 \alias{dimcalc_share}
 \alias{dimcalc_ndocs}
 \alias{dimcalc_kaiser}
-\title{Dimensionality Calculation Routines (SVD,LSA)}
+\title{Dimensionality Calculation Routines (LSA)}
 \description{
    Calculates a (good) number of singular values for the dimensionality reduction in LSA.
 }

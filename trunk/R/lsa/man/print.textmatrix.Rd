@@ -16,11 +16,17 @@ print.textmatrix ( x, bag_lines, bag_cols, ... )
     Document-term matrices are often very large and
     cannot be displayed completely on one screen. 
     Therefore, the textmatrix print method displays
-    only a selection of sectors from this matrix.
-    Vertically as well as horizontally from the beginning,
-    the middle, and the end of the matrix, bag_lines (resp.
-    bag_cols) lines (resp. columns) are selected and
-    printed to the screen.
+    only clippings ('bags') from this matrix.
+    
+    Clippings are taken vertically and horizontally 
+    from beginning, middle, and end of the matrix.
+    \code{bag\_lines} lines (resp. \code{bag\_cols} columns) 
+    are printed to the screen.
+    
+    To keep document titles from blowing up the display,
+    a legend is introduced below, referencing the symbols
+    used in the table.
+    
 }
 \value{
 }
@@ -36,7 +42,7 @@ rownames(m) = paste("W",1:nrow(m),sep="")
 class(m) = "textmatrix"
 
 # show a short form of the matrix
-print(m)
+print(m, bag_cols=5)
 
 }
 \keyword{algebra}

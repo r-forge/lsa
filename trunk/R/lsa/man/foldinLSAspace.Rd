@@ -1,6 +1,6 @@
 \name{foldinLSAspace}
 \alias{foldinLSAspace}
-\title{Ex-post folding-in of document-term matrices into a latent semantic space}
+\title{Ex-post folding-in of textmatrices into an existing latent semantic space}
 \description{
 Additional documents can be mapped into a pre-exisiting
 latent semantic space without influencing the factor
@@ -25,9 +25,9 @@ Background Information:
 For folding-in, a pseudo document vector \code{mi} of the new documents 
 is calculated into as shown in the equations (1) and (2) (cf. Berry et al., 1995):
 
-(1) \code{ di = t(v) \%*\% Tk \%*\% solve(diag(Sk)) }
+\code{(1) di = t(v) \%*\% Tk \%*\% solve(diag(Sk)) }
 
-(2) \code{ mi = Tk \%*\% diag(Sk) \%*\% t(di) }
+\code{(2) mi = Tk \%*\% diag(Sk) \%*\% t(di) }
 
 The document vector \code{t(v)} in equation (1) is identical to an additional 
 column of an input textmatrix \code{M} with the term frequencies of the 
@@ -49,19 +49,19 @@ textmatrix representation of the latent semantic space (as produced by
 # create a first textmatrix with some files
 td = tempdir()
 dir.create(td)
-write( c("dog", "cat", "mouse"), file=paste(td, "data_doc1.dt", sep="/")
-write( c("hamster", "mouse", "sushi"), file=paste(td, "data_doc2.dt", sep="/")
-write( c("dog", "monster", "monster"), file=paste(td, "data_doc3.dt", sep="/")
-matrix1 = textmatrix(td)
+write( c("dog", "cat", "mouse"), file=paste(td, "D1", sep="/") )
+write( c("hamster", "mouse", "sushi"), file=paste(td, "D2", sep="/") )
+write( c("dog", "monster", "monster"), file=paste(td, "D3", sep="/") )
+matrix1 = textmatrix(td, minWordLength=1)
 unlink(td, recursive=TRUE)
 
-# create a second textmatrix with some different files
+# create a second textmatrix with some more files
 td = tempdir()
 dir.create(td)
-write( c("cat", "mouse", "mouse"), file=paste(td, "data2_doc1.dt", sep="/")
-write( c("nothing", "mouse", "monster"), file=paste(td, "data2_doc2.dt", sep="/")
-write( c("cat", "monster", "monster"), file=paste(td, "data2_doc3.dt", sep="/")
-matrix2 = textmatrix(td)
+write( c("cat", "mouse", "mouse"), file=paste(td, "A1", sep="/") )
+write( c("nothing", "mouse", "monster"), file=paste(td, "A2", sep="/") )
+write( c("cat", "monster", "monster"), file=paste(td, "A3", sep="/") )
+matrix2 = textmatrix(td, vocabulary=rownames(matrix1), minWordLength=1)
 unlink(td, recursive=TRUE)
 
 # create an LSA space from matrix1

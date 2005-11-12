@@ -17,6 +17,7 @@ number of values not 0, number of terms containing strange
 characters.
 }
 \value{
+   \item{matrix}{Returns a matrix.}
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \seealso{ \code{\link{textmatrix}} }

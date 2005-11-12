@@ -61,9 +61,9 @@ gw_entropy(m)
 
 Dumais, S. (1992) \emph{Enhancing Performance in Latent Semantic Indexing (LSI) Retrieval}. Technical Report, Bellcore.
 
-Nakov, P., Popova, A., and Mateev, P. (2001) \emph{Weight functions impact on LSA performance}. In: Recent Advances in Natural language processing – RANLP’2001. Tzigov Chark, Bulgaria, pp. 187--193.
+Nakov, P., Popova, A., and Mateev, P. (2001) \emph{Weight functions impact on LSA performance}. In: Recent Advances in Natural language processing –- RANLP'2001, Bulgaria, pp. 187--193.
 
-Shannon, C. (1948) \emph{A Mathematical Theory of Communication}. In: The Bell System Technical Journal 27 (July), pp. 379–423.
+Shannon, C. (1948) \emph{A Mathematical Theory of Communication}. In: The Bell System Technical Journal 27 (July), pp.379–-423.
 
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
