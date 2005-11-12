@@ -47,7 +47,7 @@ textmatrix representation of the latent semantic space (as produced by
 \examples{
 
 # create a first textmatrix with some files
-td = tempdir()
+td = paste(tempdir(), "lsatest", sep="/")
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td, "D1", sep="/") )
 write( c("hamster", "mouse", "sushi"), file=paste(td, "D2", sep="/") )
@@ -56,7 +56,7 @@ matrix1 = textmatrix(td, minWordLength=1)
 unlink(td, recursive=TRUE)
 
 # create a second textmatrix with some more files
-td = tempdir()
+td = paste(tempdir(), "lsatest", sep="/")
 dir.create(td)
 write( c("cat", "mouse", "mouse"), file=paste(td, "A1", sep="/") )
 write( c("nothing", "mouse", "monster"), file=paste(td, "A2", sep="/") )

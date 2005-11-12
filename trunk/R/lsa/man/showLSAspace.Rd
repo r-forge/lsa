@@ -33,14 +33,15 @@ for more information.
 \examples{
 
 # create some files
-td = tempdir()
+td = paste(tempdir(), "lsatest", sep="/")
 dir.create(td)
-write( c("dog", "cat", "mouse"), file=paste(td, "data_doc1.dt", sep="/")
-write( c("hamster", "mouse", "sushi"), file=paste(td, "data_doc2.dt", sep="/")
-write( c("dog", "monster", "monster"), file=paste(td, "data_doc3.dt", sep="/")
+write( c("dog", "cat", "mouse"), file=paste(td, "D1", sep="/"))
+write( c("hamster", "mouse", "sushi"), file=paste(td, "D2", sep="/"))
+write( c("dog", "monster", "monster"), file=paste(td, "D3", sep="/"))
+write( c("dog", "mouse", "dog"), file=paste(td, "D4", sep="/"))
 
 # read files into a document-term matrix
-myMatrix = textmatrix(td)
+myMatrix = textmatrix(td, minWordLength=1)
 
 # create the latent semantic space
 myLSAspace = createLSAspace(myMatrix, dims=dimcalc(method="raw")) 

@@ -26,7 +26,7 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
 \examples{
 
 # prepare some files
-td = tempdir()
+td = paste(tempdir(), "lsatest", sep="/")
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td,"/data_doc1.dt",sep="") )
 write( c("hamster", "mouse", "sushi"), file=paste(td,"/data_doc2.dt",sep="") )

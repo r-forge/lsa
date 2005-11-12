@@ -89,7 +89,7 @@ Landauer, T., Foltz, P., and Laham, D. (1998) \emph{Introduction to Latent Seman
 \examples{
 
 # create some files
-td = tempdir()
+td = paste(tempdir(),"d1",sep="/")
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td, "data_doc1.dt", sep="/")
 write( c("ham", "mouse", "sushi"), file=paste(td, "data_doc2.dt", sep="/")
