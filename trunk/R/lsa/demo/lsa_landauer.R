@@ -2,29 +2,27 @@
 ### demo/lsa_landauer.r
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 
-library("lsa")
-
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # generate the files of the famous Landauer example
-dir.create("landauer")
-write( c("human", "interface", "computer"), file="landauer/c1")
-write( c("survey", "user", "computer", "system", "response", "time"), file="landauer/c2")
-write( c("EPS", "user", "interface", "system"), file="landauer/c3")
-write( c("system", "human", "system", "EPS"), file="landauer/c4")
-write( c("user", "response", "time"), file="landauer/c5")
-write( c("trees"), file="landauer/m1")
-write( c("graph", "trees"), file="landauer/m2")
-write( c("graph", "minors", "trees"), file="landauer/m3")
-write( c("graph", "minors", "survey"), file="landauer/m4")
+ldir = paste(tempdir(), "landauer", sep="/")
+dir.create(ldir)
+write( c("human", "interface", "computer"), file=paste(ldir, "c1", sep="/"))
+write( c("survey", "user", "computer", "system", "response", "time"), file=paste(ldir, "c2", sep="/"))
+write( c("EPS", "user", "interface", "system"), file=paste(ldir, "c3", sep="/"))
+write( c("system", "human", "system", "EPS"), file=paste(ldir, "c4", sep="/"))
+write( c("user", "response", "time"), file=paste(ldir, "c5", sep="/"))
+write( c("trees"), file=paste(ldir, "m1", sep="/"))
+write( c("graph", "trees"), file=paste(ldir, "m2", sep="/"))
+write( c("graph", "minors", "trees"), file=paste(ldir, "m3", sep="/"))
+write( c("graph", "minors", "survey"), file=paste(ldir, "m4", sep="/"))
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # generate doc term matrix from landauer files
-dtm = textmatrix("landauer/", minWordLength=1)
+dtm = textmatrix(ldir, minWordLength=1)
 dtm
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # make a space, reconstruct original
-
 landauerOriginalSpace = createLSAspace(dtm, dims=dimcalc(method="raw"))
 X = showLSAspace(landauerOriginalSpace)
 
@@ -32,7 +30,8 @@ X = showLSAspace(landauerOriginalSpace)
 all( (round(X,2) == dtm) == TRUE)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
-# reduce dimensionality (Y shall be the recalculated 'reduced' matrix)
+# reduce dimensionality (Y shall be 
+# the recalculated 'reduced' matrix)
 
 landauerSpace = createLSAspace(dtm, dims=2)
 Y = showLSAspace(landauerSpace)
@@ -41,7 +40,7 @@ round(Y,2)
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # now read in again the landauer sample (but 
 # with the vocabulary of the existing matrix)
-pdocs = textmatrix("landauer/", vocabulary=rownames(dtm))
+pdocs = textmatrix(ldir, vocabulary=rownames(dtm))
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # now calc a pseudo SVD on the basis of dtm's SVD
@@ -64,6 +63,6 @@ lsaCor = cor(Y)
 round(rawCor,2)
 round(lsaCor,2)
 
-# now clean up a little.
-unlink("landauer", recursive=TRUE)
+# clean up
+unlink(ldir, recursive=TRUE)
 
