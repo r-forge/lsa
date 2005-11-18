@@ -4,27 +4,19 @@
 
 library(lsa)
 
-# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-# testing cosine
-
-print("[cosine] - starting with tests.")
-
-a = c(2,1,1,1,0)
-b = c(0,0,0,1,0)
-
-errors = NULL
-errors = append(errors, (round(cosine(a,b),3) == 0.378))
-
-if (any(errors == FALSE)) {
-    stop("[cosine] - fatal error");
-} else {
-    print("[cosine] - testing went fine.")
+lsatest <- function(test, description) {
+    if (!test) stop(description)
 }
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-# routines for get/set/delTriples
+# testing cosine
 
-print("[triples] - starting with tests.")
+a = c(2,1,1,1,0)
+b = c(0,0,0,1,0)
+lsatest( (round(cosine(a,b),3) == 0.378), "[cosine] - vector comparison");
+
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# routines for get/set/delTriples
 
 myTextMatrix = matrix(2,2,3);
 colnames(myTextMatrix) = c("c1","c2","c3");
@@ -38,42 +30,33 @@ setTriple(myTextMatrix, "c3", "has_category", 20)
 setTriple(myTextMatrix, "c2", "has_category", 20)
 setTriple(myTextMatrix, "c1", "has_category", 20)
 
-errors = append(errors, all( (getTriple(myTextMatrix)[[1]] == as.vector(c("1", "1", "3", "2", "1"))) == TRUE))
-errors = append(errors, all( (getTriple(myTextMatrix)[[2]] == as.vector(rep("has_category", 5))) == TRUE))
-errors = append(errors, all( (getTriple(myTextMatrix)[[3]] == as.vector(c("15","11","20","20","20"))) == TRUE))
+lsatest( all( (getTriple(myTextMatrix)[[1]] == as.vector(c("1", "1", "3", "2", "1"))) == TRUE), "[triples] - getTriple(all) subjects");
+lsatest( all( (getTriple(myTextMatrix)[[2]] == as.vector(rep("has_category", 5))) == TRUE), "[triples] - getTriple(all) predicates");
+lsatest( all( (getTriple(myTextMatrix)[[3]] == as.vector(c("15","11","20","20","20"))) == TRUE), "[triples] - getTriple(all) objects");
 
-errors = append(errors, all( (getTriple(myTextMatrix, "c1")[[1]] == as.vector(rep("has_category",3))) == TRUE))
-errors = append(errors, all( (getTriple(myTextMatrix, "c1")[[2]] == as.vector(c("15","11","20"))) == TRUE))
+lsatest( all( (getTriple(myTextMatrix, "c1")[[1]] == as.vector(rep("has_category",3))) == TRUE), "[triples] - getTriple(c1) predicates" )
+lsatest( all( (getTriple(myTextMatrix, "c1")[[2]] == as.vector(c("15","11","20"))) == TRUE), "[triples] - getTriple(c1) objects")
 
-errors = append(errors, getTriple(myTextMatrix, "c2")[[1]][1] == "has_category")
-errors = append(errors, getTriple(myTextMatrix, "c2")[[2]][1] == "20")
+lsatest( getTriple(myTextMatrix, "c2")[[1]][1] == "has_category", "[triples] - getTriple(c2) predicates")
+lsatest( getTriple(myTextMatrix, "c2")[[2]][1] == "20", "[triples] - getTriple(c2) objects")
 
-errors = append(errors, all( (getTriple(myTextMatrix, "c1", "has_category") == c("15","11","20")) ))
+lsatest( all( (getTriple(myTextMatrix, "c1", "has_category") == c("15","11","20")) ), "[triples] - getTriple(c1,has_category) objects")
 
 delTriple(myTextMatrix, "c1", "has_category", 11)
 
-errors = append(errors, all( (getTriple(myTextMatrix, "c1")[[1]] == as.vector(rep("has_category",2))) == TRUE))
-errors = append(errors, all( (getTriple(myTextMatrix, "c1")[[2]] == as.vector(c("15","20"))) == TRUE))
+lsatest( all( (getTriple(myTextMatrix, "c1")[[1]] == as.vector(rep("has_category",2))) == TRUE), "[triples] - deletion, predicates")
+lsatest( all( (getTriple(myTextMatrix, "c1")[[2]] == as.vector(c("15","20"))) == TRUE), "[triples] - deletion, objects")
 
 setTriple(myTextMatrix, "c1", "has_category", 17)
 
-errors = append(errors, all( (getTriple(myTextMatrix)[[1]] == as.vector(c("1", "3", "2", "1", "1"))) == TRUE))
-errors = append(errors, all( (getTriple(myTextMatrix)[[2]] == as.vector(rep("has_category", 5))) == TRUE))
-errors = append(errors, all( (getTriple(myTextMatrix)[[3]] == as.vector(c("15","20","20","20","17"))) == TRUE))
-
-if (any(errors == FALSE)) {
-    stop("[triples] - fatal error");
-} else {
-    print("[triples] - testing went fine.")
-}
+lsatest( all( (getTriple(myTextMatrix)[[1]] == as.vector(c("1", "3", "2", "1", "1"))) == TRUE), "[triples] - insertion after deletion, subjects")
+lsatest( all( (getTriple(myTextMatrix)[[2]] == as.vector(rep("has_category", 5))) == TRUE), "[triples] - insertion after deletion, predicates" )
+lsatest( all( (getTriple(myTextMatrix)[[3]] == as.vector(c("15","20","20","20","17"))) == TRUE), "[triples] - insertion after deletion, objects")
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # routines for textmatrix
 
-print("[textmatrix] - starting with tests.")
-
 # create landauer example with files
-
 td = paste(tempdir(), "lsatest", sep="/")
 dir.create(td)
 write( c("human", "interface", "computer"), file=paste(td,"/c1", sep=""))
@@ -90,21 +73,21 @@ write( c("graph", "minors", "survey"), file=paste(td,"/m4", sep=""))
 # test normal matrix
 
 dtm = textmatrix(td)
-errors = append(errors, all( rownames(dtm) == c("computer", "human",  "interface", "response", "survey", "system", "time", "user", "trees", "graph", "minors")))
-errors = append(errors, all( colnames(dtm) == c("c1","c2","c3","c4","c5","m1","m2","m3","m4") ))
+lsatest( all( rownames(dtm) == c("computer", "human",  "interface", "response", "survey", "system", "time", "user", "eps", "trees", "graph", "minors")), "[textmatrix] - landauer, terms")
+lsatest( all( colnames(dtm) == c("c1","c2","c3","c4","c5","m1","m2","m3","m4") ), "[textmatrix] - landauer, docs")
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test with reduced vocabulary (replaces former function pseudo_docs)
 
 dtm2 = textmatrix(td, vocabulary = rownames(dtm)[-(3:7)])
-errors = append(errors, all( rownames(dtm2) == c("computer", "human",  "user", "trees", "graph", "minors")))
-errors = append(errors, all( colnames(dtm2) == c("c1","c2","c3","c4","c5","m1","m2","m3","m4") ))
+lsatest( all( rownames(dtm2) == c("computer", "human",  "user", "eps", "trees", "graph", "minors")), "[textmatrix] - controlled vocabulary (terms)")
+lsatest( all( colnames(dtm2) == c("c1","c2","c3","c4","c5","m1","m2","m3","m4") ), "[textmatrix] - controlled vocabulary (docs)")
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test with stemming
 
 dtm = textmatrix(td, stemming=TRUE, language="english")
-errors = append(errors, all( rownames(dtm) == c("comput", "human", "interfac", "respons", "survey", "system", "time", "user", "tree", "graph", "minor")))
+lsatest( all( rownames(dtm) == c("comput", "human", "interfac", "respons", "survey", "system", "time", "user", "ep", "tree", "graph", "minor")), "[textmatrix] - stemming")
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test with stopping
@@ -112,10 +95,10 @@ errors = append(errors, all( rownames(dtm) == c("comput", "human", "interfac", "
 write( c("the", "das", "minor", "die", "it"), file=paste(td,"/stopwords", sep=""))
 data(stopwords_en)
 dtm = textmatrix(td, stopwords=stopwords_en, minDocFreq=1, minWordLength=1)
-errors = append(errors, all( rownames(dtm) == c("computer", "human", "interface", "response", "survey", "system", "time", "user", "eps", "trees", "graph", "minors", "das", "die", "minor")))
+lsatest( all( rownames(dtm) == c("computer", "human", "interface", "response", "survey", "system", "time", "user", "eps", "trees", "graph", "minors", "das", "die", "minor")), "[textmatrix] - stopping english")
 data(stopwords_de)
 dtm2 = textmatrix(td, stopwords=stopwords_de, minDocFreq=1, minWordLength=1)
-errors = append(errors, all( rownames(dtm2) == c("computer", "human", "interface", "response", "survey", "system", "time", "user", "eps", "trees", "graph", "minors", "it", "minor", "the" )))
+lsatest( all( rownames(dtm2) == c("computer", "human", "interface", "response", "survey", "system", "time", "user", "eps", "trees", "graph", "minors", "it", "minor", "the" )), "[textmatrix] - stopping german")
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # clean up
@@ -124,7 +107,7 @@ unlink(td, recursive=TRUE)
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test query
 
-errors = append( errors, all( query("response.interface human", rownames(dtm2)) == c(0,1,1,1,0,0,0,0,0,0,0,0,0,0,0)))
+lsatest( all( query("response.interface human", rownames(dtm2)) == c(0,1,1,1,0,0,0,0,0,0,0,0,0,0,0)), "[textmatrix] - query")
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test for word order sensitivity
@@ -140,15 +123,10 @@ write( c("word1", "word2", "word3"), file=paste(td2,"/c2", sep=""))
 dtm1 = textmatrix(td1)
 dtm2 = textmatrix(td2, vocabulary=rownames(dtm1))
 dtm3 = textmatrix(td2)
-errors = append(errors, length(rownames(dtm1)) == length(rownames(dtm2)))
-errors = append(errors, rownames(dtm1) == rownames(dtm2) )
-errors = append(errors, length(rownames(dtm2)) != length(rownames(dtm3)) )
+lsatest( length(rownames(dtm1)) == length(rownames(dtm2)), "[textmatrix] - word order (vocabulary by number)")
+lsatest( all(rownames(dtm1) == rownames(dtm2)), "[textmatrix] - word order (vocabulary by content)")
+lsatest( length(rownames(dtm2)) != length(rownames(dtm3)), "[textmatrix] - word order (vocabulary test 2)")
 unlink(td1, recursive=TRUE)
 unlink(td2, recursive=TRUE)
 
-if (any(errors == FALSE)) {
-    stop("[textmatrix] - fatal error");
-} else {
-    print("[textmatrix] - testing went fine.")
-}
 
