@@ -8,7 +8,6 @@
 \alias{entropy}
 \alias{gw_entropy}
 \title{Weighting Schemes (Matrices)}
-\encoding{UTF-8}
 \description{
   Calculates a weighted document-term matrix according to the chosen local and/or global weighting scheme.
 }
@@ -68,7 +67,7 @@ Dumais, S. (1992) \emph{Enhancing Performance in Latent Semantic Indexing (LSI) 
 
 Nakov, P., Popova, A., and Mateev, P. (2001) \emph{Weight functions impact on LSA performance}. In: Proceedings of the Recent Advances in Natural language processing, Bulgaria, pp.187-193.
 
-Shannon, C. (1948) \emph{A Mathematical Theory of Communication}. In: The Bell System Technical Journal 27(July), pp.379–423.
+Shannon, C. (1948) \emph{A Mathematical Theory of Communication}. In: The Bell System Technical Journal 27(July), pp.379--423.
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \examples{
