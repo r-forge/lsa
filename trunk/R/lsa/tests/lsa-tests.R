@@ -2,6 +2,8 @@
 ### testing routines for LSA package
 ### 
 
+library(lsa)
+
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # testing cosine
 
