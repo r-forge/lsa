@@ -68,7 +68,13 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
     nr = nrow(x);    
     
     if (nc <= (3*bag_cols) && nr <= (3*bag_lines)) {
-        print.matrix(x);
+        
+        y = x;
+        attr(y,"class") = NULL;
+        environment(y) = NULL;
+        print.default(y);
+        invisible(x);
+        
     } else {
         
         redx = matrix(ncol = (3*bag_cols), nrow = (3*bag_lines));
