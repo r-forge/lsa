@@ -5,7 +5,7 @@
   Return a summary with some statistical infos about a given textmatrix.
 }
 \usage{
-summary.textmatrix ( object, ... )
+summary.textmatrix( object, ... )
 }
 \arguments{
    \item{object}{A textmatrix.}

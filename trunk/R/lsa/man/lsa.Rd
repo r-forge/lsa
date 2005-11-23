@@ -1,37 +1,37 @@
-\name{createLSAspace}
-\alias{createLSAspace}
+\name{lsa}
+\alias{lsa}
 \title{Create a vector space with Latent Semantic Analysis (LSA)}
 \description{
    Calculates a latent semantic space from a given document-term matrix.
 }
 \usage{
-   createLSAspace( x, dims=dimcalc(method="share") )
+   lsa( x, dims=dimcalc_share() )
 }
 \arguments{
-   \item{x}{a document-term matrix (recommeded to be of class 'textmatrix'), containing documents in 
+   \item{x}{a document-term matrix (recommeded to be of class textmatrix), containing documents in 
    colums, terms in rows and occurrence frequencies in the cells.}
-   \item{dims}{either the number of dimensions or the configuring function 'dimcalc()'.}
+   \item{dims}{either the number of dimensions or a configuring function.}
 }
 \details{
   
-LSA combines the classical vector space model -- well known in 
-textmining -- with a singular value decomposition (SVD), a two-mode 
+LSA combines the classical vector space model --- well known in 
+textmining --- with a Singular Value Decomposition (SVD), a two-mode 
 factor analysis. Thereby, bag-of-words representations of texts can 
 be mapped into a modified vector space that is assumed to reflect 
 semantic structure.
 
-With \code{createLSAspace()} a new latent semantic space can
+With \code{lsa()} a new latent semantic space can
 be constructed over a given document-term matrix. To ease
 comparisons of terms and documents with common
 correlation measures, the space can be converted into
 a textmatrix of the same format as \code{y} 
-by calling \code{showLSAspace()}.
+by calling \code{as.textmatrix()}.
 
 To add more documents or queries to this latent semantic
 space in order to keep them from influencing the original 
-factor distribution (=the latent semantic structure calculated
-from a primary text corpus), they can be 'folded-in' later on 
-with the function \code{foldinLSAspace()}.
+factor distribution (i.e., the latent semantic structure calculated
+from a primary text corpus), they can be `folded-in' later on 
+(with the function \code{fold_in()}).
 
 Background information (see also Deerwester et al., 1990): 
 
@@ -44,42 +44,36 @@ left singular vectors), the document vector matrix \code{D} (constituting
 right singular vectors) being both orthonormal, and the diagonal matrix 
 \code{S} (constituting singular values). 
 
-\code{LSAspace = svd(M)}
+\begin{center}
+\eqn{M = TSD^T}
+\end{center}
 
-\code{T = LSAspace$u}
-
-\code{S = LSAspace$d}
-
-\code{D = LSAspace$v}
-
-These matrices are then reduced to the given number of dimensions \code{k=dims}
-to result into truncated matrices \code{Tk}, \code{Sk} and \code{Dk} -- the
+These matrices are then reduced to the given number of dimensions \eqn{k=dims}
+to result into truncated matrices \eqn{T_{k}}, \eqn{S_{k}} and \eqn{D_{k}} --- the
 latent semantic space. 
 
-\code{Tk = T[,1:k]}
+\begin{center}
+\eqn{M_k = \sum\limits_{i=1}^k t_i \cdot s_i \cdot d_i }
+\end{center}
 
-\code{Sk = S[1:k]}
-
-\code{Dk = D[,1:k]}
-
-If these matrices \code{Tk, Sk, Dk} were multiplied, they would give a new
-matrix \code{Mk} (of the same format as \code{M}, i.e. rows are the
+If these matrices \eqn{T_k, S_k, D_k} were multiplied, they would give a new
+matrix \eqn{M_k} (of the same format as \eqn{M}, i.e., rows are the
 same terms, columns are the same documents), which is the least-squares best 
-fit approximation of \code{M} with \code{k} singular values.
+fit approximation of \eqn{M} with \eqn{k} singular values.
 
-In the case of folding-in, i.e. multiplying new documents into a given
-latent semantic space, the matrices \code{Tk} and \code{Sk} remain unchanged
-and an additional \code{Dk} is created (without replacing the old one).
+In the case of folding-in, i.e., multiplying new documents into a given
+latent semantic space, the matrices \eqn{T_k} and \eqn{S_k} remain unchanged
+and an additional \eqn{D_k} is created (without replacing the old one).
 All three are multiplied together to return a (new and appendable)
-document-term matrix \code{Mnew} in the term-order of \code{M}.
+document-term matrix \eqn{\hat{M}} in the term-order of \eqn{M}.
 
 }
 \value{
-  \item{LSAspace}{a latent semantic space (a list containing Tk, Sk, Dk).}
+  \item{LSAspace}{a list with components (\eqn{T_k, S_k, D_k}), representing the latent semantic space.}
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \seealso{ 
-  \code{\link{showLSAspace}}, \code{\link{foldinLSAspace}}, \code{\link{textmatrix}}, \code{\link{gw_idf}} 
+  \code{\link{as.textmatrix}}, \code{\link{fold_in}}, \code{\link{textmatrix}}, \code{\link{gw_idf}}, \code{\link{dimcalc_share}}
 }
 \references{
 Deerwester, S., Dumais, S., Furnas, G., Landauer, T., and Harshman, R. (1990) \emph{Indexing by Latent Semantic Analysis}. In: Journal of the American Society for Information Science 41(6), pp. 391--407.
@@ -89,7 +83,7 @@ Landauer, T., Foltz, P., and Laham, D. (1998) \emph{Introduction to Latent Seman
 \examples{
 
 # create some files
-td = paste(tempdir(),"d1",sep="/")
+td = tempfile()
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td, "D1", sep="/") )
 write( c("ham", "mouse", "sushi"), file=paste(td, "D2", sep="/") )
@@ -99,8 +93,8 @@ write( c("dog", "pet", "pet"), file=paste(td, "D3", sep="/") )
 data(stopwords_en)
 myMatrix = textmatrix(td, stopwords=stopwords_en)
 myMatrix = lw_logtf(myMatrix) * gw_idf(myMatrix)
-myLSAspace = createLSAspace(myMatrix, dims=dimcalc(method="share"))
-showLSAspace(myLSAspace)
+myLSAspace = lsa(myMatrix, dims=dimcalc_share())
+as.textmatrix(myLSAspace)
 
 # clean up
 unlink(td, recursive=TRUE)

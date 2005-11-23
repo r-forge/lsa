@@ -2,6 +2,8 @@
 ### triples.r v0.2
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### 
+### 2005-11-22:
+###   * changed setTriple warning() to stop(), added more text
 ### 2005-11-08:
 ###   * tried to add with(environment(M), { ... })
 ###     to getTriple, setTriple and delTriple (does not work)
@@ -76,8 +78,8 @@ setTriple <- function(M, subject, predicate, object) {
     #    environment(M) = new.env();
     #    class(M) = "textmatrix";
     
-    if ( ! class(M) == "textmatrix" ) {
-        warning("[setTriple] - You are using a matrix which has not been generated with the \nlsa package. Therefore, you have to manually add an environment to the \nmatrix you use and set the class to 'textmatrix' to be able to save triples.");
+    if ( ! inherits(M, "textmatrix") ) {
+        stop("[setTriple] - You are using a matrix which has not been generated with the \nlsa package. Therefore, you have to manually add an environment to the \nmatrix you use and set the class to 'textmatrix' to be able to save triples.\nAlternatively, you can use as.textmatrix() to convert a matrix\nto a textmatrix (be aware that it temporarilty\nneeds twice the amount of memory of the input matrix).\n");
     }
     
     # if input is vectors, check if they 

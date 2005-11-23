@@ -4,6 +4,9 @@
 ### 
 ### HISTORY
 ### 
+### 2005-11-22
+###    * removed dimcalc() function, rewrote dimcalc_* to
+###      be generating functions
 ### 2005-08-11
 ###    * integrated all three functions into one joint
 ###      generating function. dimcalc() returns a
@@ -23,56 +26,47 @@
 ###      dimcalc_ndocs returns 1 not -Inf
 ### 
 
-dimcalc <- function ( method=c("share","kaiser","ndocs","raw"), share=0.5, ndocs) {
+dimcalc_share <- function ( share=0.5) {
     
-    if (method=="share") {
-        
-        # return the position with which 50% share of the
-        # summed up singular values are reached
-        
-        function ( s ) {
-            return( max(which(cumsum(s/sum(s))<=share)) + 1 )
-        }
-        
-    } else if (method=="kaiser") {
-        
-        # calculate the number of singular values
-        # according to the Kaiser-criterium 
-        # (take all with s>1).
-        
-        function ( s ) {
-            return(  max(which(s>=1)) ) 
-        }
-        
-    } else if (method=="ndocs") {
-
-        # return the position where the 
-        # summed up factor values for the
-        # first time exceed ndocs.
-
-        if (missing(ndocs)) {
-            stop("[dimcalc] - parameter ndocs is missing")
-        }
-        function ( s ) {
-            return( length(which(cumsum(s)<=ndocs)) + 1 ) 
-        }
-        
-    } else if (method=="raw") {
-        function ( s ) {
-            return( length(s) ) 
-        }
+    # return the position with which 50% share of the
+    # summed up singular values are reached
+    function ( s ) {
+        return( max(which(cumsum(s/sum(s))<=share)) + 1 )
     }
     
 }
 
-dimcalc_share <- function ( s, share = 0.5 ) {
-    return ( max(which(cumsum(s/sum(s))<=share)) + 1 )
+dimcalc_kaiser <- function() {
+
+    # calculate the number of singular values
+    # according to the Kaiser-criterium 
+    # (take all with s>1).
+    function ( s ) {
+        return(  max(which(s>=1)) ) 
+    }
+
 }
 
-dimcalc_kaiser <- function (s) {
-    return( max(which(s>=1)) )
+dimcalc_ndocs <- function(ndocs) {
+    # return the position where the 
+    # summed up factor values for the
+    # first time exceed ndocs.
+
+    if (missing(ndocs)) {
+        stop("[dimcalc] - parameter ndocs is missing")
+    }
+    function ( s ) {
+        return( length(which(cumsum(s)<=ndocs)) + 1 ) 
+    }
 }
 
-dimcalc_ndocs <- function ( s, ndocs ) {
-    return( length(which(cumsum(s)<=ndocs)) + 1 )
+dimcalc_raw <- function() {
+    
+    # only for completeness: give back the 
+    # maximum number of singular values
+    function ( s ) {
+        return( length(s) ) 
+    }
+    
 }
+

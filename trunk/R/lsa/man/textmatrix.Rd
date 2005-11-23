@@ -6,24 +6,24 @@
   Creates a document-term matrix from all textfiles in a given directory.
 }
 \usage{
-textmatrix ( mydir, stemming=FALSE, language="german", 
+textmatrix( mydir, stemming=FALSE, language="german", 
    minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
-textvector ( file, stemming=FALSE, language="german", 
+textvector( file, stemming=FALSE, language="german", 
    minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
 }
 \arguments{
    \item{file}{filename (may include path).}
-   \item{mydir}{the directory path (e.g. 'corpus/texts/').}
+   \item{mydir}{the directory path (e.g., \code{'corpus/texts/'}).}
    \item{stemming}{boolean indicating whether to reduce all terms to their wordstem.}
    \item{language}{specifies language for the stemming / stop-word-removal.}
    \item{minWordLength}{words with less than minWordLength characters will be ignored.}
    \item{minDocFreq}{words of a document appearing less than minDocFreq within that document will be ignored.}
    \item{stopwords}{a stopword list that contains terms the will be ignored.}
-   \item{vocabulary}{if specified, only words in this term list will be used for building the matrix ('controlled vocabulary').}
+   \item{vocabulary}{if specified, only words in this term list will be used for building the matrix (`controlled vocabulary').}
 }
 \details{
   All documents in the specified directory are read and a matrix is composed.
-  The matrix contains in every cell the exact number of appearances (=the term frequency) 
+  The matrix contains in every cell the exact number of appearances (i.e., the term frequency) 
   of every word for all documents. If specified, simple text preprocessing mechanisms
   are applied (stemming, stopword filtering, wordlength cutoffs).
   
@@ -38,7 +38,7 @@ textvector ( file, stemming=FALSE, language="german",
   \code{textvector()} is a support function that creates a list of
   term-in-document occurrences.
   
-  For every generated matrix, an own environment is created which
+  For every generated matrix, an own environment is added as an attribute which
   holds the triples that are stored by \code{setTriple()} and can be
   retrieved with \code{getTriple()}.
   
@@ -51,7 +51,7 @@ textvector ( file, stemming=FALSE, language="german",
 \examples{
 
 # create some files
-td = paste(tempdir(), "lsatest", sep="/")
+td = tempfile()
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td, "D1", sep="/") )
 write( c("hamster", "mouse", "sushi"), file=paste(td, "D2", sep="/") )

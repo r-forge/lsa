@@ -26,31 +26,28 @@
 }
 \details{
    When combining a local and a global weighting scheme to be applied on a 
-   given textmatrix \code{m} via
+   given textmatrix \code{m} via \eqn{dtm = lw(m) \cdot gw(m)}, where
    
-   \code{dtm = lw(m) * gw(m)},
+   \item \eqn{m} is the given document-term matrix,
    
-   m is the given document-term matrix,
+   \item \eqn{lw(m)} is one of the local weight functions \code{lw\_tf()}, \code{lw\_logtf()}, \code{lw\_bintf()}, and
    
-   lw(m) is one of the local weight functions \code{lw\_tf()}, \code{lw\_logtf()}, \code{lw\_bintf()}, and
-   
-   gw(m) is one of the global weight functions \code{gw\_normalisation()},
-   \code{gw\_idf()}, \code{gw\_gfidf()}, \code{entropy()}, \code{gw\_entropy()}.
+   \item \eqn{gw(m)} is one of the global weight functions \code{gw\_normalisation()}, \code{gw\_idf()}, \code{gw\_gfidf()}, \code{entropy()}, \code{gw\_entropy()}.
    
    This set of weighting schemes includes the local weightings (lw)
    raw, log, binary and the global weightings (gw) normalisation, two versions of the 
    inverse document frequency (idf), and entropy in both the original Shannon as well as 
    in a slightly modified, more common version:
    
-   \code{lw\_tf()} returns a completely unmodified n*m matrix (placebo function).
+   \code{lw\_tf()} returns a completely unmodified \eqn{n \times m} matrix (placebo function).
    
-   \code{lw\_logtf()} returns the logarithmised n*m matrix. log(m[i,j]+1) is applied on every cell.
+   \code{lw\_logtf()} returns the logarithmised \eqn{n \times m} matrix. \eqn{log(m_{i,j}+1)} is applied on every cell.
    
-   \code{lw\_bintf()} returns binary values of the n*m matrix. Every cell is assigned 1, iff the term frequency is not equal to 0.
+   \code{lw\_bintf()} returns binary values of the \eqn{n \times m} matrix. Every cell is assigned 1, iff the term frequency is not equal to 0.
    
-   \code{gw\_normalisation()} returns a normalised n*m matrix. Every cell equals 1 divided by the square root of the document vector length.
+   \code{gw\_normalisation()} returns a normalised \eqn{n \times m} matrix. Every cell equals 1 divided by the square root of the document vector length.
    
-   \code{gw\_idf()} returns the inverse document frequency in a n*m matrix. Every cell is 1 plus the logarithmus of the number of documents divided by the number of documents where the term appears.
+   \code{gw\_idf()} returns the inverse document frequency in a \eqn{n \times m} matrix. Every cell is 1 plus the logarithmus of the number of documents divided by the number of documents where the term appears.
    
    \code{gw\_gfidf()} returns the global frequency multiplied with idf. Every cell equals the sum of the frequencies of one term divided by the number of documents where the term shows up.
    

@@ -15,6 +15,12 @@ a = c(2,1,1,1,0)
 b = c(0,0,0,1,0)
 lsatest( (round(cosine(a,b),3) == 0.378), "[cosine] - vector comparison");
 
+m = cbind(a,b,a,a);
+simm = round(cosine(m),2);
+sims = c(1, 0.38, 1, 1, 0.38, 1, 0.38, 0.38, 1, 0.38, 1, 1, 1, 0.38, 1, 1);
+dim(sims) = c(4,4);
+lsatest( all(simm==sims), "[cosine] - matrix comparison");
+
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # routines for get/set/delTriples
 
@@ -57,7 +63,7 @@ lsatest( all( (getTriple(myTextMatrix)[[3]] == as.vector(c("15","20","20","20","
 # routines for textmatrix
 
 # create landauer example with files
-td = paste(tempdir(), "lsatest", sep="/")
+td = tempfile()
 dir.create(td)
 write( c("human", "interface", "computer"), file=paste(td,"/c1", sep=""))
 write( c("survey", "user", "computer", "system", "response", "time"), file=paste(td,"/c2", sep=""))
@@ -112,11 +118,11 @@ lsatest( all( query("response.interface human", rownames(dtm2)) == c(0,1,1,1,0,0
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # test for word order sensitivity
 
-td1 = paste(tempdir(),"test1",sep="/");
+td1 = tempfile()
 dir.create(td1)
 write( c("word4", "word3", "word2"), file=paste(td1,"/c1", sep=""))
 write( c("word1", "word4", "word2"), file=paste(td1,"/c2", sep=""))
-td2 = paste(tempdir(),"test2",sep="/");
+td2 = tempfile()
 dir.create(td2)
 write( c("word1", "word2", "word3"), file=paste(td2,"/c1", sep=""))
 write( c("word1", "word2", "word3"), file=paste(td2,"/c2", sep=""))

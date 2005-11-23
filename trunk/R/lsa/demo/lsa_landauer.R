@@ -4,7 +4,7 @@
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # generate the files of the famous Landauer example
-ldir = paste(tempdir(), "landauer", sep="/")
+ldir = tempfile()
 dir.create(ldir)
 write( c("human", "interface", "computer"), file=paste(ldir, "c1", sep="/"))
 write( c("survey", "user", "computer", "system", "response", "time"), file=paste(ldir, "c2", sep="/"))

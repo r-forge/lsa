@@ -5,7 +5,7 @@
   Display a one screen short version of a textmatrix.
 }
 \usage{
-print.textmatrix ( x, bag_lines, bag_cols, ... )
+print.textmatrix( x, bag_lines, bag_cols, ... )
 }
 \arguments{
    \item{x}{A textmatrix.}
@@ -17,15 +17,15 @@ print.textmatrix ( x, bag_lines, bag_cols, ... )
     Document-term matrices are often very large and
     cannot be displayed completely on one screen. 
     Therefore, the textmatrix print method displays
-    only clippings ('bags') from this matrix.
+    only clippings (`bags') from this matrix.
     
     Clippings are taken vertically and horizontally 
     from beginning, middle, and end of the matrix.
-    \code{bag\_lines} lines (resp. \code{bag\_cols} columns) 
+    \code{bag\_lines} lines and \code{bag\_cols} columns 
     are printed to the screen.
     
     To keep document titles from blowing up the display,
-    a legend is introduced below, referencing the symbols
+    the legend is printed below, referencing the symbols
     used in the table.
     
 }

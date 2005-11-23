@@ -8,28 +8,27 @@
 cosine(x, y = NULL)
 }
 \arguments{
-   \item{x}{A vector or a matrix (e.g. a document-term matrix).}
-   \item{y}{Optional: a vector with compatible dimensions to 'x'. If 'NULL', all column vectors of x are correlated.}
+   \item{x}{A vector or a matrix (e.g., a document-term matrix).}
+   \item{y}{Optional: a vector with compatible dimensions to \code{x}. If `NULL', all column vectors of \code{x} are correlated.}
 }
 \details{
   \code{cosine()} calculates a similarity matrix between all column
-  vectors of a matrix x. This matrix might be a document-term
+  vectors of a matrix \code{x}. This matrix might be a document-term
   matrix, so columns would be expected to be documents and
   rows to be terms.
   
   When executed on two vectors \code{x} and \code{y}, 
   \code{cosine()} calculates the cosine similarity between them.
-  
-  Be reminded that the cosine measure is nearly identical
-  with the pearson correlation coefficient \code{cor(method="pearson")}
-  (besides a constant factor). For an investigation on
-  the differences in the context of textmining see
+}
+\note{
+  The cosine measure is nearly identical with the pearson correlation 
+  coefficient (besides a constant factor) \code{cor(method="pearson")}. 
+  For an investigation on the differences in the context of textmining see
   (Leydesdorff, 2005).
-
 }
 \value{
-  Returns a n*n similarity matrix of cosine values, comparing all 
-  n column vectors against each other. Executed on two vectors, their 
+  Returns a \eqn{n*n} similarity matrix of cosine values, comparing all 
+  \eqn{n} column vectors against each other. Executed on two vectors, their 
   cosine similarity value is returned.
 }
 \seealso{\code{\link[stats]{cor}}}

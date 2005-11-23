@@ -17,6 +17,6 @@ being handed over to \code{textmatrix()}.
    data(stopwords_en)
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
-\format{A vector containing 424 (English) resp. 370 (German) stop words (e.g. 'he', 'she', 'a').}
+\format{A vector containing 424 (370) English (German) stop words (e.g. 'he', 'she', 'a').}
 \keyword{datasets}
 \keyword{array}

@@ -2,6 +2,11 @@
 ### lsa.R
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### 
+### 2005-11-22:
+###    functions renamed to lsa(), as.textmatrix() and fold-in()
+###    added warning to lsa(), when 'emtpy' singular values exist
+###    chose NOT to replace solve() by 1/...
+###    added a routine to as.textmatrix to convert matrices to textmatrices
 ### 2005-11-08: modified
 ###    design decision: weighting schemes will not be integrated.
 ###                     reason: happens before the LSA core operation / is optional
@@ -11,11 +16,11 @@
 ### 2005-08-29: created.
 ### 
 
-### createLSAspace (textmatrix, dims) -> LSAspace($u, $v, $d)
-### showLSAspace (LSAspace) -> textmatrix
-### foldinLSAspace (textmatrix, LSAspace) -> textmatrix
+### lsa (textmatrix, dims) -> LSAspace($u, $v, $d)
+### as.textmatrix (LSAspace) -> textmatrix
+### fold-in (textmatrix, LSAspace) -> textmatrix
 
-createLSAspace <- function( x, dims=dimcalc(method="share") ) {
+lsa <- function( x, dims=dimcalc_share() ) {
     
     # do the singular value decomposition
     SVD = svd(x)
@@ -25,6 +30,10 @@ createLSAspace <- function( x, dims=dimcalc(method="share") ) {
         dims = dims(SVD$d)
     }
     if (dims < 2) dims=2
+    
+    if (any(SVD$d<=sqrt(.Machine$double.eps))) {
+        warning("[lsa] - there are singular values which are zero.");
+    }
     
     # prepare for returnation
     space = NULL
@@ -40,19 +49,37 @@ createLSAspace <- function( x, dims=dimcalc(method="share") ) {
     
 }
 
-# showLSAspace: recalc a textmatrix of the 
-# original format, name it and return it
+# as.textmatrix: 
+# - when given an LSAspace, recalc a textmatrix of 
+#   the original format, name it and return it
+# - when given a normal matrix, return a textmatrix
 
-showLSAspace <- function (LSAspace){
-    Y = LSAspace$tk %*% diag(LSAspace$sk) %*% t(LSAspace$dk)
-    rownames(Y)=rownames(LSAspace$tk)
-    colnames(Y)=rownames(LSAspace$dk)
-    class(Y) = "textmatrix"
-    environment(Y) = new.env()
-    return(Y)
+as.textmatrix <- function (LSAspace) {
+    
+    if (inherits(LSAspace,"LSAspace")) {
+        
+        # convert an lsa-space to a textmatrix
+        Y = LSAspace$tk %*% diag(LSAspace$sk) %*% t(LSAspace$dk)
+        rownames(Y)=rownames(LSAspace$tk)
+        colnames(Y)=rownames(LSAspace$dk)
+        class(Y) = "textmatrix"
+        environment(Y) = new.env()
+        return(Y)
+        
+    } else if (inherits(LSAspace, "matrix")) {
+        
+        # convert a matrix to a textmatrix
+        class(LSAspace) = "textmatrix"
+        environment(LSAspace) = new.env()
+        return(LSAspace)
+        
+    } else {
+        stop("[as.textmatrix] - input has to be an LSAspace (or a matrix).")
+    }
+    
 }
 
-foldinLSAspace <- function( docvecs, LSAspace ) {
+fold_in <- function( docvecs, LSAspace ) {
     
     dqs = crossprod( t( crossprod(docvecs,LSAspace$tk) ), solve(diag(LSAspace$sk)) )
     ### alternative: dqs = crossprod( docvecs, crossprod(t(LSAspace$tk), solve(diag(LSAspace$sk))) )

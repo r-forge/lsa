@@ -3,6 +3,8 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
 ### 
+### 2005-11-22: chose NOT to integrate separator lines (would splash the handling!)
+###             changed summary.textmatrix from matrix to vector output
 ### 2005-11-11: integrated the vocabulary order/sort functions...
 ### 2005-11-08: added print and summary functions
 ### 2005-11-08: added vocabulary filter to both functions
@@ -114,7 +116,7 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
 
 summary.textmatrix <- function ( object, ... ) {
     
-    s = matrix(ncol=1, nrow=5);
+    s = vector(mode="numeric", length=5);
     n = vector(mode="character", length=5);
     n[1] = "vocabulary";
     s[1] = length(rownames(object));
@@ -126,8 +128,7 @@ summary.textmatrix <- function ( object, ... ) {
     s[4] = max(nchar(rownames(object),type="chars"));
     n[5] = "non-alphanumerics in terms";
     s[5] = length(which(gsub("[[:alnum:]]|[ÄÖÜäöüß]", "", rownames(object)) != ""));
-    rownames(s) = n;
-    colnames(s)="value";
+    names(s) = n;
     class(s) = "summary.textmatrix";
     s
     

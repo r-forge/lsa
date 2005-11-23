@@ -1,6 +1,6 @@
 \name{query}
 \alias{query}
-\title{Query (Textmatrix)}
+\title{Query (Matrices)}
 \description{
   Create a query in the format of a given textmatrix. 
 }
@@ -11,10 +11,11 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
    \item{termlist}{the termlist of the background latent-semantic space.}
    \item{language}{specifies a language for stemming / stop-word-removal.}
    \item{stemming}{boolean, specifies whether all terms will be reduced to their wordstems.}
-   \item{qtext}{the query string, words are separated by blanks ' '.}
+   \item{qtext}{the query string, words are separated by blanks.}
 }
 \details{
-  Create queries in the format of a given textmatrix.
+  Create queries, i.e., an additional term vector to be used for query-to-document
+  comparisons, in the format of a given textmatrix.
 }
 \value{
   \item{query}{returns the query vector (based on the given vocabulary) as matrix.}
@@ -26,7 +27,7 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
 \examples{
 
 # prepare some files
-td = paste(tempdir(), "lsatest", sep="/")
+td = tempfile()
 dir.create(td)
 write( c("dog", "cat", "mouse"), file=paste(td,"D1", sep="/") )
 write( c("hamster", "mouse", "sushi"), file=paste(td,"D2", sep="/") )
@@ -35,6 +36,7 @@ write( c("dog", "monster", "monster"), file=paste(td,"D3", sep="/") )
 # demonstrate generation of a query
 dtm = textmatrix(td)
 query("monster", rownames(dtm))
+query("monster dog", rownames(dtm))
 
 # clean up
 unlink(td, TRUE)
