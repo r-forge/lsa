@@ -3,6 +3,12 @@ TO-DO:
 * eliminate query -> integrate into textmatrix
 * vignettes for the paper
 
+DONE 2005-11-23:
+
+* a lot of minor changes to make documentation better
+* smaller code changes
+* renamed core functions to lsa(), as.textmatrix(), fold_in()
+
 DONE 2005-11-12:
 * documentation refactured, added documentation for several new methods.
 * remove meanmax.R (doesn't fit the package
