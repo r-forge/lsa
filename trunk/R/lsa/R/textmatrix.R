@@ -73,6 +73,7 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
         
         y = x;
         attr(y,"class") = NULL;
+        attr(y,"call") = NULL;
         environment(y) = NULL;
         print.default(y);
         invisible(x);
