@@ -37,7 +37,7 @@
   The dimensionality calculation methods, however, can still be called directly
   by adding a second, separate parameter set: e.g.
   
-  \begin{center}\code{dimcalc\_share(share=0.2)(mysingularvalues)}\end{center}
+  \code{dimcalc\_share(share=0.2)(mysingularvalues)}
   
   The method \code{dimcalc\_share()} finds the first position in the descending sequence of 
   singular values \code{s} where their sum (divided by the sum of all 

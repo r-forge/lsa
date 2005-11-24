@@ -25,16 +25,16 @@ Background Information:
 For folding-in, a pseudo document vector \code{mi} of the new documents 
 is calculated into as shown in the equations (1) and (2) (cf. Berry et al., 1995):
 
-(1) \eqn{\hat{d} = v^T T_k S_k^{-1}}
+(1) \eqn{\hat{d} = v^T T_k S_k^{-1}}{di = t(v) Tk Sk^(-1)}
 
-(2) \eqn{\hat{m} = T_k S_k \hat{d}^T}
+(2) \eqn{\hat{m} = T_k S_k \hat{d}^T}{mi = Tk Sk t(di)}
 
-The document vector \eqn{v^T} in equation~(1) is identical to an additional 
+The document vector \eqn{v^T}{t(v)} in equation~(1) is identical to an additional 
 column of an input textmatrix \eqn{M} with the term frequencies of the 
-essay to be folded-in. \eqn{T_k} and \eqn{S_k} are the truncated matrices 
+essay to be folded-in. \eqn{T_k}{Tk} and \eqn{S_k}{Sk} are the truncated matrices 
 from the SVD applied through \code{lsa()} on a given text 
 collection to construct the latent semantic space. The resulting vector
-\eqn{\hat{m}} from equation~(2) is identical to an additional column in the
+\eqn{\hat{m}}{mi} from equation~(2) is identical to an additional column in the
 textmatrix representation of the latent semantic space (as produced by 
 \code{as.textmatrix()}).
 

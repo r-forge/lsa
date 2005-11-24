@@ -16,9 +16,9 @@ getSubjectId( M, subject )
 }
 \arguments{
    \item{M}{the document term matrix (see \code{textmatrix}).}
-   \item{subject}{column number or column name (e.g., \code{'doc3'} or \code{3}).}
-   \item{predicate}{predicate of the triple sentence (e.g., code{'has\_category'} or \code{'has\_grade'}).}
-   \item{object}{value of the triple sentence (e.g., \code{'14'} or \code{14}).}
+   \item{subject}{column number or column name (e.g., \code{"doc3"} or \code{3}).}
+   \item{predicate}{predicate of the triple sentence (e.g., \code{"has\_category"} or \code{"has\_grade"}).}
+   \item{object}{value of the triple sentence (e.g., \code{"14"} or \code{14}).}
 }
 \details{
   
@@ -39,11 +39,9 @@ getSubjectId( M, subject )
   this function, its class should be set to 'textmatrix' and an 
   environment has to be added manually via:
   
-  \begin{center}
   \code{class(mymatrix) = "textmatrix"}
   
   \code{environment(mymatrix) = new.env()}
-  \end{center}
 
   Alternatively, \code{as.matrix()} can be used to convert a
   matrix to a textmatrix. To spare memory, the manual method

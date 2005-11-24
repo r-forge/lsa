@@ -28,11 +28,13 @@
    When combining a local and a global weighting scheme to be applied on a 
    given textmatrix \code{m} via \eqn{dtm = lw(m) \cdot gw(m)}, where
    
-   \item \eqn{m} is the given document-term matrix,
-   
-   \item \eqn{lw(m)} is one of the local weight functions \code{lw\_tf()}, \code{lw\_logtf()}, \code{lw\_bintf()}, and
-   
-   \item \eqn{gw(m)} is one of the global weight functions \code{gw\_normalisation()}, \code{gw\_idf()}, \code{gw\_gfidf()}, \code{entropy()}, \code{gw\_entropy()}.
+   \itemize{
+    \item \eqn{m} is the given document-term matrix,
+    
+    \item \eqn{lw(m)} is one of the local weight functions \code{lw\_tf()}, \code{lw\_logtf()}, \code{lw\_bintf()}, and
+    
+    \item \eqn{gw(m)} is one of the global weight functions \code{gw\_normalisation()}, \code{gw\_idf()}, \code{gw\_gfidf()}, \code{entropy()}, \code{gw\_entropy()}.
+   }
    
    This set of weighting schemes includes the local weightings (lw)
    raw, log, binary and the global weightings (gw) normalisation, two versions of the 

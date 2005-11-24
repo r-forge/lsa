@@ -13,7 +13,7 @@ textvector( file, stemming=FALSE, language="german",
 }
 \arguments{
    \item{file}{filename (may include path).}
-   \item{mydir}{the directory path (e.g., \code{'corpus/texts/'}).}
+   \item{mydir}{the directory path (e.g., \code{"corpus/texts/"}).}
    \item{stemming}{boolean indicating whether to reduce all terms to their wordstem.}
    \item{language}{specifies language for the stemming / stop-word-removal.}
    \item{minWordLength}{words with less than minWordLength characters will be ignored.}

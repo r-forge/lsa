@@ -35,41 +35,37 @@ from a primary text corpus), they can be `folded-in' later on
 
 Background information (see also Deerwester et al., 1990): 
 
-A document-term matrix \code{M} is constructed 
-with \code{textmatrix()} from a given text base of \code{n} documents 
-containing \code{m} terms.
-This matrix \code{M} of the size \code{m*n} is then decomposed via a
-singular value decomposition into: term vector matrix \code{T} (constituting 
-left singular vectors), the document vector matrix \code{D} (constituting 
+A document-term matrix \eqn{M} is constructed 
+with \code{textmatrix()} from a given text base of \eqn{n} documents 
+containing \eqn{m} terms.
+This matrix \eqn{M} of the size \eqn{m \times n} is then decomposed via a
+singular value decomposition into: term vector matrix \eqn{T} (constituting 
+left singular vectors), the document vector matrix \eqn{D} (constituting 
 right singular vectors) being both orthonormal, and the diagonal matrix 
-\code{S} (constituting singular values). 
+\eqn{S} (constituting singular values). 
 
-\begin{center}
-\eqn{M = TSD^T}
-\end{center}
+\eqn{M = TSD^T}{M = T S t(D)}
 
 These matrices are then reduced to the given number of dimensions \eqn{k=dims}
-to result into truncated matrices \eqn{T_{k}}, \eqn{S_{k}} and \eqn{D_{k}} --- the
-latent semantic space. 
+to result into truncated matrices \eqn{T_{k}}{Tk}, \eqn{S_{k}}{Sk} and \eqn{D_{k}}{Dk}
+--- the latent semantic space. 
 
-\begin{center}
-\eqn{M_k = \sum\limits_{i=1}^k t_i \cdot s_i \cdot d_i }
-\end{center}
+\eqn{\begin{center}M_k = \sum\limits_{i=1}^k t_i \cdot s_i \cdot d_i^T\end{center}}{Mk = t[,1:k] s[1:k,1:k] t(d[,1:k])}
 
-If these matrices \eqn{T_k, S_k, D_k} were multiplied, they would give a new
-matrix \eqn{M_k} (of the same format as \eqn{M}, i.e., rows are the
+If these matrices \eqn{T_k, S_k, D_k}{Tk, Sk, Dk} were multiplied, they would give a new
+matrix \eqn{M_k}{Mk} (of the same format as \eqn{M}, i.e., rows are the
 same terms, columns are the same documents), which is the least-squares best 
 fit approximation of \eqn{M} with \eqn{k} singular values.
 
 In the case of folding-in, i.e., multiplying new documents into a given
-latent semantic space, the matrices \eqn{T_k} and \eqn{S_k} remain unchanged
-and an additional \eqn{D_k} is created (without replacing the old one).
+latent semantic space, the matrices \eqn{T_k}{Tk} and \eqn{S_k}{Sk} remain unchanged
+and an additional \eqn{D_k}{Dk} is created (without replacing the old one).
 All three are multiplied together to return a (new and appendable)
-document-term matrix \eqn{\hat{M}} in the term-order of \eqn{M}.
+document-term matrix \eqn{\hat{M}}{Mnew} in the term-order of \eqn{M}.
 
 }
 \value{
-  \item{LSAspace}{a list with components (\eqn{T_k, S_k, D_k}), representing the latent semantic space.}
+  \item{LSAspace}{a list with components (\eqn{T_k, S_k, D_k}{Tk, Sk, Dk}), representing the latent semantic space.}
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \seealso{ 
