@@ -23,8 +23,8 @@ dtm
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # make a space, reconstruct original
-landauerOriginalSpace = createLSAspace(dtm, dims=dimcalc(method="raw"))
-X = showLSAspace(landauerOriginalSpace)
+landauerOriginalSpace = lsa(dtm, dims=dimcalc(method="raw"))
+X = as.textmatrix(landauerOriginalSpace)
 
 # X should be equal to dtm (beside rounding errors)
 all( (round(X,2) == dtm) == TRUE)
@@ -34,7 +34,7 @@ all( (round(X,2) == dtm) == TRUE)
 # the recalculated 'reduced' matrix)
 
 landauerSpace = createLSAspace(dtm, dims=2)
-Y = showLSAspace(landauerSpace)
+Y = as.textmatrix(landauerSpace)
 round(Y,2)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
@@ -44,7 +44,7 @@ pdocs = textmatrix(ldir, vocabulary=rownames(dtm))
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # now calc a pseudo SVD on the basis of dtm's SVD
-Y2 = foldinLSAspace(pdocs, landauerSpace)
+Y2 = fold_in(pdocs, landauerSpace)
 round(Y2,2)
 
 # Y and Y2 should be the same (as well as 
