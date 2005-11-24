@@ -27,7 +27,7 @@ is calculated into as shown in the equations (1) and (2) (cf. Berry et al., 1995
 
 (1) \eqn{\hat{d} = v^T T_k S_k^{-1}}{di = t(v) Tk Sk^(-1)}
 
-(2) \eqn{\hat{m} = T_k S_k \hat{d}^T}{mi = Tk Sk t(di)}
+(2) \eqn{\hat{m} = T_k S_k \hat{d}}{mi = Tk Sk t(di)}
 
 The document vector \eqn{v^T}{t(v)} in equation~(1) is identical to an additional 
 column of an input textmatrix \eqn{M} with the term frequencies of the 

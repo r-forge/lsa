@@ -50,7 +50,7 @@ These matrices are then reduced to the given number of dimensions \eqn{k=dims}
 to result into truncated matrices \eqn{T_{k}}{Tk}, \eqn{S_{k}}{Sk} and \eqn{D_{k}}{Dk}
 --- the latent semantic space. 
 
-\eqn{\begin{center}M_k = \sum\limits_{i=1}^k t_i \cdot s_i \cdot d_i^T\end{center}}{Mk = t[,1:k] s[1:k,1:k] t(d[,1:k])}
+\eqn{M_k = \sum\limits_{i=1}^k t_i \cdot s_i \cdot d_i^T}{Mk = t\[,1:k\] s\[1:k,1:k\] t(d\[,1:k\])}
 
 If these matrices \eqn{T_k, S_k, D_k}{Tk, Sk, Dk} were multiplied, they would give a new
 matrix \eqn{M_k}{Mk} (of the same format as \eqn{M}, i.e., rows are the
