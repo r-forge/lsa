@@ -23,7 +23,7 @@ dtm
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # make a space, reconstruct original
-landauerOriginalSpace = lsa(dtm, dims=dimcalc(method="raw"))
+landauerOriginalSpace = lsa(dtm, dims=dimcalc_share())
 X = as.textmatrix(landauerOriginalSpace)
 
 # X should be equal to dtm (beside rounding errors)
@@ -33,7 +33,7 @@ all( (round(X,2) == dtm) == TRUE)
 # reduce dimensionality (Y shall be 
 # the recalculated 'reduced' matrix)
 
-landauerSpace = createLSAspace(dtm, dims=2)
+landauerSpace = lsa(dtm, dims=2)
 Y = as.textmatrix(landauerSpace)
 round(Y,2)
 
