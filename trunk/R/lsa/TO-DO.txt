@@ -2,6 +2,7 @@ TO-DO:
 
 * eliminate query -> integrate into textmatrix
 * vignettes for the paper
+* bugfix of print.textmatrix() (bug appeared: 2nd of jan 2006)
 
 DONE 2005-11-23:
 
