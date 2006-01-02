@@ -69,6 +69,11 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
     nc = ncol(x);
     nr = nrow(x);    
     
+    # buggy! the number of lines can be long enough
+    # even if the number of columns is not. this results
+    # in an error message (index out of bound) in the else
+    # routine!
+    
     if (nc <= (3*bag_cols) && nr <= (3*bag_lines)) {
         
         y = x;
