@@ -1,5 +1,8 @@
 TO-DO:
 
+* add possibility to filter by minimum number of 
+  documents, a term has to appear in:
+     m = m[!rowSums(lw_bintf(m))==minGlobFreq,]
 * eliminate query -> integrate into textmatrix
 * vignettes for the paper
 * bugfix of print.textmatrix() (bug appeared: 2nd of jan 2006)
@@ -27,7 +30,6 @@ DONE 2005-11-08:
     
     refacturing:
     
-       
        DONE * eliminate pseudo_docs
        DONE   -> integrate into textmatrix
        NOT POSSIBLE * connections
