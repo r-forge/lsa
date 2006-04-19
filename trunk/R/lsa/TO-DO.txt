@@ -1,11 +1,22 @@
 TO-DO:
-
+* add maxWordLength (FALSE für unendlich)
+* error handling für leere files?
+* error handling für leere vektoren?
+* add dimcalc_fraction()
+* upper and lower boundaries for global frequencies
+* remove numbers as terms (Simon Lin)
+* Add <XML> and <HTML> handling: automatically 
+  skipping the tags. (Simon Lin)
+* add phrasedetection to textvector function ("my phrase"),
+  should not strip any special chars and should stay
+  case sensitive (Neal Snider)
 * add possibility to filter by minimum number of 
   documents, a term has to appear in:
      m = m[!rowSums(lw_bintf(m))==minGlobFreq,]
+* add error handling for "no term" documents (leave out, give warning)
 * eliminate query -> integrate into textmatrix
 * vignettes for the paper
-* bugfix of print.textmatrix() (bug appeared: 2nd of jan 2006)
+* bugfix of print.textmatrix() (bug appeared: 2nd of jan 2006, Claudia)
 
 DONE 2005-11-23:
 
