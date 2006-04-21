@@ -1,4 +1,4 @@
-TO-DO:
+﻿TO-DO:
 * add maxWordLength (FALSE für unendlich)
 * error handling für leere files?
 * error handling für leere vektoren?
@@ -17,6 +17,8 @@ TO-DO:
 * eliminate query -> integrate into textmatrix
 * vignettes for the paper
 * bugfix of print.textmatrix() (bug appeared: 2nd of jan 2006, Claudia)
+  Fix by: Jeff Verhulst, J&J Pharma R&D IM (2006)
+  mention as contributor
 
 DONE 2005-11-23:
 
