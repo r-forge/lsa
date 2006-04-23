@@ -1,4 +1,8 @@
 ﻿TO-DO:
+* allow textmatrix to get a list of files instead of a
+  directory (maybe add random sample function also with
+  the optional parameter so that you can re-use the same
+  sample?)
 * add maxWordLength (FALSE für unendlich)
 * error handling für leere files?
 * error handling für leere vektoren?
