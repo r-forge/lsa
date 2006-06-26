@@ -8,6 +8,7 @@
 * error handling für leere vektoren?
 * add dimcalc_fraction()
 * upper and lower boundaries for global frequencies
+* maybe IDF instead of frequency boundaries?
 * remove numbers as terms (Simon Lin)
 * Add <XML> and <HTML> handling: automatically 
   skipping the tags. (Simon Lin)
