@@ -1,0 +1,122 @@
+﻿
+==============================
+  Release Notes for LSA 0.58
+       August 1st, 2006
+==============================
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # 
+Open Issues
+# # # # # #
+
+Wishlist / Unresolved Bugs
+--------------------------
+
+* random sample for files? (maybe add random sample function also with
+  the optional parameter so that you can re-use the same
+  sample?)
+
+* error handling for empty files (no term docs)?
+
+* error handling für empty textvectors?
+
+* upper and lower boundaries for global frequencies
+* maybe IDF instead of frequency boundaries?
+* add possibility to filter by minimum number of 
+  documents, a term has to appear in:
+     m = m[!rowSums(lw_bintf(m))==minGlobFreq,]
+
+* remove numbers as terms (Simon Lin)
+
+* Add <XML> and <HTML> handling: automatically 
+  skipping the tags. (Simon Lin)
+
+* add phrasedetection to textvector function ("my phrase"),
+  should not strip any special chars and should stay
+  case sensitive (Neal Snider)
+
+* eliminate query -> integrate into textmatrix
+
+* vignettes for the paper
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # 
+Changes
+# # # #
+
+
+Changes in 0.58
+---------------
+
+o   Fridolin Wild (2006-07-31)
+
+    * added dimcalc_fraction()
+
+    * added support to textmatrix() to run not only over directories, 
+	  but also over a single file or a vector of files (or a mixed 
+	  vector with files and directories)
+
+    * added maxWordLength filtering
+
+    * added maxDocFreq filtering
+
+    * 
+
+o   Jeff Verhukst (
+    * bugfix of print.textmatrix() (bug appeared: 2nd of jan 2006, Claudia)
+      Fix by: Jeff Verhulst, J&J Pharma R&D IM (2006)
+
+
+
+Changes in 0.57 (first public release)
+--------------------------------------
+
+o   2005-11-23:
+
+    * a lot of minor changes to make documentation better
+	
+    * smaller code changes
+	
+    * renamed core functions to lsa(), as.textmatrix(), fold_in()
+
+o   2005-11-12:
+
+    * documentation refactured, added documentation for several new methods.
+	
+    * removed meanmax.R (doesn't fit the package)
+	
+    * checked query() to ensure it's working
+
+o   2005-11-11:
+
+    * bugfix of textmatrix() to work properly with the vocabulary list
+
+o   2005-11-08:
+
+    * added high-level functions:
+	   
+       * lsa_fold-in
+	   
+       * lsa
+    
+    * refacturing:
+	
+        * eliminated pseudo_docs
+          -> integrate into textmatrix
+	  
+        * connections for textmatrix turned out to be impossible
+		
+        * summary method
+		
+	    * print method
+		
+        * rewrote "pseudo_docs" to table / factor
+		
+        * in triples.r: use of "With(environment, { bla })" 
+	      turned out impossible
+        
+		* getTriples: use of "return list(S=S, P=P, O=O)"
+	      turned out impossible
+    
+
+--------------------------------------------------
