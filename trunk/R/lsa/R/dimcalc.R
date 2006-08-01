@@ -4,6 +4,8 @@
 ### 
 ### HISTORY
 ### 
+### 2006-07-30
+###    * added dimcal_fraction()
 ### 2005-11-22
 ###    * removed dimcalc() function, rewrote dimcalc_* to
 ###      be generating functions
@@ -70,3 +72,11 @@ dimcalc_raw <- function() {
     
 }
 
+dimcalc_fraction <- function( frac = (1/50) ) {
+	
+	# return the desired fraction of singular values 	
+	function ( s ) {
+		return( ceiling(length(s)*frac) )
+	}
+	
+}
