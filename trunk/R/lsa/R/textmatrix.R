@@ -2,20 +2,22 @@
 ### textmatrix
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
-### 
-### 2005-11-22: chose NOT to integrate separator lines (would splash the handling!)
-###             changed summary.textmatrix from matrix to vector output
-### 2005-11-11: integrated the vocabulary order/sort functions...
-### 2005-11-08: added print and summary functions
-### 2005-11-08: added vocabulary filter to both functions
-### 2005-10-04: added nchar(..., type="chars") to count characters, not bytes
-### 2005-08-25: added "\\[|\\]|\\{|\\}" to gsub
-### 2005-08-26: renamed dt_triples to textvector and dt_matrix to textmatrix
 
-textvector <- function (file, stemming=FALSE, language="german", minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL) {
+textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=F ) {
     
     txt = scan(file, what = "character", quiet = TRUE)
-    txt = gsub( "\\.|:|\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\?|-|\\!|\"|\'|\`|\\^|\=|\’|\–|\„|\”|\/", " ", txt)
+
+    if (removeXML) {
+		txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=T, extended=F)
+	}
+	
+	
+	if (language=="arabic") {
+		# support for Buckwalter transliterations
+		txt = gsub( "\\.|:|\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\?|\\!|\"|\'|\`|\\^|\=|\’|\„|\”|\/", " ", txt)
+	} else {
+		txt = gsub( "\\.|:|\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\?|-|\\!|\"|\'|\`|\\^|\=|\’|\–|\„|\”|\/", " ", txt)
+	}
     txt = gsub("[[:space:]]+", " ", txt)
     txt = tolower(txt)
     txt = unlist(strsplit(txt, " ", fixed=TRUE))
@@ -29,12 +31,14 @@ textvector <- function (file, stemming=FALSE, language="german", minWordLength=2
     # tabulate
     tab = sort(table(txt), decreasing = TRUE)
     
-    # with threshold minDocFreq
+    # bandwith for document frequency?
     tab = tab[tab >= minDocFreq]
+	if (is.numeric(maxDocFreq)) tab = tab[tab <= maxDocFreq]
     
-    # wordLength filtering?
+    # word-length filtering?
     tab = tab[nchar(names(tab), type="chars") >= minWordLength]
-    
+    if (is.numeric(maxWordLength)) tab = tab[nchar(names(tab), type="chars") <= maxWordLength]
+	
     # stemming?
     if (stemming) names(tab) = wordStem(names(tab), language=language)
     
@@ -42,9 +46,35 @@ textvector <- function (file, stemming=FALSE, language="german", minWordLength=2
     
 }
 
-textmatrix <- function( mydir, stemming=FALSE, language="german", minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL ) {
+textmatrix <- function( mydir, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=F ) {
     
-    dummy = lapply( dir(mydir, full.names=TRUE), textvector, stemming, language, minWordLength, minDocFreq, stopwords, vocabulary)
+	# if directory, then list its files recursively, else check
+	# whether file exists and eventually append it to list.
+	
+	myfiles = NULL
+	if ( length(mydir) > 1 ) {
+	
+		for (i in 1:length(mydir)) {
+		
+			if (file.info(normalizePath(mydir[i]))$isdir==TRUE) {
+				myfiles = append(myfiles, dir(mydir[i], full.names=TRUE, recursive=T))
+			} else if (file.exists(normalizePath(mydir[i]))) {				
+				myfiles = append(myfiles, normalizePath(mydir[i]))
+			} else {
+				warning( paste("[textmatrix] - WARNING: file ",mydir[i], " does not exist.", sep=""))
+			}
+			
+		}
+		
+	} else if ( file.info(normalizePath(mydir))$isdir==TRUE ) {
+		myfiles = dir(mydir, full.names=TRUE, recursive=T)
+	} else if ( file.exists(normalizePath(mydir)) ==TRUE ) {
+		myfiles = normalizePath(mydir)
+	} else {
+		stop("[textmatrix] - ERROR: specified input file or directory does not exist.")
+	}
+	
+    dummy = lapply( myfiles, textvector, stemming, language, minWordLength, maxWordLength, minDocFreq, maxDocFreq, stopwords, vocabulary, phrases, removeXML)
     if (!is.null(vocabulary)) {
         dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
         result = matrix(0, nrow=length(vocabulary), ncol=ncol(dtm))
@@ -69,10 +99,8 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
     nc = ncol(x);
     nr = nrow(x);    
     
-    # buggy! the number of lines can be long enough
-    # even if the number of columns is not. this results
-    # in an error message (index out of bound) in the else
-    # routine!
+	# subscript out of bound bugfix 
+	# by Jeff Verhulst, J&J Pharma R&D IM, 2006
     
     if (nc <= (3*bag_cols) && nr <= (3*bag_lines)) {
         
@@ -80,10 +108,51 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
         attr(y,"class") = NULL;
         attr(y,"call") = NULL;
         environment(y) = NULL;
-        print.default(y);
-        invisible(x);
+		ret = y
         
-    } else {
+    } else if ( nc <= 3*bag_cols ) {
+		
+		redx = matrix(ncol = nc, nrow = (3*bag_lines));
+		mid = round(nrow(x)/2)
+			
+		# top
+		redx[1:bag_lines, 1:nc] = x[1:bag_lines, 1:nc]
+		
+		# mid
+		redx[(bag_lines+1):(bag_lines*2), 1:nc] = x[mid:(mid+bag_lines-1), 1:nc]
+		
+		# bottom
+		redx[(bag_lines*2+1):(bag_lines*3), 1:nc] = x[(nrow(x)-bag_lines+1):nrow(x), 1:nc]
+				
+		# dixnaxes
+		rownames(redx) = c( paste(1:bag_lines,rownames(x)[1:bag_lines],sep=". "), paste(mid:(mid+bag_lines-1),rownames(x)[(mid):(mid+bag_lines-1)],sep=". "), paste((nrow(x)-bag_lines+1):nrow(x), rownames(x)[(nrow(x)-bag_lines+1):nrow(x)], sep=". "))
+		colnames(redx) = paste("D", c( 1:nc ), sep="")
+		docnames = paste( colnames(redx), c( colnames(x)[1:nc]), sep=" = ")	
+		
+		ret = NULL
+		ret$matrix = round(redx,2);
+		ret$legend = docnames;
+		
+	} else if ( nr <= 3*bag_lines ) {
+		
+		redx = matrix(ncol = (3*bag_cols), nrow = nr);
+		midc = round(ncol(x)/2)
+		
+		# top = all
+		redx[1:nr, 1:bag_cols] = x[1:nr, 1:bag_cols]
+		redx[1:nr, (bag_cols+1):(bag_cols+bag_cols)] = x[1:nr, midc:(midc+bag_cols-1)]
+		redx[1:nr, (2*bag_cols+1):(3*bag_cols)] = x[1:nr, (ncol(x)-bag_cols+1):ncol(x)]
+		
+		# dixnaxes
+		rownames(redx) = c( paste(1:nr,rownames(x)[1:nr],sep=". "))
+		colnames(redx) = paste("D", c( 1:bag_cols, midc:(midc+bag_cols-1), (ncol(x)-bag_cols+1):ncol(x) ), sep="")
+		docnames = paste( colnames(redx), c( colnames(x)[1:bag_cols], colnames(x)[midc:(midc+bag_cols-1)], colnames(x)[(ncol(x)-bag_cols+1):ncol(x)] ), sep=" = ")	
+		
+		ret = NULL
+		ret$matrix = round(redx,2);
+		ret$legend = docnames;
+		
+	} else {
         
         redx = matrix(ncol = (3*bag_cols), nrow = (3*bag_lines));
         mid = round(nrow(x)/2)
@@ -108,16 +177,16 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
         rownames(redx) = c( paste(1:bag_lines,rownames(x)[1:bag_lines],sep=". "), paste(mid:(mid+bag_lines-1),rownames(x)[(mid):(mid+bag_lines-1)],sep=". "), paste((nrow(x)-bag_lines+1):nrow(x), rownames(x)[(nrow(x)-bag_lines+1):nrow(x)], sep=". "))
         colnames(redx) = paste("D", c( 1:bag_cols, midc:(midc+bag_cols-1), (ncol(x)-bag_cols+1):ncol(x) ), sep="")
         docnames = paste( colnames(redx), c( colnames(x)[1:bag_cols], colnames(x)[midc:(midc+bag_cols-1)], colnames(x)[(ncol(x)-bag_cols+1):ncol(x)] ), sep=" = ")
-        
-        ret = NULL
-        ret$matrix = round(redx,2);
-        ret$legend = docnames;
-        
-        print(ret);
-        invisible(x);
-        
+		
+		ret = NULL
+		ret$matrix = round(redx,2);
+		ret$legend = docnames;
+		
     }
-    
+	
+	print.default(ret);
+	invisible(x);
+	
 }
 
 summary.textmatrix <- function ( object, ... ) {
@@ -139,4 +208,3 @@ summary.textmatrix <- function ( object, ... ) {
     s
     
 }
-
