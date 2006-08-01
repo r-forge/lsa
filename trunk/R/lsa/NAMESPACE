@@ -1,6 +1,7 @@
 export("cosine")
 export("dimcalc_share", "dimcalc_kaiser", "dimcalc_ndocs", "dimcalc_raw")
 export("textmatrix", "textvector")
+export("corpus_sample")
 export("query")
 export("getTriple", "setTriple", "delTriple")
 export("lw_tf", "lw_logtf", "lw_bintf", "gw_normalisation", "gw_idf", "gw_gfidf", "entropy", "gw_entropy")

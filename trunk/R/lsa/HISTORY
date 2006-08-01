@@ -12,12 +12,7 @@ Open Issues
 Wishlist / Unresolved Bugs
 --------------------------
 
-* random sample for files? (maybe add random sample function also with
-  the optional parameter so that you can re-use the same
-  sample?)
-
 * error handling for empty files (no term docs)?
-
 * error handling für empty textvectors?
 
 * upper and lower boundaries for global frequencies
@@ -28,16 +23,11 @@ Wishlist / Unresolved Bugs
 
 * remove numbers as terms (Simon Lin)
 
-* Add <XML> and <HTML> handling: automatically 
-  skipping the tags. (Simon Lin)
-
 * add phrasedetection to textvector function ("my phrase"),
   should not strip any special chars and should stay
   case sensitive (Neal Snider)
 
-* eliminate query -> integrate into textmatrix
-
-* vignettes for the paper
+* generalise architecture with processing chain
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -50,6 +40,9 @@ Changes in 0.58
 
 o   Fridolin Wild (2006-07-31)
 
+    * added random sample function for corpus selection.
+	  index can be returned to allow for re-use of the sample.
+
     * added dimcalc_fraction()
 
     * added support to textmatrix() to run not only over directories, 
@@ -60,11 +53,21 @@ o   Fridolin Wild (2006-07-31)
 
     * added maxDocFreq filtering
 
-    * 
+    * added simple <XML> tag handling: tags are automatically
+      removed (requested by Simon Lin, Northwestern, US @ Feb 23, 2006)
 
-o   Jeff Verhukst (
-    * bugfix of print.textmatrix() (bug appeared: 2nd of jan 2006, Claudia)
-      Fix by: Jeff Verhulst, J&J Pharma R&D IM (2006)
+    * added arabic support for Buckwalter transliterations
+	  (requested by Neal Snider, Stanford @ Feb 21, 2006)
+	
+	* changed textmatrix() / textvector() standard language 
+	  to english
+
+
+o   Jeff Verhulst (2006-04-21)
+
+    * bugfix: print.textmatrix()
+	  bug appeared: 2nd of jan 2006 (Claudia Mayr)
+      fix provided by: Jeff Verhulst, J&J Pharma R&D IM (2006)
 
 
 
@@ -79,6 +82,10 @@ o   2005-11-23:
 	
     * renamed core functions to lsa(), as.textmatrix(), fold_in()
 
+o   2005-11-22:
+	* chose NOT to integrate separator lines (would splash the handling!)
+      changed summary.textmatrix from matrix to vector output
+
 o   2005-11-12:
 
     * documentation refactured, added documentation for several new methods.
@@ -90,6 +97,7 @@ o   2005-11-12:
 o   2005-11-11:
 
     * bugfix of textmatrix() to work properly with the vocabulary list
+	* textmatrix(): integrated the vocabulary order/sort functions...
 
 o   2005-11-08:
 
@@ -112,11 +120,31 @@ o   2005-11-08:
 		
         * rewrote "pseudo_docs" to table / factor
 		
+		* added vocabulary filter to textmatrix / textvector
+		
         * in triples.r: use of "With(environment, { bla })" 
 	      turned out impossible
         
 		* getTriples: use of "return list(S=S, P=P, O=O)"
 	      turned out impossible
     
+
+o   2005-10-04: added nchar(..., type="chars") to count characters, not bytes
+
+
+Changes in 0.47
+---------------
+
+o   2005-08-26: 
+
+    * renamed dt_triples to textvector and dt_matrix to textmatrix
+
+
+Changes in 0.46
+---------------
+
+o   2005-08-25:
+
+    * added "\\[|\\]|\\{|\\}" to gsub in textvector
 
 --------------------------------------------------
