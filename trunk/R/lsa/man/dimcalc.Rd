@@ -4,6 +4,7 @@
 \alias{dimcalc_ndocs}
 \alias{dimcalc_kaiser}
 \alias{dimcalc_raw}
+\alias{dimcalc_fraction}
 \title{Dimensionality Calculation Routines (LSA)}
 \description{
    Methods for choosing a `good' number of singular values for the dimensionality reduction in LSA.
@@ -13,9 +14,11 @@
    dimcalc_ndocs(ndocs)
    dimcalc_kaiser()
    dimcalc_raw()
+   dimcalc_fraction(frac=(1/50))
 }
 \arguments{
    \item{share}{Optional: a fraction of the sum of the selected singular values to the sum of all singular values (default: 0.5). Only needed by \code{dimcalc\_share}.}
+   \item{frac}{Optional: a fraction of the number of the singular values to be used (default: 1/50th).}
    \item{ndocs}{Optional: the number of documents (only needed for \code{dimcalc\_ndocs()}).}
 }
 \details{
@@ -50,7 +53,11 @@
   Kaiser-Criterium, i.e. from the descending order of values all values 
   with \code{s[n] > 1} will be taken. The number of dimensions is returned
   accordingly.
-  
+ 
+  The method \code{dimcalc_fraction()} returns the specified share of the
+  number of singular values. Per default, 1/50th of the available values
+  will be used and the determined number of singular values will be returned.
+ 
   The method \code{dimcalc\_raw()} return the maximum number of singular values (= the length 
   of \code{s}). It is here only for completeness.
   
