@@ -9,25 +9,26 @@
 Open Issues
 # # # # # #
 
-Wishlist / Unresolved Bugs
---------------------------
+Wishlist & Unresolved
+---------------------
 
 * error handling for empty files (no term docs)?
 * error handling für empty textvectors?
 
-* upper and lower boundaries for global frequencies
-* maybe IDF instead of frequency boundaries?
-* add possibility to filter by minimum number of 
-  documents, a term has to appear in:
-     m = m[!rowSums(lw_bintf(m))==minGlobFreq,]
+* maybe GF*IDF boundaries instead of frequency 
+  boundaries
 
-* remove numbers as terms (Simon Lin)
+* bugfix necc: textmatrix() returns a vector, when only
+  one term is present (loosing the rowname!)
 
 * add phrasedetection to textvector function ("my phrase"),
   should not strip any special chars and should stay
   case sensitive (Neal Snider)
 
-* generalise architecture with processing chain
+* generalise architecture with text-processing chain
+
+* add bigger test corpus
+
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -37,6 +38,25 @@ Changes
 
 Changes in 0.58
 ---------------
+
+o   Fridolin Wild (2006-08-01)
+
+    * added simple <XML> tag handling: tags are automatically
+      removed (requested by Simon Lin, Northwestern @ Feb 23, 2006)
+
+    * added arabic support for Buckwalter transliterations
+	  (requested by Neal Snider, Stanford @ Feb 21, 2006)
+	
+	* changed textmatrix() / textvector() standard language 
+	  to english
+
+    * textmatrix can now automatically remove terms with only
+	  numbers (requested by Simon Lin, Northwestern @ Feb 23, 2006)
+
+    * extended special character stripping ('#', '+', ...)
+
+    * added upper and lower boundaries for global frequencies
+
 
 o   Fridolin Wild (2006-07-31)
 
@@ -53,22 +73,12 @@ o   Fridolin Wild (2006-07-31)
 
     * added maxDocFreq filtering
 
-    * added simple <XML> tag handling: tags are automatically
-      removed (requested by Simon Lin, Northwestern, US @ Feb 23, 2006)
-
-    * added arabic support for Buckwalter transliterations
-	  (requested by Neal Snider, Stanford @ Feb 21, 2006)
-	
-	* changed textmatrix() / textvector() standard language 
-	  to english
-
 
 o   Jeff Verhulst (2006-04-21)
 
     * bugfix: print.textmatrix()
 	  bug appeared: 2nd of jan 2006 (Claudia Mayr)
       fix provided by: Jeff Verhulst, J&J Pharma R&D IM (2006)
-
 
 
 Changes in 0.57 (first public release)
