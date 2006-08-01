@@ -121,9 +121,16 @@ setTriple <- function(M, subject, predicate, object) {
 } # # setTriple
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-# retractTriple: remove specific triple(s) from
+# delTriple: remove specific triple(s) from
 # environment of M. Currently not very memory sensitive ;)
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# changes:
+# 
+# 2006-07-31:
+#    * removed gc() output to make delTriple more silent
+# 
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+
 delTriple <- function(M, subject, predicate, object) {
     
     # find position
@@ -139,8 +146,7 @@ delTriple <- function(M, subject, predicate, object) {
     assign("triples$O", get("triples$O", envir=environment(M))[-origspos], envir=environment(M))
     
     # garbage collection
-    gc()
+    a = gc()
         
 } # delTriple
-
 
