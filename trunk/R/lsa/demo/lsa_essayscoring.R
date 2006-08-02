@@ -8,13 +8,12 @@
 #   
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 
-library("lsa")
-#setwd("C:/denkfabrik/produktionshalde/pss2006/artificial-tutoring/")
+source("create_corpus.R")
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # CREATE SPACE
 
-training = textmatrix( "corpora/corpus.6.base/", stemming=FALSE, minWordLength=3, minDocFreq=1 )
+training = textmatrix( trainingsdir, stemming=FALSE, minWordLength=3, minDocFreq=1 )
 weighted_training = training * gw_entropy(training)
 space = lsa( weighted_training, dims=dimcalc_share(share=0.5) )
 
@@ -22,7 +21,7 @@ space = lsa( weighted_training, dims=dimcalc_share(share=0.5) )
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # FOLD IN ESSAYS
 
-essays = textmatrix( "corpora/corpus.6/", stemming=FALSE, minWordLength=3, vocabulary=rownames(training) )
+essays = textmatrix( testdir, stemming=FALSE, minWordLength=3, vocabulary=rownames(training) )
 weighted_essays = essays * gw_entropy(training)
 lsaEssays = fold_in( weighted_essays, space )
 
@@ -34,7 +33,7 @@ essay2essay = cor(lsaEssays, method="spearman")
 goldstandard = c( "data6_golden_01.txt", "data6_golden_02.txt", "data6_golden_03.txt" )
 machinescores = colSums( essay2essay[goldstandard, ] ) / 3
 
-humanscores = read.table( "corpora/corpus.6.scores", row.names="V1")
+humanscores = read.table( scores, row.names="V1")
 
 cor.test(humanscores[names(machinescores),], machinescores, exact=FALSE, method="spearman", alternative="two.sided")
 
