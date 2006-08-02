@@ -3,7 +3,7 @@
 #   essay-scoring.R
 #   fridolin.wild@wu-wien.ac.at, June 5th 2006
 #   
-#   Written for the tutorial at the 
+#   Written for a tutorial at the 
 #   ProLearn Summer School 2006, Bled, Slowenia
 #   
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
@@ -12,7 +12,7 @@
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # CREATE A CORPUS
 
-source("lsa_corpus.R")
+demo(lsa_corpus)
 
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
@@ -51,9 +51,10 @@ machinescores = colSums( essay2essay[goldstandard, ] ) / 3
 cor.test(humanscores[names(machinescores),], machinescores, exact=FALSE, method="spearman", alternative="two.sided")
 
 # => impressingly good!
-# => in our own experiments interrater correlation 
-#    was in the best case .88, but going down to
-#    -0.17 with unfamiliar topics/raters
+# => in other experiments at the Vienna University
+#    of Economics and Business Administration, the 
+#    interrater correlation was in the best case .88, 
+#    but going down to -0.17 with unfamiliar topics/raters
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # CLEAN UP
