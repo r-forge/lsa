@@ -8,7 +8,12 @@
 #   
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 
-source("create_corpus.R")
+
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# CREATE A CORPUS
+
+source("lsa_corpus.R")
+
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # CREATE SPACE
@@ -49,3 +54,8 @@ cor.test(humanscores[names(machinescores),], machinescores, exact=FALSE, method=
 # => in our own experiments interrater correlation 
 #    was in the best case .88, but going down to
 #    -0.17 with unfamiliar topics/raters
+
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# CLEAN UP
+
+unlink(tempdir, recursive=TRUE)
