@@ -1,4 +1,5 @@
 \name{corpus_sample}
+\alias{corpus_sample}
 \title{Corpus Sample (Matrices)}
 \description{
   Generate a random sample of a document collection.

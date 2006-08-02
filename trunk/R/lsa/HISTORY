@@ -18,17 +18,14 @@ Wishlist & Unresolved
 * maybe GF*IDF boundaries instead of frequency 
   boundaries
 
-* bugfix necc: textmatrix() returns a vector, when only
-  one term is present (loosing the rowname!)
+* bugfix neccessary: textmatrix() returns a vector, when 
+  only one term is present (loosing the rowname!)
 
 * add phrasedetection to textvector function ("my phrase"),
   should not strip any special chars and should stay
   case sensitive (Neal Snider)
 
 * generalise architecture with text-processing chain
-
-* add bigger test corpus
-
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -56,6 +53,10 @@ o   Fridolin Wild (2006-08-01)
     * extended special character stripping ('#', '+', ...)
 
     * added upper and lower boundaries for global frequencies
+
+    * demo for essay scoring added
+	
+	* data set with essays (corpus.6) added
 
 
 o   Fridolin Wild (2006-07-31)

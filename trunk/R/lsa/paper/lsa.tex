@@ -259,6 +259,27 @@ from a primary text corpus), they can be `folded-in' later on
 
 Overview over influencing parameters for every core function.
 
+\begin{table}
+\centering
+\caption{Weighting Schemes (tf = term frequency)}
+\label{tab:schemes}
+\begin{tabular}{p{30mm}@{\extracolsep{5mm}}p{80mm}}
+\hline\noalign{\smallskip}
+Call & Description \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+lw\_logtf() & $log(m_{i,j}+1)$ is applied on every cell \\
+lw\_bintf() & $tf_{ij} = 1$, iff $tf_{ij} \neq 0$ \\
+lw\_tf() & completely unmodified (placebo function) \\
+gw\_idf() & $\log_2{\frac{ndocs}{df_i}+1}$, where $df_i = \sum\limits^j_1{\frac{tf_ij}{tf_ij}}$ \\
+gw\_normalisation() & $\frac{1}{\sqrt{\sum\limits_{1}^{j}{tf^2_{ij}}}}$ \\
+gw\_gfidf() & Global Frequency $\times$ idf: $\sum\limits_1^j{tf_{ij}} \times idf$ \\
+entropy() & $-\sum\limits^{1}_{j}{\frac{p_{ij}\log{p_{ij}}}{\log{numdocs}}}$, where $p_{ij}=\frac{tf_{ij}}{\sum_j^1{tf_{ij}}}$ \\
+gw\_entropy() & 1 + Entropy \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+
+
 \section{Tuning the Model}
 
 Choosing Hyperparameters, Influencing Parameters

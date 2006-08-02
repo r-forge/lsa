@@ -6,10 +6,12 @@
   Creates a document-term matrix from all textfiles in a given directory.
 }
 \usage{
-textmatrix( mydir, stemming=FALSE, language="german", 
-   minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
-textvector( file, stemming=FALSE, language="german", 
-   minWordLength=2, minDocFreq=1, stopwords=NULL, vocabulary=NULL )
+textmatrix( mydir, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, 
+   minDocFreq=1, maxDocFreq=FALSE, minGlobFreq=FALSE, maxGlobFreq=FALSE, stopwords=NULL, vocabulary=NULL, 
+   phrases=NULL, removeXML=FALSE, removeNumbers=FALSE)
+textvector( file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, 
+   minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, 
+   phrases=NULL, removeXML=FALSE, removeNumbers=FALSE )
 }
 \arguments{
    \item{file}{filename (may include path).}

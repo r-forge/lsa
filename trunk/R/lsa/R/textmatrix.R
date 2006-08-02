@@ -3,23 +3,31 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
 
-textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=F ) {
+textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=FALSE, removeNumbers=FALSE ) {
     
     txt = scan(file, what = "character", quiet = TRUE)
-
+	txt = tolower(txt)
+	
     if (removeXML) {
 		txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=T, extended=F)
+		txt = gsub("&gt;",">", txt, perl=F, extended=F, fixed=T)
+		txt = gsub("&lt;","<", txt, perl=F, extended=F, fixed=T)
+		txt = gsub("&quot;","\"", txt, perl=F, extended=F, fixed=T)
+		if (language=="german") {
+			txt = gsub("&auml;","ä", txt, perl=F, extended=F, fixed=T)
+			txt = gsub("&ouml;","ö", txt, perl=F, extended=F, fixed=T)
+			txt = gsub("&uuml;","ü", txt, perl=F, extended=F, fixed=T)
+			txt = gsub("&szlig;","ß", txt, perl=F, extended=F, fixed=T)
+		}
 	}
-	
-	
+		
 	if (language=="arabic") {
 		# support for Buckwalter transliterations
 		txt = gsub( "\\.|:|\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\?|\\!|\"|\'|\`|\\^|\=|\’|\„|\”|\/", " ", txt)
 	} else {
-		txt = gsub( "\\.|:|\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\?|-|\\!|\"|\'|\`|\\^|\=|\’|\–|\„|\”|\/", " ", txt)
+		txt = gsub( "\\.|:|\\(|\\)|\\*|\\||\\#|\\>|\\<|\\+|\\[|\\]|\\{|\\}|,|;|\\?|-|\\!|\"|\'|\`|\\^|\=|\’|\–|\„|\”|\/", " ", txt)
 	}
     txt = gsub("[[:space:]]+", " ", txt)
-    txt = tolower(txt)
     txt = unlist(strsplit(txt, " ", fixed=TRUE))
     
     # stopword filtering?
@@ -42,11 +50,15 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
     # stemming?
     if (stemming) names(tab) = wordStem(names(tab), language=language)
     
+	if (removeNumbers) {
+		tab = tab[-grep("(^[0-9]+$)", names(tab), perl=T, extended=F)]
+	}
+	
     return( data.frame( docs=basename(file), terms = names(tab), Freq = tab, row.names = NULL) )
     
 }
 
-textmatrix <- function( mydir, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=F ) {
+textmatrix <- function( mydir, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, minGlobFreq=FALSE, maxGlobFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=FALSE, removeNumbers=FALSE) {
     
 	# if directory, then list its files recursively, else check
 	# whether file exists and eventually append it to list.
@@ -74,22 +86,44 @@ textmatrix <- function( mydir, stemming=FALSE, language="english", minWordLength
 		stop("[textmatrix] - ERROR: specified input file or directory does not exist.")
 	}
 	
-    dummy = lapply( myfiles, textvector, stemming, language, minWordLength, maxWordLength, minDocFreq, maxDocFreq, stopwords, vocabulary, phrases, removeXML)
-    if (!is.null(vocabulary)) {
-        dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
-        result = matrix(0, nrow=length(vocabulary), ncol=ncol(dtm))
+    dummy = lapply( myfiles, textvector, stemming, language, minWordLength, maxWordLength, minDocFreq, maxDocFreq, stopwords, vocabulary, phrases, removeXML, removeNumbers)
+    
+	if (!is.null(vocabulary)) {
+        
+		dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
+        
+		if (is.numeric(minGlobFreq)){
+			dtm = dtm[rowSums(lw_bintf(dtm))>=minGlobFreq,]
+		}
+		if (is.numeric(maxGlobFreq)) {
+			dtm = dtm[rowSums(lw_bintf(dtm))<=maxGlobFreq,]
+		}
+		gc()
+		
+		result = matrix(0, nrow=length(vocabulary), ncol=ncol(dtm))
         rownames(result) = vocabulary
         result[rownames(dtm),] = dtm[rownames(dtm),]
         colnames(result) = colnames(dtm)
         dtm = result
         gc()
+		
     } else {
-        dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
+        
+		dtm = t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
+		
+		if (is.numeric(minGlobFreq)){
+			dtm = dtm[rowSums(lw_bintf(dtm))>=minGlobFreq,]
+		}
+		if (is.numeric(maxGlobFreq)) {
+			dtm = dtm[rowSums(lw_bintf(dtm))<=maxGlobFreq,]
+		}
+		gc()
+
     }
     
     environment(dtm) = new.env()
     class(dtm) = "textmatrix"
-    
+	
     return ( dtm )
     
 }
@@ -102,7 +136,7 @@ print.textmatrix <- function ( x, bag_lines = 12, bag_cols = 10, ... ) {
 	# subscript out of bound bugfix 
 	# by Jeff Verhulst, J&J Pharma R&D IM, 2006
     
-    if (nc <= (3*bag_cols) && nr <= (3*bag_lines)) {
+    if ( (nc <= (3*bag_cols)) && (nr <= (3*bag_lines)) ) {
         
         y = x;
         attr(y,"class") = NULL;
