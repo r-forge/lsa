@@ -27,6 +27,10 @@ Wishlist & Unresolved
 
 * generalise architecture with text-processing chain
 
+* input document sanitizing routines or at least a
+  testing environment that can tell which files will
+  produce errors.
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 Changes
