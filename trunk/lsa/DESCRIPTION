@@ -11,4 +11,5 @@ Description: The basic idea of latent semantic analysis (LSA) is,
   over a given document-term matrix, this variability problem can be overcome. 
 Depends: Rstem
 Maintainer: Fridolin Wild <fridolin.wild@wu-wien.ac.at>
-License: GPL version 2 or later.
+License: GPL (>= 2)
+Encoding: UTF-8
