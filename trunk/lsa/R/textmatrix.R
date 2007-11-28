@@ -8,6 +8,7 @@
 ### 2007-11-28
 ###    * bugfix textvector: stemming before (!) 
 ###      filtering with controlled vocabulary
+###    * bugfix textvector: special chars better now
 
 
 textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=FALSE, removeNumbers=FALSE ) {
@@ -30,9 +31,9 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 		
 	if (language=="arabic") {
 		# support for Buckwalter transliterations
-		txt = gsub( "\\.|:|\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\?|\\!|\"|\'|\`|\\^|\=|\’|\„|\”|\/", " ", txt)
+		txt = gsub( "[.:()\\[\\]\\{\\},;?!\"\'`^=’„”/]", " ", txt)
 	} else {
-		txt = gsub( "\\.|:|\\(|\\)|\\*|\\||\\#|\\>|\\<|\\+|\\[|\\]|\\{|\\}|,|;|\\?|-|\\!|\"|\'|\`|\\^|\=|\’|\–|\„|\”|\/", " ", txt)
+		txt = gsub( "[^[:alnum:]]", " ", txt)
 	}
 
     txt = gsub("[[:space:]]+", " ", txt)

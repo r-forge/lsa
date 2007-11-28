@@ -61,6 +61,8 @@ o   Fridolin Wild (2007-11-28)
 	
 	* testing routine added for one-term matrices
 	
+	* special characters cleaned in textvector()
+	
 
 Changes in 0.58
 ---------------
