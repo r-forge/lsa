@@ -233,3 +233,29 @@ lsatest( length(rownames(textmatrix(td1, minGlobFreq=2)))==3, "[textmatrix] - gl
 lsatest( length(rownames(textmatrix(td1, maxGlobFreq=2, minGlobFreq=2)))==2, "[textmatrix] - global frequency (minimum)" )
 unlink(td1, recursive=TRUE)
 
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# stemming in german
+
+td1 = tempfile()
+dir.create(td1)
+write( "systeme", file=paste(td1,"A1",sep="/") )
+write( "hunde", file=paste(td1,"A2",sep="/") )
+td2 = tempfile()
+dir.create(td2)
+write( "von systemen von hunden", file=paste(td2,"A3",sep="/") )
+tm1 = textmatrix(td1, stemming=T, language="german")
+tm2 = textmatrix(td2, stemming=T, language="german", vocabulary=rownames(tm1) )
+lsatest( all( (rownames(tm1) == c("system", "hund")) == TRUE), "[textmatrix] - stemming (german)" )
+lsatest( all( (rownames(tm2) == c("system", "hund")) == TRUE), "[textmatrix] - fold-in with stemming (german)" )
+unlink(td2, recursive=TRUE)
+unlink(td1, recursive=TRUE)
+
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# one term matrices
+
+td1 = tempfile()
+dir.create(td1)
+write( "systeme", file=paste(td1,"A1",sep="/") )
+tm1 = textmatrix(td1, stemming=T, language="german")
+lsatest( (rownames(tm1) == "system"), "[textmatrix] - one term matrix" )
+unlink(td1, recursive=TRUE)

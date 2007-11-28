@@ -3,9 +3,16 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
 
+### HISTORY
+### 
+### 2007-11-28
+###    * bugfix textvector: stemming before (!) 
+###      filtering with controlled vocabulary
+
+
 textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=FALSE, removeNumbers=FALSE ) {
     
-    txt = scan(file, what = "character", quiet = TRUE)
+    txt = scan(file, what = "character", quiet = TRUE, encoding = "UTF-8")
 	txt = tolower(txt)
 	
     if (removeXML) {
@@ -27,17 +34,22 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 	} else {
 		txt = gsub( "\\.|:|\\(|\\)|\\*|\\||\\#|\\>|\\<|\\+|\\[|\\]|\\{|\\}|,|;|\\?|-|\\!|\"|\'|\`|\\^|\=|\’|\–|\„|\”|\/", " ", txt)
 	}
+
     txt = gsub("[[:space:]]+", " ", txt)
     txt = unlist(strsplit(txt, " ", fixed=TRUE))
     
     # stopword filtering?
     if (!is.null(stopwords)) txt = txt[!txt %in% stopwords]
-    
-    # vocabulary filtering?
-    if (!is.null(vocabulary)) txt = txt[txt %in% vocabulary]
-    
+
     # tabulate
     tab = sort(table(txt), decreasing = TRUE)
+    
+    # stemming?
+    if (stemming) names(tab) = wordStem(names(tab), language=language)
+	
+    # vocabulary filtering?
+    #if (!is.null(vocabulary)) txt = txt[txt %in% vocabulary]
+	if (!is.null(vocabulary)) tab = tab[names(tab) %in% vocabulary]
     
     # bandwith for document frequency?
     tab = tab[tab >= minDocFreq]
@@ -46,9 +58,6 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
     # word-length filtering?
     tab = tab[nchar(names(tab), type="chars") >= minWordLength]
     if (is.numeric(maxWordLength)) tab = tab[nchar(names(tab), type="chars") <= maxWordLength]
-	
-    # stemming?
-    if (stemming) names(tab) = wordStem(names(tab), language=language)
     
 	if (removeNumbers) {
 		tab = tab[-grep("(^[0-9]+$)", names(tab), perl=T, extended=F)]

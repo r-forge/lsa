@@ -1,7 +1,7 @@
 ﻿
 ==============================
-  Release Notes for LSA 0.58
-       August 1st, 2006
+  Release Notes for LSA 0.59
+       November 28, 2007
 ==============================
 
 
@@ -18,10 +18,10 @@ Wishlist & Unresolved
 * maybe GF*IDF boundaries instead of frequency 
   boundaries
 
-* bugfix neccessary: textmatrix() returns a vector, when 
-  only one term is present (loosing the rowname!)
+* bugfix neccessary: textmatrix with controlled
+  vocabulary fails if no term is left
 
-* add phrasedetection to textvector function ("my phrase"),
+* add phrase detection to textvector function ("my phrase"),
   should not strip any special chars and should stay
   case sensitive (Neal Snider)
 
@@ -31,11 +31,36 @@ Wishlist & Unresolved
   testing environment that can tell which files will
   produce errors.
 
+* corpora package: global weights should always come
+  from the original textmatrix, especially when folding
+  in additional texts.
+  
+* corpora package: should decide automatically whether
+  it is a textfile, a directory, or a string.
+
+* terms may be ""? terms may be "¤"? Unicode problems!
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 Changes
 # # # #
 
+Changes in 0.59
+---------------
+
+o   Fridolin Wild (2007-11-28)
+
+	* Dutch stopword list added (thanks to Marco Kalz,
+	  Open University Netherlands)
+	
+	* UTF-8 support enforced in stopword list, package
+	  description, textmatrix
+	  
+	* stemming bug fixed (stemming was _after_
+	  filtering by controlled vocabulary
+	
+	* testing routine added for one-term matrices
+	
 
 Changes in 0.58
 ---------------

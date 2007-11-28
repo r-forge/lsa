@@ -1,3 +1,4 @@
 lsa_landauer       Demonstrates the example from Landauer, T., Foltz, P., Laham, D. (1998): Introduction to Latent Semantic Analysis, In: Discourse Processes, 25, pp. 259-284
 lsa_essayscoring   Demonstrates how students' essays can be scored with Latent Semantic Analysis (from a tutorial given at the ProLearn Summer School 2006, Bled, Slowenia).
 lsa_corpus         Creates a test corpus in 'tempdir'
+lsa_plot           Visualises a latent semantic space with two singular values in a 2D scatter plot

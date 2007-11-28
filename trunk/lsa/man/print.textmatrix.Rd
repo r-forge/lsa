@@ -29,6 +29,8 @@ print.textmatrix( x, bag_lines, bag_cols, ... )
     used in the table.
     
 }
+\value{
+}
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
 \seealso{ \code{\link{textmatrix}} }
 \examples{
