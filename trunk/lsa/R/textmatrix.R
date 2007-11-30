@@ -64,6 +64,8 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 		tab = tab[-grep("(^[0-9]+$)", names(tab), perl=T, extended=F)]
 	}
 	
+	if (length(names(tab))==0) warning(paste("[textvector] - the file ", file, " contains no terms after filtering.", sep=""))
+	
     return( data.frame( docs=basename(file), terms = names(tab), Freq = tab, row.names = NULL) )
     
 }
