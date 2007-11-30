@@ -57,7 +57,7 @@ o   Fridolin Wild (2007-11-28)
 	  description, textmatrix
 	  
 	* stemming bug fixed (stemming was _after_
-	  filtering by controlled vocabulary
+	  filtering by controlled vocabulary)
 	
 	* testing routine added for one-term matrices
 	
@@ -68,7 +68,10 @@ o   Fridolin Wild (2007-11-28)
 	  Stanford, below). Included the following characters
 	  to 'be' alphanumerics: ' $ | _ - ~ > < & { } * `
 	  
-	* utf-8 conform umlaut replacement in textmatrix
+	* utf-8 conform umlaut replacement in textmatrix()
+	
+	* added warning for 'empty' files (empty after filtering)
+	  to textvector()
 	
 
 Changes in 0.58
