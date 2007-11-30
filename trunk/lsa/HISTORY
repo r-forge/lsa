@@ -23,7 +23,7 @@ Wishlist & Unresolved
 
 * add phrase detection to textvector function ("my phrase"),
   should not strip any special chars and should stay
-  case sensitive (Neal Snider)
+  case sensitive (Neal Snider, Stanford)
 
 * generalise architecture with text-processing chain
 
@@ -62,6 +62,13 @@ o   Fridolin Wild (2007-11-28)
 	* testing routine added for one-term matrices
 	
 	* special characters cleaned in textvector()
+	
+	* Optimised support for Arabic buckwalter transliterations
+	  (referring to the earlier request of Neal Snider, 
+	  Stanford, below). Included the following characters
+	  to 'be' alphanumerics: ' $ | _ - ~ > < & { } * `
+	  
+	* utf-8 conform umlaut replacement in textmatrix
 	
 
 Changes in 0.58

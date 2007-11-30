@@ -17,21 +17,21 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 	txt = tolower(txt)
 	
     if (removeXML) {
-		txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=T, extended=F)
-		txt = gsub("&gt;",">", txt, perl=F, extended=F, fixed=T)
-		txt = gsub("&lt;","<", txt, perl=F, extended=F, fixed=T)
-		txt = gsub("&quot;","\"", txt, perl=F, extended=F, fixed=T)
+		txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=T)
+		txt = gsub("&gt;",">", txt, perl=F, fixed=T)
+		txt = gsub("&lt;","<", txt, perl=F, fixed=T)
+		txt = gsub("&quot;","\"", txt, perl=F, fixed=T)
 		if (language=="german") {
-			txt = gsub("&auml;","ä", txt, perl=F, extended=F, fixed=T)
-			txt = gsub("&ouml;","ö", txt, perl=F, extended=F, fixed=T)
-			txt = gsub("&uuml;","ü", txt, perl=F, extended=F, fixed=T)
-			txt = gsub("&szlig;","ß", txt, perl=F, extended=F, fixed=T)
+			txt = gsub("&auml;","\u00e4", txt, perl=F, fixed=T)
+			txt = gsub("&ouml;","\u00f6", txt, perl=F, fixed=T)
+			txt = gsub("&uuml;","\u00fc", txt, perl=F, fixed=T)
+			txt = gsub("&szlig;","\u00df", txt, perl=F, fixed=T)
 		}
 	}
 		
 	if (language=="arabic") {
 		# support for Buckwalter transliterations
-		txt = gsub( "[.:()\\[\\]\\{\\},;?!\"\'`^=’„”/]", " ", txt)
+		txt = gsub( "[^[:alnum:]'\\_\\~$\\|><&{}*`\\-]", " ", txt)
 	} else {
 		txt = gsub( "[^[:alnum:]]", " ", txt)
 	}
