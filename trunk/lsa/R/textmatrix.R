@@ -22,10 +22,10 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 		txt = gsub("&lt;","<", txt, perl=F, fixed=T)
 		txt = gsub("&quot;","\"", txt, perl=F, fixed=T)
 		if (language=="german") {
-			txt = gsub("&auml;","\u00e4", txt, perl=F, fixed=T)
-			txt = gsub("&ouml;","\u00f6", txt, perl=F, fixed=T)
-			txt = gsub("&uuml;","\u00fc", txt, perl=F, fixed=T)
-			txt = gsub("&szlig;","\u00df", txt, perl=F, fixed=T)
+			txt = gsub("&auml;","ä", txt, perl=F, fixed=T) # \u00e4
+			txt = gsub("&ouml;","ö", txt, perl=F, fixed=T) # \u00f6
+			txt = gsub("&uuml;","ü", txt, perl=F, fixed=T) # \u00fc
+			txt = gsub("&szlig;","ß", txt, perl=F, fixed=T) # \u00df
 		}
 	}
 		

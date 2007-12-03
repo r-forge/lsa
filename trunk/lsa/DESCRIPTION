@@ -13,3 +13,4 @@ Depends: Rstem
 Maintainer: Fridolin Wild <fridolin.wild@wu-wien.ac.at>
 License: GPL (>= 2)
 Encoding: UTF-8
+LazyLoad: no
