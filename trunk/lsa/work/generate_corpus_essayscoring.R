@@ -15,6 +15,6 @@ corpus_training = textmatrix( "corpus/corpus.6.base", stemming=FALSE, minWordLen
 corpus_essays = textmatrix( "corpus/corpus.6", stemming=FALSE, minWordLength=3, vocabulary=rownames(corpus_training) )
 corpus_scores = read.table( "corpus/corpus.6.scores", row.names="V1") 
 
-save(corpus_training, file="../data/corpus_training.rda")
-save(corpus_essays, file="../data/corpus_essays.rda")
-save(corpus_scores, file="../data/corpus_scores.rda")
+save(corpus_training, file="../data/corpus_training.rda", ascii=T)
+save(corpus_essays, file="../data/corpus_essays.rda", ascii=T)
+save(corpus_scores, file="../data/corpus_scores.rda", ascii=T)
