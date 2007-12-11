@@ -4,6 +4,7 @@
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # generate the files of the famous Landauer example
+
 ldir = tempfile()
 dir.create(ldir)
 write( c("human", "interface", "computer"), file=paste(ldir, "c1", sep="/"))
@@ -18,12 +19,14 @@ write( c("graph", "minors", "survey"), file=paste(ldir, "m4", sep="/"))
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # generate doc term matrix from landauer files
+
 dtm = textmatrix(ldir, minWordLength=1)
 dtm
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # make a space, reconstruct original
-landauerOriginalSpace = lsa(dtm, dims=dimcalc_share())
+
+landauerOriginalSpace = lsa(dtm, dims=dimcalc_raw())
 X = as.textmatrix(landauerOriginalSpace)
 
 # X should be equal to dtm (beside rounding errors)
@@ -40,18 +43,22 @@ round(Y,2)
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # now read in again the landauer sample (but 
 # with the vocabulary of the existing matrix)
+
 pdocs = textmatrix(ldir, vocabulary=rownames(dtm))
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # now calc a pseudo SVD on the basis of dtm's SVD
+
 Y2 = fold_in(pdocs, landauerSpace)
 round(Y2,2)
 
 # Y and Y2 should be the same (as well as 
 # dtm and pdocs should be equal)
+
 all( (round(Y,2) == round(Y2,2)) == TRUE)
 
 # calc pearson doc2doc correlation
+
 rawCor = cor(dtm)
 lsaCor = cor(Y)
 

@@ -6,28 +6,30 @@
 #   Written for a tutorial at the 
 #   ProLearn Summer School 2006, Bled, Slowenia
 #   
-# -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-# CREATE A CORPUS
+# PREPARE TRAINING DATA
 
-demo(lsa_corpus)
+# files have been generated with 
+# textmatrix(stemming=FALSE, minWordLength=3, minDocFreq=1)
 
+data(corpus_training) 
 
-# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-# CREATE SPACE
-
-training = textmatrix( trainingsdir, stemming=FALSE, minWordLength=3, minDocFreq=1 )
-weighted_training = training * gw_entropy(training)
+weighted_training = corpus_training * gw_entropy(corpus_training)
 space = lsa( weighted_training, dims=dimcalc_share(share=0.5) )
 
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # FOLD IN ESSAYS
 
-essays = textmatrix( testdir, stemming=FALSE, minWordLength=3, vocabulary=rownames(training) )
-weighted_essays = essays * gw_entropy(training)
+# files have been prepared with
+# textmatrix( stemming=FALSE, minWordLength=3, 
+# vocabulary=rownames(training) )
+
+data(corpus_essays)
+
+weighted_essays = corpus_essays * gw_entropy(corpus_training)
 lsaEssays = fold_in( weighted_essays, space )
 
 
@@ -38,7 +40,8 @@ essay2essay = cor(lsaEssays, method="spearman")
 goldstandard = c( "data6_golden_01.txt", "data6_golden_02.txt", "data6_golden_03.txt" )
 machinescores = colSums( essay2essay[goldstandard, ] ) / 3
 
-humanscores = read.table( scores, row.names="V1")
+data(corpus_scores)
+humanscores = corpus_scores
 
 cor.test(humanscores[names(machinescores),], machinescores, exact=FALSE, method="spearman", alternative="two.sided")
 
@@ -46,7 +49,7 @@ cor.test(humanscores[names(machinescores),], machinescores, exact=FALSE, method=
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # COMPARE TO PURE VECTOR SPACE MODEL
 
-essay2essay = cor(essays, method="spearman")
+essay2essay = cor(corpus_essays, method="spearman")
 machinescores = colSums( essay2essay[goldstandard, ] ) / 3
 cor.test(humanscores[names(machinescores),], machinescores, exact=FALSE, method="spearman", alternative="two.sided")
 
@@ -55,8 +58,3 @@ cor.test(humanscores[names(machinescores),], machinescores, exact=FALSE, method=
 #    of Economics and Business Administration, the 
 #    interrater correlation was in the best case .88, 
 #    but going down to -0.17 with unfamiliar topics/raters
-
-# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-# CLEAN UP
-
-unlink(tempdir, recursive=TRUE)
