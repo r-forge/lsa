@@ -33,12 +33,10 @@ Wishlist & Unresolved
 
 * corpora package: global weights should always come
   from the original textmatrix, especially when folding
-  in additional texts.
+  in additional texts (see essay scoring example).
   
 * corpora package: should decide automatically whether
   it is a textfile, a directory, or a string.
-
-* terms may be ""? terms may be "¤"? Unicode problems!
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -47,6 +45,26 @@ Changes
 
 Changes in 0.59
 ---------------
+
+o   Fridolin Wild (2007-12-11)
+	
+	* bug fix (R crashed when calling lsa_corpus
+	  demo): essay scoring demo now calls data
+	  files to avoid this unicode problem (seems
+	  to be a bug in R).
+	
+	* stopword lists converted to .rda data files
+	
+	* unicode bugfix in tests
+	
+	* unicode bugfix for german umlaut
+	  conversion from html-entities in textvector()
+	  
+	* demo index readlines bugfix (two blank lines
+	  added)
+	
+	* landauer demo: X was using dimcalc_share()
+	  instead of dimcalc_raw()
 
 o   Fridolin Wild (2007-11-28)
 

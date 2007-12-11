@@ -36,7 +36,9 @@ from the SVD applied through \code{lsa()} on a given text
 collection to construct the latent semantic space. The resulting vector
 \eqn{\hat{m}}{mi} from equation~(2) is identical to an additional column in the
 textmatrix representation of the latent semantic space (as produced by 
-\code{as.textmatrix()}).
+\code{as.textmatrix()}). Be careful when using weighting schemes: you
+may want to use the global weights of the training textmatrix also for
+your new data that you fold-in!
 
 }
 \value{

@@ -56,6 +56,10 @@
    \code{entropy()} returns the entropy (as defined by Shannon).
    
    \code{gw\_entropy()} returns one plus entropy.
+   
+   Be careful when folding in data into an existing lsa space: you may want to 
+   weight an additional textmatrix based on the same vocabulary with the global 
+   weights of the training data (not the new data)!
 
 }
 \value{
