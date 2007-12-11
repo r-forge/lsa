@@ -1,0 +1,1 @@
+Dadurch kann erreicht werden, dass die Werte auf der Diagonalen von S, welche Singulärwerte heissen, absteigend geordnet sind.

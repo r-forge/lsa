@@ -1,0 +1,1 @@
+Im zweidimensionalen Fall, für n=2 entspricht dies der Hypotenuse eines Rechtwinkligen Dreiecks, im dreidimensionalen Fall  (n=3) der Raumdiagonale eines Quaders.
