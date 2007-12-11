@@ -200,7 +200,7 @@ unlink(td1, recursive=TRUE)
 td1 = tempfile()
 write( c("<html>\n<head></head><body background=\"#FFFFFF\">&auml;bc<h1>test></h1></body></html>"), file=td1)
 lsatest( length(rownames(textmatrix(td1, removeXML=TRUE, language="german"))) == 2, "[textmatrix] - XML removal")
-lsatest( rownames(textmatrix(td1, removeXML=TRUE, language="german"))[1] == "äbc", "[textmatrix] - html German umlaut replacement")
+lsatest( rownames(textmatrix(td1, removeXML=TRUE, language="german"))[1] == "\u00e4bc", "[textmatrix] - html German umlaut replacement")
 unlink(td1)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
