@@ -14,7 +14,18 @@
 textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=FALSE, removeNumbers=FALSE ) {
     
     txt = scan(file, what = "character", quiet = TRUE, encoding = "UTF-8")
-	txt = tolower(txt)
+    txt = tolower(txt)
+
+    ## Current version of R have the following bug:
+    ##     R> txt <- "ü "
+    ##     R> Encoding(txt)
+    ##     [1] "UTF-8"
+    ##     R> Encoding(gsub( "[^[:alnum:]]", " ", txt))
+    ##     [1] "unknown"
+    ## (The space matters.)
+    ## Hence, let's save the encoding and tag it back on ...
+
+    encoding <- Encoding(txt)
 	
     if (removeXML) {
 		txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=T)
@@ -37,6 +48,9 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 	}
 
     txt = gsub("[[:space:]]+", " ", txt)
+
+    Encoding(txt) <- encoding
+    
     txt = unlist(strsplit(txt, " ", fixed=TRUE))
     
     # stopword filtering?
