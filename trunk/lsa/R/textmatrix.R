@@ -28,24 +28,24 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
     encoding <- Encoding(txt)
 	
     if (removeXML) {
-		txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=T)
-		txt = gsub("&gt;",">", txt, perl=F, fixed=T)
-		txt = gsub("&lt;","<", txt, perl=F, fixed=T)
-		txt = gsub("&quot;","\"", txt, perl=F, fixed=T)
-		if (language=="german") {
-			txt = gsub("&auml;","ä", txt, perl=F, fixed=T) # \u00e4
-			txt = gsub("&ouml;","ö", txt, perl=F, fixed=T) # \u00f6
-			txt = gsub("&uuml;","ü", txt, perl=F, fixed=T) # \u00fc
-			txt = gsub("&szlig;","ß", txt, perl=F, fixed=T) # \u00df
-		}
-	}
+        txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=TRUE)
+        txt = gsub("&gt;",">", txt, perl=FALSE, fixed=TRUE)
+        txt = gsub("&lt;","<", txt, perl=FALSE, fixed=TRUE)
+        txt = gsub("&quot;","\"", txt, perl=FALSE, fixed=TRUE)
+        if (language=="german") {
+            txt = gsub("&auml;","ä", txt, perl=FALSE, fixed=TRUE) # \u00e4
+            txt = gsub("&ouml;","ö", txt, perl=FALSE, fixed=TRUE) # \u00f6
+            txt = gsub("&uuml;","ü", txt, perl=FALSE, fixed=TRUE) # \u00fc
+            txt = gsub("&szlig;","ß", txt, perl=FALSE, fixed=TRUE) # \u00df
+        }
+    }
 		
-	if (language=="arabic") {
-		# support for Buckwalter transliterations
-		txt = gsub( "[^[:alnum:]'\\_\\~$\\|><&{}*`\\-]", " ", txt)
-	} else {
-		txt = gsub( "[^[:alnum:]]", " ", txt)
-	}
+    if (language=="arabic") {
+        ## support for Buckwalter transliterations
+        txt = gsub( "[^[:alnum:]'\\_\\~$\\|><&{}*`\\-]", " ", txt)
+    } else {
+        txt = gsub( "[^[:alnum:]]", " ", txt)
+    }
 
     txt = gsub("[[:space:]]+", " ", txt)
 
@@ -74,11 +74,11 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
     tab = tab[nchar(names(tab), type="chars") >= minWordLength]
     if (is.numeric(maxWordLength)) tab = tab[nchar(names(tab), type="chars") <= maxWordLength]
     
-	if (removeNumbers) {
-		tab = tab[-grep("(^[0-9]+$)", names(tab), perl=T, extended=F)]
-	}
+    if (removeNumbers) {
+        tab = tab[-grep("(^[0-9]+$)", names(tab), perl=TRUE, extended=FALSE)]
+    }
 	
-	if (length(names(tab))==0) warning(paste("[textvector] - the file ", file, " contains no terms after filtering.", sep=""))
+    if (length(names(tab))==0) warning(paste("[textvector] - the file ", file, " contains no terms after filtering.", sep=""))
 	
     return( data.frame( docs=basename(file), terms = names(tab), Freq = tab, row.names = NULL) )
     
@@ -95,7 +95,7 @@ textmatrix <- function( mydir, stemming=FALSE, language="english", minWordLength
 		for (i in 1:length(mydir)) {
 		
 			if (file.info(normalizePath(mydir[i]))$isdir==TRUE) {
-				myfiles = append(myfiles, dir(mydir[i], full.names=TRUE, recursive=T))
+				myfiles = append(myfiles, dir(mydir[i], full.names=TRUE, recursive=TRUE))
 			} else if (file.exists(normalizePath(mydir[i]))) {				
 				myfiles = append(myfiles, normalizePath(mydir[i]))
 			} else {
@@ -105,7 +105,7 @@ textmatrix <- function( mydir, stemming=FALSE, language="english", minWordLength
 		}
 		
 	} else if ( file.info(normalizePath(mydir))$isdir==TRUE ) {
-		myfiles = dir(mydir, full.names=TRUE, recursive=T)
+		myfiles = dir(mydir, full.names=TRUE, recursive=TRUE)
 	} else if ( file.exists(normalizePath(mydir)) ==TRUE ) {
 		myfiles = normalizePath(mydir)
 	} else {
