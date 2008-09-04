@@ -26,6 +26,11 @@
 ###    * replaced max() with length() in ndocs
 ###      now if the first factor is already > ndocs
 ###      dimcalc_ndocs returns 1 not -Inf
+### 2005-09-04
+###    * bugfix in dimcalc_share: when there are few singular 
+###      values, the default threshold of .5 might already be 
+###      passed with the first. If statement added, now returns
+###      all in case this happened.
 ### 
 
 dimcalc_share <- function ( share=0.5) {
@@ -33,7 +38,15 @@ dimcalc_share <- function ( share=0.5) {
     # return the position with which 50% share of the
     # summed up singular values are reached
     function ( s ) {
-        return( max(which(cumsum(s/sum(s))<=share)) + 1 )
+	
+		
+		if ( any(which(cumsum(s/sum(s))<=share)) ) {
+			d = max(which(cumsum(s/sum(s))<=share)) + 1
+		} else {
+			d = length(s)
+		}
+		
+        return( d )
     }
     
 }
