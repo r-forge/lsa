@@ -9,15 +9,27 @@
 ###    * bugfix textvector: stemming before (!) 
 ###      filtering with controlled vocabulary
 ###    * bugfix textvector: special chars better now
-
+###
+### 2008-08-31
+###    * iconv routines to solve character encoding problems
+###
 
 textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=FALSE, removeNumbers=FALSE ) {
     
-    txt = scan(file, what = "character", quiet = TRUE, encoding = "UTF-8")
-    txt = tolower(txt)
+    txt = scan(file, what = "character", quiet = TRUE, encoding="UTF-8")
+	
+	txt = iconv(txt, to="UTF-8")
+    res = try(tolower(txt), TRUE)
+	if (class(res) == "try-error") {
+	   stop(paste("[lsa] - could not open file ",file," due to encoding problems of the file.", sep=""))
+	} else {
+	   txt = res
+	   res = NULL
+	   gc()
+	}
 
     ## Current version of R have the following bug:
-    ##     R> txt <- "ü "
+    ##     R> txt <- "Ã¼ "
     ##     R> Encoding(txt)
     ##     [1] "UTF-8"
     ##     R> Encoding(gsub( "[^[:alnum:]]", " ", txt))
@@ -25,9 +37,10 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
     ## (The space matters.)
     ## Hence, let's save the encoding and tag it back on ...
 
-    encoding <- Encoding(txt)
+	#encoding = Encoding(txt)
 	
     if (removeXML) {
+        txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=TRUE)
         txt = gsub("<[^>]*>"," ", paste(txt,collapse=" "), perl=TRUE)
         txt = gsub("&gt;",">", txt, perl=FALSE, fixed=TRUE)
         txt = gsub("&lt;","<", txt, perl=FALSE, fixed=TRUE)
@@ -49,7 +62,7 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 
     txt = gsub("[[:space:]]+", " ", txt)
 
-    Encoding(txt) <- encoding
+    # Encoding(txt) <- encoding
     
     txt = unlist(strsplit(txt, " ", fixed=TRUE))
     
@@ -262,7 +275,7 @@ summary.textmatrix <- function ( object, ... ) {
     n[4] = "max term length";
     s[4] = max(nchar(rownames(object),type="chars"));
     n[5] = "non-alphanumerics in terms";
-    s[5] = length(which(gsub("[[:alnum:]]|[ÄÖÜäöüß]", "", rownames(object)) != ""));
+    s[5] = length(which(gsub("[[:alnum:]]|[Ã„Ã–ÃœÃ¤Ã¶Ã¼ÃŸ]", "", rownames(object)) != ""));
     names(s) = n;
     class(s) = "summary.textmatrix";
     s
