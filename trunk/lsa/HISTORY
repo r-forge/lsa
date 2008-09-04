@@ -1,7 +1,7 @@
 ﻿
 ==============================
-  Release Notes for LSA 0.59
-       November 28, 2007
+  Release Notes for LSA 0.60
+       September 4, 2008
 ==============================
 
 
@@ -13,13 +13,12 @@ Wishlist & Unresolved
 ---------------------
 
 * error handling for empty files (no term docs)?
-* error handling für empty textvectors?
-
-* maybe GF*IDF boundaries instead of frequency 
-  boundaries
-
+* error handling for empty textvectors?
 * bugfix neccessary: textmatrix with controlled
   vocabulary fails if no term is left
+  
+* maybe GF*IDF boundaries instead of frequency 
+  boundaries
 
 * add phrase detection to textvector function ("my phrase"),
   should not strip any special chars and should stay
@@ -38,13 +37,34 @@ Wishlist & Unresolved
 * corpora package: should decide automatically whether
   it is a textfile, a directory, or a string.
 
+* normalized local weights! (phillip türtscher)
+
+* integrate with tm package
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 Changes
 # # # #
 
+Changes in 0.60
+---------------
+
+o   Fridolin Wild (2008-09-04)
+	* bug fixed dimcalc_share when using
+	  extremely small dimensions (e.g. 2).
+
+o   Fridolin Wild (2008-08-31)
+	* bug fixed encoding problems on windows
+
+o   Kurt Hornik (2008-03-12)
+    * T => TRUE, F => FALSE
+
+
 Changes in 0.59
 ---------------
+
+o   Fridolin Wild, Kurt Hornik (2007-12-18)
+    * several patches for encoding problems
 
 o   Fridolin Wild (2007-12-11)
 	
