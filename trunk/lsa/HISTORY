@@ -1,7 +1,7 @@
 ﻿
 ==============================
-  Release Notes for LSA 0.60
-       September 4, 2008
+  Release Notes for LSA 0.61
+       November 26, 2008
 ==============================
 
 
@@ -20,10 +20,6 @@ Wishlist & Unresolved
 * maybe GF*IDF boundaries instead of frequency 
   boundaries
 
-* add phrase detection to textvector function ("my phrase"),
-  should not strip any special chars and should stay
-  case sensitive (Neal Snider, Stanford)
-
 * generalise architecture with text-processing chain
 
 * input document sanitizing routines or at least a
@@ -41,10 +37,26 @@ Wishlist & Unresolved
 
 * integrate with tm package
 
+* add phrase detection to textvector function ("my phrase"),
+  should not strip any special chars and should stay
+  case sensitive (Neal Snider, Stanford)
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 Changes
 # # # #
+
+Changes in 0.61
+---------------
+
+o   Fridolin Wild (2008-11-26)
+	* phrase detection added (thanks to Eileen Hlavka,
+	  PRGS, RAND Corporation and Neil Snider, Stanford).
+	  So far phrases can be provided as character vector,
+	  the textvector routine changes them into the
+	  format word1_word2_word3 (and the like) to
+	  replace them in the texts. When phrases are
+	  used, underscores are no longer stripped from
+	  the texts!
 
 Changes in 0.60
 ---------------
