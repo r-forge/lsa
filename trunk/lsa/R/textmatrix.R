@@ -56,6 +56,25 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
     if (language=="arabic") {
         ## support for Buckwalter transliterations
         txt = gsub( "[^[:alnum:]'\\_\\~$\\|><&{}*`\\-]", " ", txt)
+    } else if (!is.null(phrases)) {
+		
+		# collapse the list into a single character string
+		txt = paste(txt, collapse=" ")
+		
+        # identify phrases in the text
+        for (p in phrases) {
+           # convert phrase to "word1_word2_word3"
+           repl = gsub("[[:space:]]+", " ", as.character(p))
+           repl = gsub("[[:space:]]+", "_", repl)
+		   # replace the phrase in txt (slow but works)
+           txt = gsub(p, repl, txt)
+        }
+		
+        # filter the rest
+        txt = gsub("[^[:alnum:]\\_]", " ", txt)
+		
+		# split again by whitespaces
+		txt = unlist(strsplit(txt, " "))
     } else {
         txt = gsub( "[^[:alnum:]]", " ", txt)
     }
