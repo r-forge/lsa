@@ -13,6 +13,9 @@
 ### 2008-08-31
 ###    * iconv routines to solve character encoding problems
 ###
+### 2009-01-30
+###    * removed german umlauts from non-alnum summary
+### 
 
 textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=FALSE, removeNumbers=FALSE ) {
     
@@ -294,7 +297,7 @@ summary.textmatrix <- function ( object, ... ) {
     n[4] = "max term length";
     s[4] = max(nchar(rownames(object),type="chars"));
     n[5] = "non-alphanumerics in terms";
-    s[5] = length(which(gsub("[[:alnum:]]|[Ã„Ã–ÃœÃ¤Ã¶Ã¼ÃŸ]", "", rownames(object)) != ""));
+    s[5] = length(which(gsub("[[:alnum:]]", "", rownames(object)) != "")); 
     names(s) = n;
     class(s) = "summary.textmatrix";
     s
