@@ -45,11 +45,11 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
         txt = gsub("&gt;",">", txt, perl=FALSE, fixed=TRUE)
         txt = gsub("&lt;","<", txt, perl=FALSE, fixed=TRUE)
         txt = gsub("&quot;","\"", txt, perl=FALSE, fixed=TRUE)
-        if (language=="german") {
-            txt = gsub("&auml;","ä", txt, perl=FALSE, fixed=TRUE) # \u00e4
-            txt = gsub("&ouml;","ö", txt, perl=FALSE, fixed=TRUE) # \u00f6
-            txt = gsub("&uuml;","ü", txt, perl=FALSE, fixed=TRUE) # \u00fc
-            txt = gsub("&szlig;","ß", txt, perl=FALSE, fixed=TRUE) # \u00df
+        if (language=="german" && l10n_info()$MBCS) {
+            txt = gsub("&auml;","Ã¤", txt, perl=FALSE, fixed=TRUE) # \u00e4
+            txt = gsub("&ouml;","Ã¶", txt, perl=FALSE, fixed=TRUE) # \u00f6
+            txt = gsub("&uuml;","Ã¼", txt, perl=FALSE, fixed=TRUE) # \u00fc
+            txt = gsub("&szlig;","ÃŸ", txt, perl=FALSE, fixed=TRUE) # \u00df
         }
     }
 		
