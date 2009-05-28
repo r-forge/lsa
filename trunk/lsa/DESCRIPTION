@@ -10,7 +10,7 @@ Description: The basic idea of latent semantic analysis (LSA) is,
   via a truncated singular value decomposition (a two-mode factor analysis) 
   over a given document-term matrix, this variability problem can be overcome. 
 Depends: Rstem
-Maintainer: Fridolin Wild <fridolin.wild@wu-wien.ac.at>
+Maintainer: Fridolin Wild <f.wild@open.ac.uk>
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyLoad: no
