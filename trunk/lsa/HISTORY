@@ -45,6 +45,12 @@ Wishlist & Unresolved
 Changes
 # # # #
 
+Changes in 0.62
+---------------
+
+o   Fridolin Wild (2009-05-28)
+	* french stopwords added (thanks to Haykel Demnati, ISG Tunis)
+
 Changes in 0.61
 ---------------
 
