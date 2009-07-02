@@ -43,13 +43,13 @@
    
    \code{lw\_tf()} returns a completely unmodified \eqn{n \times m} matrix (placebo function).
    
-   \code{lw\_logtf()} returns the logarithmised \eqn{n \times m} matrix. \eqn{log(m_{i,j}+1)} is applied on every cell.
+   \code{lw\_logtf()} returns the logarithmized \eqn{n \times m} matrix. \eqn{log(m_{i,j}+1)} is applied on every cell.
    
    \code{lw\_bintf()} returns binary values of the \eqn{n \times m} matrix. Every cell is assigned 1, iff the term frequency is not equal to 0.
    
    \code{gw\_normalisation()} returns a normalised \eqn{n \times m} matrix. Every cell equals 1 divided by the square root of the document vector length.
    
-   \code{gw\_idf()} returns the inverse document frequency in a \eqn{n \times m} matrix. Every cell is 1 plus the logarithmus of the number of documents divided by the number of documents where the term appears.
+   \code{gw\_idf()} returns the inverse document frequency in a \eqn{n \times m} matrix. Every cell is 1 plus the logarithm of the number of documents divided by the number of documents where the term appears.
    
    \code{gw\_gfidf()} returns the global frequency multiplied with idf. Every cell equals the sum of the frequencies of one term divided by the number of documents where the term shows up.
    

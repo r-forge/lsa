@@ -2,7 +2,7 @@
 \alias{fold_in}
 \title{Ex-post folding-in of textmatrices into an existing latent semantic space}
 \description{
-Additional documents can be mapped into a pre-exisiting
+Additional documents can be mapped into a pre-existing
 latent semantic space without influencing the factor
 distribution of the space. Applied, when additional documents 
 must not influence the calculated existing latent semantic 
