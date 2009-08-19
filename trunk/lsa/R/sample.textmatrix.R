@@ -1,5 +1,5 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-### corpus_sample.R
+### sample.textmatrix.R
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### created 2006-07-31
 
