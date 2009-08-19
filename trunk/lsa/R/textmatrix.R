@@ -5,6 +5,9 @@
 
 ### HISTORY
 ### 
+### 2009-08-19
+###    * exchanged Rstem with Snowball 
+###
 ### 2007-11-28
 ###    * bugfix textvector: stemming before (!) 
 ###      filtering with controlled vocabulary
@@ -32,7 +35,7 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 	}
 
     ## Current version of R have the following bug:
-    ##     R> txt <- "Ã¼ "
+    ##     R> txt <- "ae "
     ##     R> Encoding(txt)
     ##     [1] "UTF-8"
     ##     R> Encoding(gsub( "[^[:alnum:]]", " ", txt))
@@ -49,10 +52,10 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
         txt = gsub("&lt;","<", txt, perl=FALSE, fixed=TRUE)
         txt = gsub("&quot;","\"", txt, perl=FALSE, fixed=TRUE)
         if (language=="german" && l10n_info()$MBCS) {
-            txt = gsub("&auml;","ä", txt, perl=FALSE, fixed=TRUE) # \u00e4
-            txt = gsub("&ouml;","ö", txt, perl=FALSE, fixed=TRUE) # \u00f6
-            txt = gsub("&uuml;","ü", txt, perl=FALSE, fixed=TRUE) # \u00fc
-            txt = gsub("&szlig;","ß", txt, perl=FALSE, fixed=TRUE) # \u00df
+            txt = gsub("&auml;","ae", txt, perl=FALSE, fixed=TRUE) # \u00e4
+            txt = gsub("&ouml;","oe", txt, perl=FALSE, fixed=TRUE) # \u00f6
+            txt = gsub("&uuml;","ue", txt, perl=FALSE, fixed=TRUE) # \u00fc
+            txt = gsub("&szlig;","ss", txt, perl=FALSE, fixed=TRUE) # \u00df
         }
     }
 		
@@ -95,7 +98,8 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
     tab = sort(table(txt), decreasing = TRUE)
     
     # stemming?
-    if (stemming) names(tab) = wordStem(names(tab), language=language)
+    #if (stemming) names(tab) = wordStem(names(tab), language=language)
+    if (stemming) names(tab) = SnowballStemmer(names(tab), Weka_control(S=language))
 	
     # vocabulary filtering?
     #if (!is.null(vocabulary)) txt = txt[txt %in% vocabulary]
