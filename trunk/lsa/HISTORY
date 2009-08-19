@@ -1,4 +1,4 @@
-﻿
+
 ==============================
   Release Notes for LSA 0.61
        November 26, 2008
@@ -41,9 +41,24 @@ Wishlist & Unresolved
   should not strip any special chars and should stay
   case sensitive (Neal Snider, Stanford)
 
+* rewrite fold_in 
+    dqs = t(docvecs) %*% LSAspace$tk %*% diag(LSAspace$sk)
+    dtm = LSAspace$tk %*% diag(LSAspace$sk) %*% t(dqs)
+  with 
+    crossprod(x,y) = t(x) %*% y
+    tcrossprod(x,y) = x %*% t(y)
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # 
 Changes
 # # # #
+
+Changes in 0.63
+---------------
+
+o   Fridolin Wild (2009-09-17)
+        * Rstem replaced with Snowball (in textmatrix, query),
+          thanks to Kurt Hornik.
 
 Changes in 0.62
 ---------------
