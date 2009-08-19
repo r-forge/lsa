@@ -7,12 +7,12 @@
     through random sampling.
 }
 \usage{
-sample.textmatrix(textmatrix, samplesize, index.return=FALSE)
+   sample.textmatrix(textmatrix, samplesize, index.return=FALSE)
 }
 \arguments{
    \item{textmatrix}{A document-term matrix.}
    \item{samplesize}{Desired number of files}
-   \item{index.return}{if set to \code{true}, the positions of the subset in the original column vectors will be returned as well.}
+   \item{index.return}{if set to true, the positions of the subset in the original column vectors will be returned as well.}
 }
 \details{
 
@@ -25,7 +25,7 @@ sample.textmatrix(textmatrix, samplesize, index.return=FALSE)
 }
 \value{
   \item{filelist}{a list of filenames of the documents in the corpus.). }
-  \item{ix}{If index.return is set to \code{true}, a list is returned; \code{x} contains
+  \item{ix}{If index.return is set to true, a list is returned; \code{x} contains
            the filenames and \code{ix} contains the position of the sample files in the
                    original filelist.}
 

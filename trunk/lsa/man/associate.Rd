@@ -28,7 +28,7 @@ associate(textmatrix, term, measure = "cosine", threshold = 0.7)
 
 }
 \value{
-  \item{termlist}{A named vector of closeness values (terms as labels, sorted in descending order). }
+  \item{termlist}{A named vector of closeness values (terms as labels, sorted in descending order).}
 }
 \author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \seealso{ \code{\link{textmatrix}} }
@@ -47,7 +47,7 @@ myMatrix = textmatrix(td, minWordLength=1)
 myLSAspace = lsa(myMatrix, dims=dimcalc_share()) 
 myNewMatrix = as.textmatrix(myLSAspace) 
 
-# calc associations for 'mouse'
+# calc associations for mouse
 associate(myNewMatrix, "mouse")
 
 # clean up
