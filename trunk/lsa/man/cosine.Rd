@@ -32,7 +32,7 @@ cosine(x, y = NULL)
   cosine similarity value is returned.
 }
 \seealso{\code{\link[stats]{cor}}}
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \references{Leydesdorff, L. (2005) \emph{Similarity Measures, Author Cocitation Analysis,and Information Theory}. In: JASIST 56(7), pp.769-772.}
 \examples{
 

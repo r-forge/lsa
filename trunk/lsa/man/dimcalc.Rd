@@ -70,7 +70,7 @@
 }
 \seealso{\code{\link{lsa}}}
 \references{Wild, F., Stahl, C., Stermsek, G., Neumann, G., Penya, Y. (2005) \emph{Parameters Driving Effectiveness of Automated Essay Scoring with LSA}. In: Proceedings of the 9th CAA, pp.485-494, Loughborough }
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \examples{
 
 ## create some data 

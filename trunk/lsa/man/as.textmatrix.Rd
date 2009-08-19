@@ -26,7 +26,7 @@ for more information.
 \value{
   \item{textmatrix}{a textmatrix representation of the latent semantic space.}
 }
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \seealso{ \code{\link{textmatrix}}, \code{\link{lsa}}, \code{\link{fold_in}} }
 \references{Berry, M., Dumais, S., and O'Brien, G (1995) \emph{Using Linear Algebra for Intelligent Information Retrieval}. In: SIAM Review, Vol. 37(4), pp.573--595. }
 \examples{

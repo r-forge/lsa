@@ -20,9 +20,9 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
 \value{
   \item{query}{returns the query vector (based on the given vocabulary) as matrix.}
 }
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \seealso{
-\code{\link[Rstem]{wordStem}}, \code{\link{textmatrix}} 
+\code{\link[Snowball]{SnowballStemmer}}, \code{\link{textmatrix}} 
 }
 \examples{
 

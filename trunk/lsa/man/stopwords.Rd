@@ -3,9 +3,11 @@
 \alias{stopwords_de}
 \alias{stopwords_en}
 \alias{stopwords_nl}
+\alias{stopwords_fr}
 \alias{stopwords_german}
 \alias{stopwords_english}
 \alias{stopwords_dutch}
+\alias{stopwords_french}
 \title{Stopwordlists in German, English, Dutch, and French}
 \description{
 This data sets contain very common lists of words that want to be ignored when 

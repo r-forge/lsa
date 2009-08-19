@@ -39,7 +39,7 @@ textvector( file, stemming=FALSE, language="english",
   of every word for all documents. If specified, simple text preprocessing mechanisms
   are applied (stemming, stopword filtering, wordlength cutoffs).
   
-  Stemming thereby uses Porter's snowball stemmer (from package \code{Rstem}).
+  Stemming thereby uses Porter's snowball stemmer (from package \code{Snowball}).
   
   There are two stopword lists included (for english and for german), which
   are loaded on demand into the variables \code{stopwords_de} and 
@@ -61,8 +61,8 @@ textvector( file, stemming=FALSE, language="english",
 \value{
   \item{textmatrix}{the document-term matrix (incl. row and column names).}
 }
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
-\seealso{ \code{\link[Rstem]{wordStem}}, \code{\link{stopwords_de}}, \code{\link{stopwords_en}}, \code{\link{setTriple}}, \code{\link{getTriple}}}
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
+\seealso{ \code{\link[Snowball]{SnowballStemmer}}, \code{\link{stopwords_de}}, \code{\link{stopwords_en}}, \code{\link{setTriple}}, \code{\link{getTriple}}}
 \examples{
 
 # create some files

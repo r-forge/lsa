@@ -54,7 +54,7 @@ getSubjectId( M, subject )
 \value{
   \item{textmatrix}{the document-term matrix (including row and column names).}
 }
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \seealso{ \code{\link{textmatrix}} }
 \examples{
 

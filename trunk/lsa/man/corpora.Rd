@@ -21,7 +21,7 @@ exist \emph{before} being handed over to e.g. \code{lsa()}.
    data(corpus_essays)
    data(corpus_scores)
 }
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \format{ Corpora: textmatrix; Scores: table.}
 \keyword{datasets}
 \keyword{array}

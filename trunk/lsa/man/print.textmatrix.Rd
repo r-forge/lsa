@@ -29,7 +29,7 @@ print.textmatrix( x, bag_lines, bag_cols, ... )
     used in the table.
     
 }
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \seealso{ \code{\link{textmatrix}} }
 \examples{
 

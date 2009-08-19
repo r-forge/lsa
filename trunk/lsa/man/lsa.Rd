@@ -8,8 +8,8 @@
    lsa( x, dims=dimcalc_share() )
 }
 \arguments{
-   \item{x}{a document-term matrix (recommended to be of class textmatrix), containing documents in 
-   columns, terms in rows and occurrence frequencies in the cells.}
+   \item{x}{a document-term matrix (recommeded to be of class textmatrix), containing documents in 
+   colums, terms in rows and occurrence frequencies in the cells.}
    \item{dims}{either the number of dimensions or a configuring function.}
 }
 \details{

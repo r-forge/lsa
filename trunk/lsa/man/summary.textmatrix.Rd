@@ -20,7 +20,7 @@ characters.
 \value{
    \item{matrix}{Returns a matrix.}
 }
-\author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \seealso{ \code{\link{textmatrix}} }
 \examples{
 
