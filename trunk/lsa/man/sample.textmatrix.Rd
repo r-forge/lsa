@@ -45,7 +45,7 @@ write( c("dog", "mouse", "dog"), file=paste(td, "D4", sep="/"))
 # create matrices
 myMatrix = textmatrix(td, minWordLength=1)
 
-sample(myMatrix, 2)
+sample(myMatrix, 3)
 
 # clean up
 unlink(td, recursive=TRUE)
