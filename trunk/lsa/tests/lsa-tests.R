@@ -221,7 +221,7 @@ write( "HalAwap_2    jaraH-a_1   muro$id_1  taHoDiyriy~_1   |laY_1", file=paste(
 write( "HalAyib_2    jaraY-i_1   muroDiy_1  taHoSiyl_1      |lam_1 ", file=paste(td1,"A3",sep="/") )
 lcc <- Sys.getlocale("LC_COLLATE")
 Sys.setlocale("LC_COLLATE", "C")
-lsatest(rownames(textmatrix(td1, language="arabic"))[10] == "tahodiyriy~_1",
+lsatest(sort(rownames(textmatrix(td1, language="arabic")))[14] == "tahodiyriy~_1",
         "[textmatrix] - arabic")
 unlink(td1, recursive=TRUE)
 Sys.setlocale("LC_COLLATE", lcc)
