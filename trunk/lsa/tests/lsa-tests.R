@@ -221,7 +221,7 @@ write( "HalAwap_2    jaraH-a_1   muro$id_1  taHoDiyriy~_1   |laY_1", file=paste(
 write( "HalAyib_2    jaraY-i_1   muroDiy_1  taHoSiyl_1      |lam_1 ", file=paste(td1,"A3",sep="/") )
 lcc = Sys.getlocale("LC_ALL")
 Sys.setlocale("LC_ALL", "C")
-lsatest(sort(rownames(textmatrix(td1, language="arabic")))[14] == "tahodiyriy~_1",
+lsatest("tahodiyriy~_1" %in% rownames(textmatrix(td1, language="arabic")),
         "[textmatrix] - arabic")
 unlink(td1, recursive=TRUE)
 Sys.setlocale("LC_ALL", lcc)
