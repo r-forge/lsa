@@ -219,12 +219,12 @@ dir.create(td1)
 write( "HalAwaY_1    jan~ap_1    muriyd_1   taHoDiyr_1      |l_2", file=paste(td1,"A1",sep="/") )
 write( "HalAwap_2    jaraH-a_1   muro$id_1  taHoDiyriy~_1   |laY_1", file=paste(td1,"A2",sep="/") )
 write( "HalAyib_2    jaraY-i_1   muroDiy_1  taHoSiyl_1      |lam_1 ", file=paste(td1,"A3",sep="/") )
-lcc <- Sys.getlocale("LC_COLLATE")
-Sys.setlocale("LC_COLLATE", "C")
+lcc = Sys.getlocale("LC_ALL")
+Sys.setlocale("LC_ALL", "C")
 lsatest(sort(rownames(textmatrix(td1, language="arabic")))[14] == "tahodiyriy~_1",
         "[textmatrix] - arabic")
 unlink(td1, recursive=TRUE)
-Sys.setlocale("LC_COLLATE", lcc)
+Sys.setlocale("LC_ALL", lcc)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 # global frequency boundaries
