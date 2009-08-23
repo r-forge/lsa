@@ -114,7 +114,7 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
     if (is.numeric(maxWordLength)) tab = tab[nchar(names(tab), type="chars") <= maxWordLength]
     
     if (removeNumbers) {
-        tab = tab[-grep("(^[0-9]+$)", names(tab), perl=TRUE, extended=FALSE)]
+        tab = tab[-grep("(^[0-9]+$)", names(tab), perl=TRUE)]
     }
 	
     if (length(names(tab))==0) warning(paste("[textvector] - the file ", file, " contains no terms after filtering.", sep=""))
