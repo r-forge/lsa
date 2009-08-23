@@ -52,10 +52,10 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
         txt = gsub("&lt;","<", txt, perl=FALSE, fixed=TRUE)
         txt = gsub("&quot;","\"", txt, perl=FALSE, fixed=TRUE)
         if (language=="german" && l10n_info()$MBCS) {
-            txt = gsub("&auml;","ae", txt, perl=FALSE, fixed=TRUE) # \u00e4
-            txt = gsub("&ouml;","oe", txt, perl=FALSE, fixed=TRUE) # \u00f6
-            txt = gsub("&uuml;","ue", txt, perl=FALSE, fixed=TRUE) # \u00fc
-            txt = gsub("&szlig;","ss", txt, perl=FALSE, fixed=TRUE) # \u00df
+            txt = gsub("\\&auml;","ae", txt, perl=FALSE, fixed=TRUE)
+            txt = gsub("\\&ouml;","oe", txt, perl=FALSE, fixed=TRUE)
+            txt = gsub("\\&uuml;","ue", txt, perl=FALSE, fixed=TRUE)
+            txt = gsub("\\&szlig;","ss", txt, perl=FALSE, fixed=TRUE)
         }
     }
 		
