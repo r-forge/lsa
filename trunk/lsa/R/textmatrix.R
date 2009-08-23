@@ -51,7 +51,7 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
         txt = gsub("&gt;",">", txt, perl=FALSE, fixed=TRUE)
         txt = gsub("&lt;","<", txt, perl=FALSE, fixed=TRUE)
         txt = gsub("&quot;","\"", txt, perl=FALSE, fixed=TRUE)
-        if (language=="german" && l10n_info()$MBCS) {
+        if (language=="german") { # && l10n_info()$MBCS
             txt = gsub("&auml;","ae", txt, perl=FALSE, fixed=TRUE)
             txt = gsub("&ouml;","oe", txt, perl=FALSE, fixed=TRUE)
             txt = gsub("&uuml;","ue", txt, perl=FALSE, fixed=TRUE)
