@@ -9,7 +9,7 @@ summary.textmatrix( object, ... )
 }
 \arguments{
    \item{object}{A textmatrix.}
-   \item{...}{}
+   \item{...}{further arguments to be passed to or from other methods.}
 }
 \details{
 Returns some statistical infos about the textmatrix \code{x}:
