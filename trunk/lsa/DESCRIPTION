@@ -1,7 +1,7 @@
 Package: lsa
 Title: Latent Semantic Analysis
-Version: 0.63-2
-Date: 2010-11-22
+Version: 0.63-3
+Date: 2011-06-26
 Author: Fridolin Wild
 Description: The basic idea of latent semantic analysis (LSA) is, 
   that text do have a higher order (=latent semantic) structure which, 
@@ -13,4 +13,3 @@ Depends: Snowball, RWeka
 Maintainer: Fridolin Wild <f.wild@open.ac.uk>
 License: GPL (>= 2)
 Encoding: UTF-8
-LazyLoad: no
