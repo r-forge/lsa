@@ -263,3 +263,13 @@ write( "systeme", file=paste(td1,"A1",sep="/") )
 tm1 = textmatrix(td1, stemming=T, language="german")
 lsatest( (rownames(tm1) == "system"), "[textmatrix] - one term matrix" )
 unlink(td1, recursive=TRUE)
+
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+# polish language support
+
+td1=tempfile()
+load("polski.RData")
+write(polski, file=td1)
+polski = textvector(td1, language="polish")
+lsatest( polski['terms'] == "testąąęęóóććłłńńśśźźżż", "[textvector] - polish language support" )
+unlink(td1)
