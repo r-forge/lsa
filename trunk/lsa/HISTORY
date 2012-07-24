@@ -1,7 +1,7 @@
 
 ==============================
-  Release Notes for LSA 0.61
-       November 26, 2008
+  Release Notes for LSA 0.64
+       September 14, 2009
 ==============================
 
 
@@ -11,6 +11,14 @@ Open Issues
 
 Wishlist & Unresolved
 ---------------------
+
+-- robert koblischke:
+* svd(...,sparse=SVDLIBCInterface("/home/fwild/svdlibc"))
+
+Und SVDLIBCInterface ist eine subklasse von SparseSVDInterface die eine 
+methode zum transformieren der matrix, zum berechnen der svd und zum 
+transformieren der svd in die R-LSA struktur).
+--- ///
 
 * error handling for empty files (no term docs)?
 * error handling for empty textvectors?
@@ -48,17 +56,47 @@ Wishlist & Unresolved
     crossprod(x,y) = t(x) %*% y
     tcrossprod(x,y) = x %*% t(y)
 
+* replace 0 with . in the print routine
+
+* check: are html special entities removed in xml remove: e.g. &#8217;
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 Changes
 # # # #
 
+Changes in 0.66
+---------------
+
+o   Fridolin Wild (2012-07-23)
+      * added textvector support for vietnamese and polish
+        (thanks to Grażyna Paliwoda-Pękosz, Cracow University 
+        of Economics for the Polish request; and Hien Pham for
+        the Vietnamese)
+      
+
+Changes in 0.65
+---------------
+
+o   Fridolin Wild (2010-10-07)
+       * new dutch stopword list (thanks to Adriana Berlanga, Open University
+		   of the Netherlands, and Jan Hensgens, AURUS)
+
+
+Changes in 0.64
+---------------
+
+o   Fridolin Wild (2009-09-14)
+       * associate.R and cosine.R updated to deal with subsets
+		   thanks to Yue Shan, National Cheng Kung University, Taiwan 
+
 Changes in 0.63
 ---------------
 
-o   Fridolin Wild (2009-09-17)
+o   Fridolin Wild (2009-09-04)
         * Rstem replaced with Snowball (in textmatrix, query),
           thanks to Kurt Hornik.
+		  * patched test routines to work on all OS
 
 Changes in 0.62
 ---------------
