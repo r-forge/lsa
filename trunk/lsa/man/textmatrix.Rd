@@ -28,7 +28,7 @@ textvector( file, stemming=FALSE, language="english",
    \item{minGlobFreq}{words which appear in less than minGlobFreq documents will be ignored.}
    \item{maxGlobFreq}{words which appear in more than maxGlobFreq documents will be ignored.}
    \item{stopwords}{a stopword list that contains terms the will be ignored.}
-   \item{vocabulary}{if specified, only words in this term list will be used for building the matrix (`controlled vocabulary').}
+   \item{vocabulary}{a character vector containing the words: only words in this term list will be used for building the matrix (`controlled vocabulary').}
    \item{removeXML}{if set to \code{TRUE}, XML tags (elements, attributes, some special characters) will be removed.}
    \item{removeNumbers}{if set to \code{TRUE}, terms that consist only out of numbers will be removed.}
    \item{phrases}{not implemented, yet.}
