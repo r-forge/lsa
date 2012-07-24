@@ -1,5 +1,8 @@
 ### cosine.R
 ###
+### 2009-09-14:
+###   * added vector vs. matrix comparison
+###     to reduce data load when looking for associations
 ### 2005-11-21:
 ###   * added lazy calculation:
 ###     calc only below diagonale; diag = 1; add t(co)
@@ -31,7 +34,16 @@ cosine <- function( x, y=NULL ) {
         
     } else if ( is.vector(x) && is.vector(y) ) {
         return ( crossprod(x,y) / sqrt( crossprod(x)*crossprod(y) ) )
-    } else {
+    } else if ( is.vector(x) && is.matrix(y) ) {
+	
+		 co = vector(mode='numeric', length=ncol(y))
+		 names(co) = colnames(y)
+		 for (i in 1:ncol(y)) {
+			co[i] = cosine(x,y[,i]) 
+		 }
+		 return(co)
+		 
+	 }	else {
         stop("argument mismatch. Either one matrix or two vectors needed as input.")
     }
     
