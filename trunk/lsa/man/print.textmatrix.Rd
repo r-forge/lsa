@@ -5,13 +5,13 @@
   Display a one screen short version of a textmatrix.
 }
 \usage{
-print.textmatrix( x, bag_lines, bag_cols, ... )
+\method{print}{textmatrix}( x, bag_lines, bag_cols, \dots )
 }
 \arguments{
    \item{x}{A textmatrix.}
    \item{bag_lines}{The number of lines per bag.}
    \item{bag_cols}{The number of columns per bag.}
-   \item{...}{}
+   \item{\dots}{Arguments to be passed on.}
 }
 \details{
     Document-term matrices are often very large and

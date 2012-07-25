@@ -5,11 +5,11 @@
   Return a summary with some statistical infos about a given textmatrix.
 }
 \usage{
-summary.textmatrix( object, ... )
+\method{summary}{textmatrix}( object, \dots )
 }
 \arguments{
    \item{object}{A textmatrix.}
-   \item{...}{}
+   \item{\dots}{Arguments to be passed on}
 }
 \details{
 Returns some statistical infos about the textmatrix \code{x}:
