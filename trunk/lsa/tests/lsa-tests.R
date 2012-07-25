@@ -2,6 +2,8 @@
 ### testing routines for LSA package
 ### 
 
+Sys.setenv(NOAWT=TRUE)
+
 library(lsa)
 
 lsatest <- function(test, description) {
