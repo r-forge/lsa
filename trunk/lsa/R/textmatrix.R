@@ -58,32 +58,11 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
       txt = gsub("&gt;",">", txt, perl=FALSE, fixed=TRUE)
       txt = gsub("&lt;","<", txt, perl=FALSE, fixed=TRUE)
       txt = gsub("&quot;","\"", txt, perl=FALSE, fixed=TRUE)
-      if (language=="german") { # && l10n_info()$MBCS
-         txt = gsub("&auml;","ae", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&ouml;","oe", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&uuml;","ue", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&szlig;","ss", txt, perl=FALSE, fixed=TRUE)
-      } else if (language=="polish") {
-         txt = gsub("&#260;","Ą", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#261;","ą", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#280;","Ę", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#281;","ę", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#211;","Ó", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&Oacute;","Ó", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&oacute;","ó", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#243;","ó", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#262;","Ć", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#263;","ć", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#321;","Ł", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#322;","ł", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#323;","Ń", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#324;","ń", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#346;","Ś", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#347;","ś", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#377;","Ź", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#378;","ź", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#379;","Ż", txt, perl=FALSE, fixed=TRUE)
-         txt = gsub("&#380;","ż", txt, perl=FALSE, fixed=TRUE)
+      if (language=="german" || language=="polish") { # && l10n_info()$MBCS
+         data(specialchars)
+         for (sc in 1:length(specialchars$entities)) {
+	         txt = gsub(specialchars$entities[sc],specialchars$replacement[sc], txt, perl=FALSE, fixed=TRUE)
+         }
       }
    }
    
@@ -109,12 +88,14 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
       }
 		
       # filter the rest
-      txt = gsub("[^[:alnum:]\\_ĄąĘęÓóĆćŁłŃńŚśŹźŻż]", " ", txt)
+      data(alnumx)
+      txt = gsub(alnumx, " ", txt)
 		
       # split again by whitespaces
       txt = unlist(strsplit(txt, " "))
    } else {
-      txt = gsub( "[^[:alnum:]ĄąĘęÓóĆćŁłŃńŚśŹźŻż]", " ", txt)
+      data(alnumx)
+      txt = gsub( alnumx, " ", txt)
    }
    
    txt = gsub("[[:space:]]+", " ", txt)
