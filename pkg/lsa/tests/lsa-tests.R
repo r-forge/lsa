@@ -273,5 +273,6 @@ td1=tempfile()
 load("polski.RData")
 write(polski, file=td1)
 polski = textvector(td1, language="polish")
-lsatest( polski['terms'] == "testąąęęóóććłłńńśśźźżż", "[textvector] - polish language support" )
+polski['terms']
+lsatest( tolower(polski['terms']) == "testąąęęóóććłłńńśśźźżż", "[textvector] - polish language support" )
 unlink(td1)
