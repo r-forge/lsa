@@ -1,7 +1,7 @@
 Package: lsa
 Title: Latent Semantic Analysis
-Version: 0.66
-Date: 2012-07-23
+Version: 0.67
+Date: 2012-08-01
 Author: Fridolin Wild
 Description: The basic idea of latent semantic analysis (LSA) is, 
   that text do have a higher order (=latent semantic) structure which, 

@@ -1,7 +1,7 @@
 
 ==============================
-  Release Notes for LSA 0.64
-       September 14, 2009
+  Release Notes for LSA 0.67
+       August 1, 2012
 ==============================
 
 
@@ -64,6 +64,13 @@ transformieren der svd in die R-LSA struktur).
 # # # # # # # # # # # # # # # # # # # # # # # # 
 Changes
 # # # #
+
+Changes in 0.67
+---------------
+
+o   Fridolin Wild (2012-08-01)
+     * fixed some warnings for the package build
+
 
 Changes in 0.66
 ---------------
