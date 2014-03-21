@@ -5,6 +5,9 @@
 
 ### HISTORY
 ###
+### 2014-03-21
+###    * fixed snowball dependancy to snowballC
+###
 ### 2012-07-23
 ###    * added html entity support and special chars support
 ###      for polish
@@ -29,7 +32,7 @@
 
 textvector <- function (file, stemming=FALSE, language="english", minWordLength=2, maxWordLength=FALSE, minDocFreq=1, maxDocFreq=FALSE, stopwords=NULL, vocabulary=NULL, phrases=NULL, removeXML=FALSE, removeNumbers=FALSE ) {
    
-   txt = scan(file, what = "character", quiet = TRUE, encoding="UTF-8")
+   txt = scan(file, what = "character", quiet = TRUE, encoding="UTF-8", fileEncoding="UTF-8")
 	
 	txt = iconv(txt, to="UTF-8")
    res = try(tolower(txt), TRUE)
@@ -112,7 +115,9 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
    
    # stemming?
    #if (stemming) names(tab) = wordStem(names(tab), language=language)
-   if (stemming) names(tab) = SnowballStemmer(names(tab), Weka_control(S=language))
+   if (stemming) names(tab) = wordStem(names(tab), language)
+
+   #was: SnowballStemmer(names(tab), Weka_control(S=language))
 	
    # vocabulary filtering?
    #if (!is.null(vocabulary)) txt = txt[txt %in% vocabulary]

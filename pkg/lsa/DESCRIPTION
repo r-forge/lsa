@@ -1,6 +1,6 @@
 Package: lsa
 Title: Latent Semantic Analysis
-Version: 0.67
+Version: 0.67-2
 Date: 2012-08-01
 Author: Fridolin Wild
 Description: The basic idea of latent semantic analysis (LSA) is, 
@@ -9,7 +9,7 @@ Description: The basic idea of latent semantic analysis (LSA) is,
   or polysemy). By using conceptual indices that are derived statistically 
   via a truncated singular value decomposition (a two-mode factor analysis) 
   over a given document-term matrix, this variability problem can be overcome. 
-Depends: Snowball, RWeka,tm 
+Depends: SnowballC, RWeka,tm
 Maintainer: Fridolin Wild <f.wild@open.ac.uk>
 License: GPL (>= 2)
 Encoding: UTF-8

@@ -65,6 +65,14 @@ transformieren der svd in die R-LSA struktur).
 Changes
 # # # #
 
+Changes in 0.68
+---------------
+
+o   Fridolin Wild (2014-03-21)
+     * fixed snowballC dependancy
+     * added arab stopword list stopwords_ar
+
+
 Changes in 0.67
 ---------------
 

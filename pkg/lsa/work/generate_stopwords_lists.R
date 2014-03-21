@@ -14,6 +14,12 @@ stopwords_fr = tolower( scan("stopwords_french.txt", what="character", sep = " "
 stopwords_fr = unlist(strsplit(stopwords_fr,"\n"))
 stopwords_fr[1] = "$"
 
+### thanks to Marwa Naili (naili.maroua@gmail.com)
+### who combined and extended this from several other lists
+
+stopwords_ar = scan("stopwords_arab.txt", what="character", sep = " ", quiet = TRUE, encoding = "UTF-8")
+stopwords_ar = stopwords_ar[-which(stopwords_ar=="")]
+
 
 ### thanks to Grażyna Paliwoda-Pękosz (paliwodg@uek.krakow.pl)
 ### who extracted this stopword list from
@@ -28,3 +34,4 @@ save(stopwords_en, file="../data/stopwords_en.rda", ascii=T)
 save(stopwords_nl, file="../data/stopwords_nl.rda", ascii=T)
 save(stopwords_fr, file="../data/stopwords_fr.rda", ascii=T)
 save(stopwords_pl, file="../data/stopwords_pl.rda", ascii=T)
+save(stopwords_ar, file="../data/stopwords_ar.rda", ascii=T)
