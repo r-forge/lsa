@@ -10,3 +10,9 @@ tests/.Rhistory
 work/.DS_Store
 work/.Rhistory
 work/corpus/.DS_Store
+R/lsa_tm.Rbak
+R/cosine2.Rbak
+R/textmatrix-rewrite.Rbak
+R/Test_dimcalc_share.r
+R/lsaCosine.R
+demo/lsa_csv.Rbak
