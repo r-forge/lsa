@@ -3,6 +3,7 @@
 ### -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 ### dependencies: library("RStem")
 ### 
+### 2014-03-28: replaced stemming from Snowball functions to SnowballC functions
 ### 2009-08-17: replaced wordStem with SnowballStemmer
 ### 2005-11-12: bugfix for regexp
 ### 2005-11-08: pseudo_dtm.R renamed to query.R
@@ -24,8 +25,7 @@ query <- function( qtext, termlist, stemming=FALSE, language="german" ) {
     q = strsplit( gsub('[[:space:]]|[[:punct:]]+', ' ', tolower(qtext) ), " ")[[1]]
     vec = vector( mode="numeric", length(termlist) )
     for ( word in q ) {
-        if (stemming) word = SnowballStemmer(word, Weka_control(S=language))
-	# wordStem(word, language=language)
+        if (stemming) word = wordStem(word, language)
         if (word != "") {
             vec[ match(word,termlist) ] = vec[ match(word,termlist) ] + 1
         }

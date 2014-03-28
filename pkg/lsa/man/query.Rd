@@ -22,7 +22,7 @@ query ( qtext, termlist, stemming=FALSE, language="german" )
 }
 \author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \seealso{
-\code{\link[Snowball]{SnowballStemmer}}, \code{\link{textmatrix}} 
+\code{\link[SnowballC]{wordStem}}, \code{\link{textmatrix}} 
 }
 \examples{
 
