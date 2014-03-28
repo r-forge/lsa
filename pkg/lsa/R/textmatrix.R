@@ -116,8 +116,6 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
    # stemming?
    #if (stemming) names(tab) = wordStem(names(tab), language=language)
    if (stemming) names(tab) = wordStem(names(tab), language)
-
-   #was: SnowballStemmer(names(tab), Weka_control(S=language))
 	
    # vocabulary filtering?
    #if (!is.null(vocabulary)) txt = txt[txt %in% vocabulary]
