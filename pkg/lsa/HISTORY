@@ -65,6 +65,14 @@ transformieren der svd in die R-LSA struktur).
 Changes
 # # # #
 
+Changes in 0.69
+---------------
+
+o   Fridolin Wild (2014-03-28)
+     * fixed remaining snowballC dependancies
+     * fixed documentation, namespace
+
+
 Changes in 0.68
 ---------------
 
