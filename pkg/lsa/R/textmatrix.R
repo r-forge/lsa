@@ -63,7 +63,8 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
       txt = gsub("&lt;","<", txt, perl=FALSE, fixed=TRUE)
       txt = gsub("&quot;","\"", txt, perl=FALSE, fixed=TRUE)
       if (language=="german" || language=="polish") { # && l10n_info()$MBCS
-         data(specialchars)
+         data(specialchars, envir = environment())
+         specialchars = get("specialchars", envir  = environment())
          for (sc in 1:length(specialchars$entities)) {
 	         txt = gsub(specialchars$entities[sc],specialchars$replacement[sc], txt, perl=FALSE, fixed=TRUE)
          }
@@ -92,13 +93,15 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
       }
 		
       # filter the rest
-      data(alnumx)
+      data(alnumx, envir = environment())
+      alnumx = get("alnumx", envir  = environment())
       txt = gsub(alnumx, " ", txt)
 		
       # split again by whitespaces
       txt = unlist(strsplit(txt, " "))
    } else {
-      data(alnumx)
+      data(alnumx, envir = environment())
+      alnumx = get("alnumx", envir  = environment())
       txt = gsub( alnumx, " ", txt)
    }
    

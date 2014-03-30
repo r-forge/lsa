@@ -11,7 +11,7 @@
 This data sets contain very common lists of words that want to be ignored when 
 building up a document-term matrix. The stop word lists can be loaded by
 calling \code{data(stopwords_en)}, \code{data(stopwords_de)}, 
-\code{data(stopwords_nl)}, etc. The objects \code{stopwords_de}, \code{stopwords_en}, \code{stopwords_nl}, \code{stopwords_ar}, etc. must already exist \emph{before} being handed over to \code{textmatrix()}.
+\code{data(stopwords_nl)}, \code{data(stopwords_ar)}, etc. The objects \code{stopwords_de}, \code{stopwords_en}, \code{stopwords_nl}, \code{stopwords_ar}, etc. must already exist \emph{before} being handed over to \code{textmatrix()}.
 
 The French stopword list has been combined by Haykel Demnati
 by integrating the lists from rank.nl (www.rank.nl/stopwors/french.html), 
