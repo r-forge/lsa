@@ -65,6 +65,15 @@ transformieren der svd in die R-LSA struktur).
 Changes
 # # # #
 
+Changes in 0.70 to 0.72
+---------------
+
+o   Fridolin Wild (2014-03-30)
+     * fixed smaller warnings, including binding problem of textvector
+       variables alnumx and specialchars, renamed HISTORY to ChangeLog,
+       tm dependancy as suggests
+
+
 Changes in 0.69
 ---------------
 
