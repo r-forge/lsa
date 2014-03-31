@@ -27,10 +27,19 @@ The Arab stopword list has been contributed by Marwa Naili, Tunisia. The list is
 }
 \usage{
    data(stopwords_de)
+   stopwords_de
+
    data(stopwords_en)
+   stopwords_en
+
    data(stopwords_nl)
+   stopwords_nl
+
    data(stopwords_fr)
+   stopwords_fr
+
    data(stopwords_ar)
+   stopwords_ar
 }
 \author{ Fridolin Wild \email{fridolin.wild@wu-wien.ac.at}, Marco Kalz \email{marco.kalz@ou.nl} (for Dutch), Haykel Demnati \email{Haykel.Demnati@isg.rnu.tn} (for French),
     Marwa Naili \email{naili.maroua@gmail.com} (for Arab) }
