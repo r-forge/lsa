@@ -14,5 +14,5 @@ Suggests: tm
 Maintainer: Fridolin Wild <f.wild@open.ac.uk>
 License: GPL (>= 2)
 Encoding: UTF-8
-LazyLoad: no
 LazyData: yes
+BuildResaveData: no
