@@ -115,7 +115,7 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
    if (!is.null(stopwords)) txt = txt[!txt %in% stopwords]
    
    # tabulate
-   tab = sort(table(txt), decreasing = TRUE)
+   tab = c(sort(table(txt), decreasing = TRUE))
    
    # stemming?
    #if (stemming) names(tab) = wordStem(names(tab), language=language)
