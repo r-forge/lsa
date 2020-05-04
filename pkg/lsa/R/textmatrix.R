@@ -139,7 +139,7 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
 	
    if (length(names(tab))==0) warning(paste("[textvector] - the file ", file, " contains no terms after filtering.", sep=""))
 	
-   return( data.frame( docs=basename(file), terms = names(tab), Freq = tab, row.names = NULL) )
+   return( data.frame( docs=basename(file), terms = names(tab), Freq = tab, row.names = NULL, stringsAsFactors = TRUE) )
    
 }
 

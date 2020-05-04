@@ -15,4 +15,6 @@ S3method("summary", "textmatrix")
 #export("alnumx", "specialchars")
 importFrom("SnowballC", "wordStem")
 
+importFrom("stats", "cor", "xtabs")
+importFrom("utils", "data")
 
