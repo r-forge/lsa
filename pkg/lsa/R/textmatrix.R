@@ -37,7 +37,7 @@ textvector <- function (file, stemming=FALSE, language="english", minWordLength=
    txt = readLines(file, warn = FALSE, encoding = "UTF-8")
     
    res = try(tolower(txt), TRUE)
-	if (class(res) == "try-error") {
+	if (inherits(res, "try-error")) {
 	   stop(paste("[lsa] - could not open file ",file," due to encoding problems of the file.", sep=""))
 	} else {
 	   txt = res

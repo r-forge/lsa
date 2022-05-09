@@ -5,7 +5,7 @@
 
 sample.textmatrix <- function (textmatrix, samplesize, index.return=FALSE) {
 
-	if (class(textmatrix) != "textmatrix") {
+	if (!inherits(textmatrix, "textmatrix")) {
 		stop("[sample.textmatrix] ERROR: first argument not a textmatrix."); 
 	}
 

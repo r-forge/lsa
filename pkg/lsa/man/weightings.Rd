@@ -72,7 +72,7 @@ Nakov, P., Popova, A., and Mateev, P. (2001) \emph{Weight functions impact on LS
 
 Shannon, C. (1948) \emph{A Mathematical Theory of Communication}. In: The Bell System Technical Journal 27(July), pp.379--423.
 }
-\author{ Fridolin Wild \email{f.wild@open.ac.uk§} }
+\author{ Fridolin Wild \email{f.wild@open.ac.uk} }
 \examples{
 
 ## use the logarithmised term frequency as local weight and 
